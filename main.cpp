@@ -6,19 +6,20 @@ int* func(){
     return a;
 }
 
+void increment(int& num) {
+    num++;
+}
+
 int main() {
 
-    int * arr = new int [10];
-    for (int i = 0; i < 10; ++i) {
-        arr[i] = i + 100;
+    int a = 10;
+    int b = 20;
+    int &c = a;
+    c = b;
 
-    }
-    for (int i = 0; i < 10; ++i) {
-        cout << arr[i] << endl;
-
-    }
-    delete[] arr;
-
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    cout << "c = " << c << endl;
 
 
     return 0;
