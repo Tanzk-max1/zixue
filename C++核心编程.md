@@ -1130,7 +1130,7 @@ struct C2
 
 int main() {
 
-	C1 c1;
+	C1 c1;//C1 作为一个类，然后可创造多个实例，其中c1就是他的实例（对象），每个对象都具有该类定义的属性和行为
 	c1.m_A = 10; //错误，访问权限是私有
 
 	C2 c2;
@@ -1197,6 +1197,12 @@ public:
 	void setLover(string lover) {
 		m_Lover = lover;
 	}
+    
+    string getLover()
+  {
+    return  m_Name;
+  }
+    
 
 private:
 	string m_Name; //可读可写  姓名
@@ -1221,6 +1227,8 @@ int main() {
 	//情人设置
 	p.setLover("苍井");
 	//cout << "情人： " << p.m_Lover << endl;  //只写属性，不可以读取
+    
+    cout << "情人： " << p.getLover() << endl;//这样子写可以返回情人的数据
 
 	system("pause");
 
@@ -1230,7 +1238,69 @@ int main() {
 
 
 
+###### 对于成员属性的可读可写性三类讨论
 
+在C++中，可以使用访问修饰符和成员函数来设置成员属性的可读性和可写性。
+
+1. 可读属性（Read-only property）：如果您希望某个属性仅可读，而不允许外部代码修改它，可以在类定义中将该属性声明为私有(private)，并提供一个公有(public)的成员函数来返回属性的值。这样外部代码只能通过成员函数获取属性的值，但无法直接修改它。
+
+示例：
+
+```
+class MyClass {
+private:
+    int readOnlyProperty;
+
+public:
+    int getReadOnlyProperty() const {
+        return readOnlyProperty;
+    }
+};
+```
+
+在上述示例中，`readOnlyProperty` 被声明为私有属性，外部代码无法直接访问它。通过 `getReadOnlyProperty()` 函数，外部代码可以获取 `readOnlyProperty` 的值，但无法修改它。
+
+1. 可写属性（Write-only property）：如果您希望某个属性仅可写，而不允许外部代码读取它，可以在类定义中将该属性声明为私有(private)，并提供一个公有(public)的成员函数来设置属性的值。这样外部代码只能通过成员函数设置属性的值，但无法直接读取它。
+
+示例：
+
+```
+class MyClass {
+private:
+    int writeOnlyProperty;
+
+public:
+    void setWriteOnlyProperty(int value) {
+        writeOnlyProperty = value;
+    }
+};
+```
+
+在上述示例中，`writeOnlyProperty` 被声明为私有属性，外部代码无法直接访问它。通过 `setWriteOnlyProperty()` 函数，外部代码可以设置 `writeOnlyProperty` 的值，但无法直接读取它。
+
+1. 可读可写属性（Read-write property）：如果您希望某个属性既可读又可写，可以在类定义中将该属性声明为私有(private)，并提供一个公有(public)的成员函数用于读取和设置属性的值。
+
+示例：
+
+
+
+```
+class MyClass {
+private:
+    int readWriteProperty;
+
+public:
+    int getReadWriteProperty() const {
+        return readWriteProperty;
+    }
+
+    void setReadWriteProperty(int value) {
+        readWriteProperty = value;
+    }
+};
+```
+
+在上述示例中，`readWriteProperty` 被声明为私有属性，外部代码无法直接访问它。通过 `getReadWriteProperty()` 函数，外部代码可以获取 `readWriteProperty` 的值，通过 `setReadWriteProperty()` 函数，外部代码可以设置 `readWriteProperty` 的值。
 
 
 
