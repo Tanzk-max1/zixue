@@ -773,6 +773,17 @@ int main() {
 
 
 
+函数重载的特点如下：
+
+1. 同名函数：重载的函数必须具有相同的名称。
+2. 不同参数列表：重载的函数必须在参数个数或参数类型上有所区别，可以是参数个数不同、参数类型不同或参数顺序不同。
+3. 返回值类型不影响函数重载：函数的返回值类型不会影响函数重载，因为仅仅根据返回类型无法确定调用哪个函数。
+4. 相同作用域：重载函数必须在同一个作用域内定义，可以是全局作用域或类的成员函数
+
+
+
+
+
 **注意:**  函数的返回值不可以作为函数重载的条件
 
 
@@ -1271,7 +1282,7 @@ private:
 
 public:
     void setWriteOnlyProperty(int value) {
-        writeOnlyProperty = value;
+        writeOnlyProperty = value;//写
     }
 };
 ```
@@ -1284,18 +1295,18 @@ public:
 
 
 
-```
+```c++
 class MyClass {
 private:
     int readWriteProperty;
 
 public:
     int getReadWriteProperty() const {
-        return readWriteProperty;
+        return readWriteProperty;//读
     }
 
     void setReadWriteProperty(int value) {
-        readWriteProperty = value;
+        readWriteProperty = value;//写
     }
 };
 ```
