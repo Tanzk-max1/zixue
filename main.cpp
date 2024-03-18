@@ -66,62 +66,76 @@ using namespace std;
 //  }
 //};
 
-class Person{
+
+
+//class Person{
+//public:
+//  void  setName(string name){
+//    m_Name = name;
+//  }
+//  string getName()
+//  {
+//    return  m_Name;
+//  }
+//
+//  int getAge(){
+//    return m_Age;
+//  }
+//
+//  void setAge(int age){
+//    if (age < 0 || age > 150){
+//      cout << "hahahhah" << endl;
+//      return;
+//    }
+//    m_Age = age;
+//  }
+//
+//  void setLover(string lover){
+//    cout << "sahfui" <<endl;
+//
+//    m_Lover = lover;
+//
+//
+//
+//  }
+//  string getLover()
+//  {
+//    return  m_Lover;
+//  }
+//
+//private:
+//  string m_Name;
+//  int m_Age;
+//  string m_Lover;
+//
+//};
+
+
+class Student{
 public:
-  void  setName(string name){
-    m_Name = name;
-  }
-  string getName()
-  {
-    return  m_Name;
-  }
 
-  int getAge(){
-    return m_Age;
-  }
+  string m_name;
+  int m_id;
 
-  void setAge(int age){
-    if (age < 0 || age > 150){
-      cout << "hahahhah" << endl;
-      return;
-    }
-    m_Age = age;
-  }
-
-  void setLover(string lover){
-    cout << "sahfui" <<endl;
-
-    m_Lover = lover;
-
-
+  void setName(string name){
+    m_name = name;
 
   }
-  string getLover()
-  {
-    return  m_Lover;
+  void setId(int id){
+    m_id = id;
+  }
+  void showStudent(){
+    cout << "dddd" << m_name << "id: " << m_id <<endl;
   }
 
-private:
-  string m_Name;
-  int m_Age;
-  string m_Lover;
 
 };
 
-
-
 int main() {
-  Person p;
-  p.setName("张三");
-  cout << "姓名 : " << p.getName() << endl;
-
-  p.setAge(50);
-  cout << "nian ling :" << p.getAge() << endl;
-
-  p.setLover("xiaoai");
-  cout << "情人： " << p.getLover() << endl;  //只写属性，不可以读取
-
-
+  Student stu;
+  stu.setName("德玛西亚");
+  stu.setId(250);
+  stu.showStudent();
   return 0;
 
 

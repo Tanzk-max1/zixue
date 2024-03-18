@@ -885,6 +885,7 @@ void func2(int a)
 {
 	cout << "func2(int a) 调用" << endl;
 }
+//因为默认的参数是不会被触发重载的张，只有引用的才会
 
 int main() {
 	
