@@ -152,22 +152,61 @@ using namespace std;
 //  }
 //};
 
-class c1{
-  int m_a;
+
+class Person {
+public:
+  Person() {
+    cout << "无参构造函数!" << endl;
+    mAge = 0;
+  }
+  Person(int age) {
+    cout << "有参构造函数!" << endl;
+    mAge = age;
+  }
+  Person(const Person& p) {
+    cout << "拷贝构造函数!" << endl;
+    mAge = p.mAge;
+  }
+  //析构函数在释放内存之前调用
+  ~Person() {
+    cout << "析构函数!" << endl;
+  }
+public:
+  int mAge;
 };
 
-struct c2{
-  int m_a;
-};
+void test01(){
+  Person man(100);
+  Person newman(man);
+  Person newman2 = man;
+}
+
+void doWork(Person p1){}
+void test02() {
+  Person p;
+  doWork(p);
+}
+
+//3. 以值方式返回局部对象
+Person doWork2()
+{
+  Person p1;
+  cout << (int *)&p1 << endl;
+  return p1;
+}
+
+void test03()
+{
+  Person p = doWork2();
+  cout << (int *)&p << endl;
+}
 
 
 int main() {
-  c1 c3;
+  test01();
+  test02();
+  test03();
 
-  c2 c4;
-  c4.m_a = 10;
 
   return 0;
-
-
 }
