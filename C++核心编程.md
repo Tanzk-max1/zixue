@@ -1283,8 +1283,6 @@ int main() {
     
     cout << "情人： " << p.getLover() << endl;//这样子写可以返回情人的数据
 
-	system("pause");
-
 	return 0;
 }
 ```
@@ -1535,10 +1533,14 @@ public:
 	Person(const Person& p) {
 		age = p.age;
 		cout << "拷贝构造函数!" << endl;
+        cout<< "age : " << age  << endl;
 	}
 	//析构函数
 	~Person() {
 		cout << "析构函数!" << endl;
+        int age1 = 0;
+    age1++;
+    cout<< "age : " << age1  << endl;
 	}
 public:
 	int age;
@@ -1574,7 +1576,7 @@ void test02() {
 int main() {
 
 	test01();
-	//test02();
+	test02();
 
 	system("pause");
 
@@ -1582,11 +1584,32 @@ int main() {
 }
 ```
 
+输出
 
+```c++
+wugouxi 
+xigou 
+age : 1
+有参数构造函数
+有参数构造函数
+Kaobei gouzao hanshu 
+age : 10
+有参数构造函数
+Kaobei gouzao hanshu 
+age : 10
+xigou 
+age : 1
+xigou 
+age : 1
+xigou 
+age : 1
+xigou 
+age : 1
+xigou 
+age : 1
+```
 
-
-
-
+每次使用构造函数都会直接触发构析函数
 
 
 
@@ -1633,6 +1656,9 @@ void test01() {
 	Person man(100); //p对象已经创建完毕
 	Person newman(man); //调用拷贝构造函数
 	Person newman2 = man; //拷贝构造
+    
+    //执行完这几个函数之后会执行析构函数
+    //然后析构函数的调用顺序和对象的创建顺序相反，即后创建的对象先调用析构函数。在上述代码中，对象 man 是首先创建的，因此它的析构函数会在其他对象之后调用。
 
 	//Person newman3;
 	//newman3 = man; //不是调用拷贝构造函数，赋值操作
