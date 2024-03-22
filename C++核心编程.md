@@ -1072,6 +1072,7 @@ int main() {
 //三种权限
 //公共权限  public     类内可以访问  类外可以访问
 //保护权限  protected  类内可以访问  类外不可以访问
+//protected访问修饰符用于限制成员变量和成员函数的访问权限，使它们只能在派生类中或者友元函数中访问，而不能在类的外部直接访问。
 //私有权限  private    类内可以访问  类外不可以访问
 
 class Person
@@ -1111,6 +1112,46 @@ int main() {
 ```
 
 
+
+
+
+protected类传参
+
+```c++
+class Person{
+public:
+  string m_name;
+
+  void showStudent(string m_car) {
+    cout << "car:" << m_car << endl;
+  }
+
+protected:
+  string m_car;
+
+
+private:
+  int m_password;
+
+public:
+  void func(){
+    m_name = "zhangsan ";
+    m_car = "tuolaji ";
+    m_password = 123456;
+  }
+};
+
+int main() {
+  Person p;
+  p.m_name = "lisi 0";
+  p.showStudent("jiojo");
+
+  return 0;
+
+
+}
+
+```
 
 
 

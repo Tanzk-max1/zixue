@@ -111,31 +111,62 @@ using namespace std;
 //};
 
 
-class Student{
-public:
+//class Student{
+//public:
+//
+//  string m_name;
+//  int m_id;
+//
+//  void setName(string name){
+//    m_name = name;
+//
+//  }
+//  void setId(int id){
+//    m_id = id;
+//  }
+//  void showStudent(){
+//    cout << "dddd" << m_name << "id: " << m_id <<endl;
+//  }
 
-  string m_name;
-  int m_id;
 
-  void setName(string name){
-    m_name = name;
+//class Person{
+//public:
+//  string m_name;
+//
+//  void showStudent(string m_car) {
+//    cout << "car:" << m_car << endl;
+//  }
+//
+//protected:
+//  string m_car;
+//
+//
+//private:
+//  int m_password;
+//
+//public:
+//  void func(){
+//    m_name = "zhangsan ";
+//    m_car = "tuolaji ";
+//    m_password = 123456;
+//  }
+//};
 
-  }
-  void setId(int id){
-    m_id = id;
-  }
-  void showStudent(){
-    cout << "dddd" << m_name << "id: " << m_id <<endl;
-  }
-
-
+class c1{
+  int m_a;
 };
 
+struct c2{
+  int m_a;
+};
+
+
 int main() {
-  Student stu;
-  stu.setName("德玛西亚");
-  stu.setId(250);
-  stu.showStudent();
+  c1 c3;
+
+  c2 c4;
+  c4.m_a = 10;
+
   return 0;
 
 
