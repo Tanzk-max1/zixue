@@ -204,16 +204,145 @@ using namespace std;
 //  cout << (int *)&p << endl;
 //}
 
+//class Person{
+//public:
+//  Person() {
+//    cout << "无参构造函数！" << endl;
+//  }
+//  Person(int a) {
+//    age = a;
+//    cout<< "有参构造函数!" << endl;
+//
+//  }
+//  Person(const Person& p){
+//    age = p.age;
+//    cout << "拷贝构造函数!" << endl;
+//  }
+//
+//  ~Person() {
+//    cout << "析构函数!" << endl;
+//  }
+//
+//public:
+//  int age;
+//};
+//
+//void test01()
+//{
+//  Person p1(18);
+//  //如果不写拷贝构造，编译器会自动添加拷贝构造，并且做浅拷贝操作
+//  Person p2(p1);
+//
+//  cout << "p2的年龄为： " << p2.age << endl;
+//}
+//
+//void test02(){
+//  Person p1;
+//  Person p2(10);
+//  Person p3(p2);
+//
+//  Person p4; //此时如果用户自己没有提供默认构造，会出错
+//  Person p5(10); //此时如果用户自己没有提供有参，会出错
+//  Person p6(p5); //用户自己提供拷贝构造
+//}
+
+//class Person {
+//public:
+//  //无参（默认）构造函数
+//  Person() {
+//    cout << "无参构造函数!" << endl;
+//  }
+//  //有参构造函数
+//  Person(int a) {
+//    age = a;
+//    cout << "有参构造函数!" << endl;
+//  }
+//  //拷贝构造函数
+//  Person(const Person& p) {
+//    age = p.age;
+//    cout << "拷贝构造函数!" << endl;
+//    //p.age的意识是创建一个新的对象，然后将传入的兑现的值赋值给新的兑现，通过使用p.age，我们可以访问参数p的长远变量age，
+//  }
+//  //析构函数
+//  ~Person() {
+//    cout << "析构函数!" << endl;
+//  }
+//public:
+//  int age;
+//};
+//
+//void test01()
+//{
+//  Person p1(18);
+//  //如果不写拷贝构造，编译器会自动添加拷贝构造，并且做浅拷贝操作
+//  Person p2(p1);
+//
+//  cout << "p2的年龄为： " << p2.age << endl;
+//}
+//
+//void test02()
+//{
+//  //如果用户提供有参构造，编译器不会提供默认构造，会提供拷贝构造
+//  Person p1; //此时如果用户自己没有提供默认构造，会出错
+//  Person p2(10); //用户提供的有参
+//  Person p3(p2); //此时如果用户没有提供拷贝构造，编译器会提供
+//
+//  //如果用户提供拷贝构造，编译器不会提供其他构造函数
+//  Person p4; //此时如果用户自己没有提供默认构造，会出错
+//  Person p5(10); //此时如果用户自己没有提供有参，会出错
+//  Person p6(p5); //用户自己提供拷贝构造
+//  Person p7(p6);
+//}
+
+class Person{
+public:
+  Person(){
+    cout << "无参构造函数!" << endl;
+  }
+  Person(int age ,int height){
+    cout << "有参构造函数!" << endl;
+    m_age = age;
+    m_height = new int(height);
+  }
+  Person(const Person& p){
+    cout << "拷贝构造函数" << endl;
+    m_age = p.m_age;
+    m_height = new int (*p.m_height);
+  }
+  ~Person() {
+    cout << "析构函数!" << endl;
+    if (m_height != NULL) {
+      delete m_height;
+    }
+  }
+public:
+  int m_age ;
+  int *m_height;
+};
+
+void test01()
+{
+  Person p1(18, 180);
+
+  Person p2(p1);
+
+  cout << "p1的年龄： " << p1.m_age << " 身高： " << *p1.m_height << endl;
+
+  cout << "p2的年龄： " << p2.m_age << " 身高： " << *p2.m_height << endl;
+}
 
 int main() {
 
   test01();
 
   cout << "-----------------------------------" << "\n" <<endl;
-  test02();
+
   cout << "-----------------------------------" << "\n" <<endl;
-  test03();
+
 
 
   return 0;
 }
+
+
+//
