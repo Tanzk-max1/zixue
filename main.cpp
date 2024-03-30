@@ -294,45 +294,144 @@ using namespace std;
 //  Person p7(p6);
 //}
 
-class Person{
-public:
-  Person(){
-    cout << "无参构造函数!" << endl;
-  }
-  Person(int age ,int height){
-    cout << "有参构造函数!" << endl;
-    m_age = age;
-    m_height = new int(height);
-  }
-  Person(const Person& p){
-    cout << "拷贝构造函数" << endl;
-    m_age = p.m_age;
-    m_height = new int (*p.m_height);
-  }
-  ~Person() {
-    cout << "析构函数!" << endl;
-    if (m_height != NULL) {
-      delete m_height;
-    }
-  }
-public:
-  int m_age ;
-  int *m_height;
-};
+//class Person{
+//public:
+//  Person(){
+//    cout << "无参构造函数!" << endl;
+//  }
+//  Person(int age ,int height){
+//    cout << "有参构造函数!" << endl;
+//    m_age = age;
+//    m_height = new int(height);
+//  }
+//  Person(const Person& p){
+//    cout << "拷贝构造函数" << endl;
+//    m_age = p.m_age;
+//    m_height = new int (*p.m_height);
+//  }
+//  ~Person() {
+//    cout << "析构函数!" << endl;
+//    if (m_height != NULL) {
+//      delete m_height;
+//    }
+//  }
+//public:
+//  int m_age ;
+//  int *m_height;
+//};
+//
+//void test01()
+//{
+//  Person p1(18, 180);
+//
+//  Person p2(p1);
+//
+//  cout << "p1的年龄： " << p1.m_age << " 身高： " << *p1.m_height << endl;
+//
+//  cout << "p2的年龄： " << p2.m_age << " 身高： " << *p2.m_height << endl;
+//}
 
-void test01()
-{
-  Person p1(18, 180);
+//class Person{
+//public:
+//  Person(int a,int b,int c) :m_A(a),m_B(b),m_C(c) {}
+//    void PrintPerson(){
+//      cout << "ma " <<  m_A << endl;
+//      cout << "mb " <<  m_B << endl;
+//      cout << "mc " <<  m_C << endl;
+//    }
+//  private:
+//    int m_A;
+//    int m_B;
+//    int m_C;
+//
+//};
 
-  Person p2(p1);
+//class Phone
+//{
+//public:
+//  Phone(string name)
+//  {
+//    m_PhoneName = name;
+//    cout << "Phone构造" << endl;
+//  }
+//
+//  ~Phone()
+//  {
+//    cout << "Phone析构" << endl;
+//  }
+//
+//  string m_PhoneName;
+//
+//};
+//
+//
+//class Person
+//{
+//public:
+//
+//  //初始化列表可以告诉编译器调用哪一个构造函数
+//  Person(string name, string pName) :m_Name(name), m_Phone(pName)
+//  {
+//    cout << "Person构造" << endl;
+//  }
+//
+//  ~Person()
+//  {
+//    cout << "Person析构" << endl;
+//  }
+//
+//  void playGame()
+//  {
+//    cout << m_Name << " 使用" << m_Phone.m_PhoneName << " 牌手机! " << endl;
+//  }
+//
+//  string m_Name;
+//  Phone m_Phone;
+//
+//};
+//void test01()
+//{
+//  //当类中成员是其他类对象时，我们称该成员为 对象成员
+//  //构造的顺序是 ：先调用对象成员的构造，再调用本类构造
+//  //析构顺序与构造相反
+//  Person p("张三" , "苹果X");
+//  p.playGame();
+//
+//}
 
-  cout << "p1的年龄： " << p1.m_age << " 身高： " << *p1.m_height << endl;
 
-  cout << "p2的年龄： " << p2.m_age << " 身高： " << *p2.m_height << endl;
-}
+//class Person{
+//public:
+//  static int m_A;
+//
+//private:
+//  static int m_B;
+//
+//
+//};
+//
+//int Person::m_A = 10;
+//int Person::m_B = 11;
+//
+//void test01(){
+//  Person p1;
+//  p1.m_A = 100;
+//  cout << "p1.m-a = " << p1.m_A <<endl;
+//
+//  Person p2;
+//  p2.m_A = 200;
+//  cout << "p1.m_A = " << p1.m_A << endl; //共享同一份数据
+//  cout << "p2.m_A = " << p2.m_A << endl;
+//
+//  cout << "m_A = " << Person::m_A << endl;
+//
+//  //cout << "m_B = " << Person::m_B << endl; //私有权限访问不到
+//}
+
 
 int main() {
 
+//  Person p(1, 2, 3);
   test01();
 
   cout << "-----------------------------------" << "\n" <<endl;
