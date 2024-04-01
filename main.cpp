@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Sales_item.h"
 using namespace std;
 
 //int& test01(){
@@ -428,19 +429,144 @@ using namespace std;
 //  //cout << "m_B = " << Person::m_B << endl; //私有权限访问不到
 //}
 
+//class Person{
+//public:
+//  static void func()
+//  {
+//    cout << "func调用" << endl;
+//
+//    m_A = 100;
+////    m_B = 100; //错误，不可以访问非静态成员变量
+//
+//    cout << m_A << endl;
+//
+//  }
+//  void funb()//这个是静态的成员变量
+//  {
+//    cout << "func调用" << endl;
+//    m_A = 100;
+//    m_B = 100; //错误，不可以访问非静态成员变量
+//    cout << m_A << endl;
+//
+//    cout << m_B  <<" M-B"<< endl;
+//
+//  }
+//  static int m_A;
+//  int m_B;
+//private:
+//  static void fun2(){
+//    cout<<"fun2" << endl;
+//
+//  }
+//};
+//int Person::m_A = 10;
+//
+//void test01()
+//{
+//  //静态成员变量两种访问方式
+//
+//  //1、通过对象
+//  Person p1;
+//  p1.func();
+//cout << "aaaaaaaaaaaaaaaaaaaaaaaaaa" <<endl;
+//  //2、通过类名
+//  Person::func();
+//  cout << "aaaaaaaaaaaaaaaaaaaaaaaaaa" <<endl;
+//  p1.funb();
+//
+//
+//  //Person::func2(); //私有权限访问不到
+//}
+//
+//class Person{
+//public:
+//    Person() {
+//    mA = 0;
+//
+//  }
+//
+//  int mA;
+//  static int mB;
+//  void func() {
+//
+//    cout << "mA: " << this->mA << endl;
+//    cout << "mB: " << Person::mB << endl;
+//    cout << "hhh" << endl;
+//
+//  }
+//  static void sfunc(){
+//
+//  }
+//
+//};
+//
+//int Person::mB = 0;
+//
+//
+//
+//class Person {
+//public:
+//  void ShowClassname(){
+//    cout << "woshi person lei" << endl;
+//  }
+//  void ShowPerson() {
+//    if (this == NULL) {
+//      return;
+//    }
+//    cout << mAge << endl;
+//  }
+//private:
+//  int mAge;
+//};
+//
+//void test01()
+//{
+//  Person * p = NULL;
+//  p->ShowClassname(); //空指针，可以调用成员函数
+//  cout << "-----------------AAAAAAAAAAAAA-------------" << "\n" <<endl;
+//  p->ShowPerson();  //但是如果成员函数中用到了this指针，就不可以了
+//}
+//
+//int main() {
+//
+////  Person p(1, 2, 3);
+////  test01();
+//
+//  cout << "-----------------------------------" << "\n" <<endl;
+//  test01();
+//  cout << "-----------------------------------" << "\n" <<endl;
+//
+//
+//
+//  return 0;
+//}
 
-int main() {
+int main(){
+//    int small = 0,big = 0;
+//    std::cout << "please";
+//    std::cin >> small >> big;
+//
+//    if (small > big){
+//      int tmp = small;
+//      small = big;
+//      big = tmp;
+//    }
+//    while (small <= big){
+//      std::cout << small << " ";
+//      ++small;
+//    }
+//    std::cout <<std::endl;
+//    return 0;
 
-//  Person p(1, 2, 3);
-  test01();
-
-  cout << "-----------------------------------" << "\n" <<endl;
-
-  cout << "-----------------------------------" << "\n" <<endl;
-
-
-
-  return 0;
+  Sales_item item1,item2;
+  cin >> item1 >> item2;
+  if (item1.isbn() == item2.isbn()){
+    std::cout <<item1 + item2 << endl;
+    return 0;
+  } else{
+    cerr << "date" <<endl;
+    return -1;
+  }
 }
 
 

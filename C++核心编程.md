@@ -2153,12 +2153,23 @@ public:
 	//1 程序共享一个函数
 	//2 静态成员函数只能访问静态成员变量
 	
-	static void func()
+	static void func()//这个是静态的成员变量
 	{
 		cout << "func调用" << endl;
 		m_A = 100;
 		//m_B = 100; //错误，不可以访问非静态成员变量
 	}
+    
+    void funb()//这个是静态的成员变量
+  {
+    cout << "func调用" << endl;
+    m_A = 100;
+    m_B = 100; //此时可以调用，因为是普通状态下
+    cout << m_A << endl;
+
+    cout << m_B  <<" M-B"<< endl;
+
+  }
 
 	static int m_A; //静态成员变量
 	int m_B; // 
@@ -2178,11 +2189,13 @@ void test01()
 	//静态成员变量两种访问方式
 
 	//1、通过对象
-	Person p1;
-	p1.func();
-
-	//2、通过类名
-	Person::func();
+  Person p1;
+  p1.func();
+cout << "aaaaaaaaaaaaaaaaaaaaaaaaaa" <<endl;
+  //2、通过类名
+  Person::func();
+  cout << "aaaaaaaaaaaaaaaaaaaaaaaaaa" <<endl;
+  p1.funb();
 
 
 	//Person::func2(); //私有权限访问不到
@@ -2191,8 +2204,6 @@ void test01()
 int main() {
 
 	test01();
-
-	system("pause");
 
 	return 0;
 }
@@ -2232,12 +2243,23 @@ public:
 	static int mB; 
 	//函数也不占对象空间，所有函数共享一个函数实例
 	void func() {
-		cout << "mA:" << this->mA << endl;
+        
+		mB = 1;
+    cout << "mA: " << this->mA << endl;
+    cout << "mB: " << Person::mB << endl;
+    cout << "hhh" << endl;
+        //this 指针只能在非静态成员函数中使用
+        //在非静态成员函数中自动提供的
 	}
 	//静态成员函数也不占对象空间
+    //静态不吃空间
 	static void sfunc() {
 	}
 };
+int Person::mB = 0;
+//类外部定义和初始化静态成员变量
+
+//静态成员函数和类内的静态成员初始化器是在c++11里面常见的两种在类内部定义和初始化静态成员变量的
 
 int main() {
 
