@@ -636,8 +636,24 @@ const pstring *ps;
 int main(){
   using SI = Sales_item;
   wages hourly , weekly;
+  int  val1,val2;
+  int i = 0,&r = i;
+  auto a = r;
+
+  const int ci = i ,&cr = ci;
+  auto b = ci;
+  auto c = cr;
+  auto d = &i;
+
+
+  const auto f = ci;
+  cin >> val1 >> val2 ;
 //  SI item; // 等价于Sales_item item
   auto item = val1 + val2;
+  cout << item << endl;
+
+
+
 
 
 
