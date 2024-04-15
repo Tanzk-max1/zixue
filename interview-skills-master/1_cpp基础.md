@@ -52,6 +52,30 @@ const int* a;
 int const* a;
 ```
 
+```c++
+// 底层 const 指针
+int x = 5;
+const int* constPtr = &x;  // constPtr 是一个指向常量整数的底层 const 指针
+// *constPtr = 10;  // 错误，不能通过 constPtr 修改所指向的值
+x = 10;  // 可以通过其他方式修改所指向的值
+
+const double pi = 3.14159;
+const double* ptr = &pi;  // ptr 是一个指向常量 double 的指针
+// *ptr = 3.14;  // 错误，不能通过 ptr 修改所指向的值
+
+// 底层 const 函数参数
+void printValue(const int* ptr) {
+    // *ptr = 10;  // 错误，不能通过指针修改底层 const 参数所指向的值
+    std::cout << *ptr << std::endl;
+}
+
+int main() {
+    int num = 5;
+    printValue(&num);  // 传递指向常量整数的指针给 printValue 函数
+    return 0;
+}
+```
+
 `const` 修饰 `*a`，代表指针指向的对象是`const`，不能通过指针修改对象，强调指针对其所指对象的不可改变性。
 
 ##### 指针常量（顶层const->指针本身是const）
@@ -60,6 +84,29 @@ const pointer
 
 ```c++
 int* const a;
+```
+
+```c++
+// 顶层 const 指针
+const int* ptr = nullptr;  // ptr 是一个指向常量整数的指针
+const double* constPtr = nullptr;  // constPtr 是一个指向常量 double 的常量指针
+
+int x = 5;
+const int* ptr2 = &x;  // ptr2 指向一个常量整数
+// *ptr2 = 10;  // 错误，不能通过 ptr2 修改所指向的值
+x = 10;  // 可以通过其他方式修改所指向的值
+
+// 顶层 const 函数参数
+void printValue(const int value) {
+    // value = 10;  // 错误，不能在函数中修改顶层 const 参数的值
+    std::cout << value << std::endl;
+}
+
+int main() {
+    int num = 5;
+    printValue(num);  // 传递常量值给 printValue 函数
+    return 0;
+}
 ```
 
 `const` 修饰 `a`，代表指针本身就是常量，不可改变指向，强调指针本身的不可改变性，只能在定义时初始化。
