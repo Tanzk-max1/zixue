@@ -94,7 +94,7 @@ const double* constPtr = nullptr;  // constPtr 是一个指向常量 double 的�
 int x = 5;
 const int* ptr2 = &x;  // ptr2 指向一个常量整数
 // *ptr2 = 10;  // 错误，不能通过 ptr2 修改所指向的值
-x = 10;  // 可以通过其他方式修改所指向的值
+//x = 10;  // 可以通过其他方式修改所指向的值
 
 // 顶层 const 函数参数
 void printValue(const int value) {
@@ -118,6 +118,111 @@ const int* const a;
 ```
 
 指针指向不可改变和也不可通过指针来改变所指的对象。
+
+##### 顶层与底层的理解
+
+```c++
+底层 const 和顶层 const 都可以用于限制对象的可变性，但它们的作用范围不同。
+
+底层 const 用于限制指针所指向的对象的可变性。当你使用底层 const 修饰指针时，该指针可以指向一个常量对象，即你不能通过该指针修改所指向对象的值。但是，你仍然可以通过其他方式修改对象本身的值。
+
+顶层 const 用于限制对象本身的可变性。当你使用顶层 const 修饰对象时，该对象本身被视为常量，你不能通过任何方式修改其值。
+    
+    int x = 5;
+const int* ptr1 = &x;  // 底层 const 指针，指向常量整数
+int* const ptr2 = &x;  // 顶层 const 指针，指向整数的常量指针
+
+*ptr1 = 7;  // 错误，不能通过 ptr1 修改所指向的值
+ptr1 = nullptr;  // 正确，可以修改指针本身
+
+*ptr2 = 7;  // 可以通过 ptr2 修改所指向的值（x 的值被修改为 7）
+// ptr2 = nullptr;  // 错误，不能重新指向其他对象
+
+
+在上述示例中，ptr1 是一个底层 const 指针，指向一个常量整数。因此，你不能通过 ptr1 修改所指向的对象的值，但可以修改指针本身，即改变指针指向的对象。
+
+ptr2 是一个顶层 const 指针，指向一个整数的常量指针。这意味着你不能通过 ptr2 修改所指向的对象的值，但可以通过其他方式修改对象的值，例如通过解引用指针进行修改。但你不能将 ptr2 指向其他对象，因为它是一个顶层 const 指针。
+
+因此，底层 const 和顶层 const 的区别在于它们所限制的内容不同：底层 const 限制了对象本身的可变性，而顶层 const 限制了指针或对象本身的可变性。
+```
+
+
+
+底层 `const` 和顶层 `const` 在实际开发中都有各自的用途和应用场景。下面是一个示例和开发场景，以帮助你更好地理解它们的作用。
+
+示例代码如下：
+
+cpp
+
+复制
+
+```c++
+#include <iostream>
+
+// 底层 const 示例：指针指向常量对象
+void printValue(const int* ptr) {
+    std::cout << *ptr << std::endl;
+    // *ptr = 10;  // 错误，不能通过 ptr 修改所指向的值
+}
+
+// 顶层 const 示例：函数返回常量对象
+const int* getValue() {
+    static int value = 5;
+    return &value;
+    // int* ptr = &value;
+    // return ptr;  // 错误，不能返回指向非常量的指针
+}
+
+int main() {
+    // 底层 const 示例
+    int x = 10;
+    const int* ptr = &x;  // 底层 const 指针，指向常量整数
+    printValue(ptr);
+
+    // 顶层 const 示例
+    const int* const constPtr = getValue();  // 顶层 const 指针，指向常量整数
+    std::cout << *constPtr << std::endl;
+
+    return 0;
+}
+```
+
+在上述示例中，我们展示了底层 `const` 和顶层 `const` 的两个主要用途：
+
+1. 底层 `const` 的用途：
+   - `printValue` 函数的参数 `ptr` 是一个指向常量整数的底层 `const` 指针。这意味着函数内部不能通过 `ptr` 修改所指向的值。这在需要传递常量对象给函数时非常有用，可以保护传递的对象不被意外修改。
+2. 顶层 `const` 的用途：
+   - `getValue` 函数返回一个指向常量整数的顶层 `const` 指针。这意味着调用者不能通过返回的指针修改所指向的值。这在需要返回常量对象的情况下非常有用，可以确保调用者不能修改函数返回的对象。
+
+开发场景示例：
+
+假设你正在开发一个图像处理库，并且有一个函数用于对图像进行裁剪。在这个场景中，底层 `const` 和顶层 `const` 都可以发挥作用。
+
+1. 底层 `const` 的应用：
+
+   - 当你传递一个指向图像数据的指针给裁剪函数时，你可以使用底层 `const` 来指示函数不会修改原始图像数据。这可以提高代码的可读性并确保图像数据的完整性。
+
+   cpp
+
+   复制
+
+   ```c++
+   void cropImage(const unsigned char* imageData, int width, int height);
+   ```
+
+2. 顶层 `const` 的应用：
+
+   - 当你定义一个函数用于返回图像的元数据，比如图像的宽度和高度时，你可以使用顶层 `const` 来指示函数返回的指针指向的对象是常量。这可以防止调用者修改元数据，保持数据的一致性。
+
+   cpp
+
+   复制
+
+   ```c++
+   const int* getImageSize(const Image& image);
+   ```
+
+在这个开发场景中，底层 `const` 和顶层 `const` 都有助于提高代码的可读性和安全性，同时确保图像数据和元数据的一致性和不变性。
 
 
 

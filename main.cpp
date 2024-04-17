@@ -626,35 +626,111 @@ using namespace std;
 
 //
 
-typedef double wages;
-typedef wages base, *p;
-typedef char *pstring;
-const pstring cstr = 0;
-const pstring *ps;
+//typedef double wages;
+//typedef wages base, *p;
+//typedef char *pstring;
+//const pstring cstr = 0;
+//const pstring *ps;
 
 
-int main(){
-  using SI = Sales_item;
-  wages hourly , weekly;
-  int  val1,val2;
-  int i = 0,&r = i;
-  auto a = r;
+//// 顶层 const 指针
+//const int* ptr = nullptr;  // ptr 是一个指向常量整数的指针
+//const double* constPtr = nullptr;  // constPtr 是一个指向常量 double 的常量指针
+//
+//int x = 5;
+//const int* ptr2 = &x;  // ptr2 指向一个常量整数
+//// *ptr2 = 10;  // 错误，不能通过 ptr2 修改所指向的值
+////x = 10;  // 可以通过其他方式修改所指向的值
+//
+//
+//// 顶层 const 函数参数
+//void printValue(const int value) {
+//  // value = 10;  // 错误，不能在函数中修改顶层 const 参数的值
+//  std::cout << value << std::endl;
+//}
 
-  const int ci = i ,&cr = ci;
-  auto b = ci;
-  auto c = cr;
-  auto d = &i;
+// 底层 const 指针
+int x = 5;
+const int* constPtr = &x;  // constPtr 是一个指向常量整数的底层 const 指针
+// *constPtr = 10;  // 错误，不能通过 constPtr 修改所指向的值
+//x = 10;  // 可以通过其他方式修改所指向的值
 
+const double pi = 3.14159;
+const double* ptr = &pi;  // ptr 是一个指向常量 double 的指针
+// *ptr = 3.14;  // 错误，不能通过 ptr 修改所指向的值
 
-  const auto f = ci;
-  cin >> val1 >> val2 ;
-//  SI item; // 等价于Sales_item item
-  auto item = val1 + val2;
-  cout << item << endl;
-
-
-
-
-
-
+// 底层 const 函数参数
+void printValue(const int* ptr) {
+  // *ptr = 10;  // 错误，不能通过指针修改底层 const 参数所指向的值
+  std::cout << *ptr << std::endl;
 }
+
+int main() {
+  //  using SI = Sales_item;
+  //  wages hourly , weekly;
+  //  int  val1,val2;
+  //  int i = 0,&r = i;
+  //  auto a = r;
+  //
+  //  const int ci = i ,&cr = ci;
+  //  auto b = ci;
+  //  auto c = cr;
+  //  auto d = &i;
+  //
+  //
+  //  const auto f = ci;
+  //  cin >> val1 >> val2 ;
+  ////  SI item; // 等价于Sales_item item
+  //  auto item = val1 + val2;
+  //  cout << item << endl;
+//  int num = 5;
+//  printValue(num); // 传递常量值给 printValue 函数
+//  return 0;
+//  int num = 5;
+//  printValue(&num);  // 传递指向常量整数的指针给 printValue 函数
+//  return 0;
+
+//  int i = 0, &r = i;
+//  const int ci = i, &cr = ci;
+//
+//  auto a = r;  // int
+//  auto b = ci;  // int
+//  auto c = cr;  // int
+//  auto d = &i;  // int *
+//  auto e = &ci;  // const int *
+//  const auto f = ci;  // const int
+//  auto &g = ci;  // const int &
+//
+//  std::cout << "a: before = " << a;
+//  a = 42;  // OK
+//  std::cout << "\tafter = " << a << std::endl;
+//  std::cout << "b: before = " << b;
+//  b = 42;  // OK
+//  std::cout << "\tafter = " << b << std::endl;
+//  std::cout << "c: before = " << c;
+//  c = 42;  // OK
+//  std::cout << "\tafter = " << c << std::endl;
+//  std::cout << "d: before = " << d;
+//  //d = 42;  // Error，尝试直接将整数值赋给指针变量 d，即 d = 42;，这是不允许的，因为这会将整数值赋给一个指针类型的变量，这是不匹配的。
+//  std::cout << "\tafter = " << d << std::endl;
+//  std::cout << "e: before = " << e;
+//  //e = 42;  // Error
+//  std::cout << "\tafter = " << e << std::endl;
+//  std::cout << "f: before = " << f;
+//  //f = 42;  // Error，const int，所以是一个常量，所以不能修改
+//  std::cout << "\tafter = " << f << std::endl;
+//  std::cout << "g: before = " << g;
+//  //g = 42;  // Error，因为只是引用关系，引用的话具有只读的特性，因此修改是错误的
+//  std::cout << "\tafter = " << g << std::endl;
+
+
+
+
+
+  return 0;
+}
+
+
+
+
+
