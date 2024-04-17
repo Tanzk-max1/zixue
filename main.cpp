@@ -1,4 +1,7 @@
 #include <iostream>
+#include "vector"
+#include <string>
+
 #include "Sales_item.h"
 #include "ex2_42.h"
 using namespace std;
@@ -651,23 +654,23 @@ using namespace std;
 //  std::cout << value << std::endl;
 //}
 
-// 底层 const 指针
-int x = 5;
-const int* constPtr = &x;  // constPtr 是一个指向常量整数的底层 const 指针
-// *constPtr = 10;  // 错误，不能通过 constPtr 修改所指向的值
-//x = 10;  // 可以通过其他方式修改所指向的值
+//// 底层 const 指针
+//int x = 5;
+//const int* constPtr = &x;  // constPtr 是一个指向常量整数的底层 const 指针
+//// *constPtr = 10;  // 错误，不能通过 constPtr 修改所指向的值
+////x = 10;  // 可以通过其他方式修改所指向的值
+//
+//const double pi = 3.14159;
+//const double* ptr = &pi;  // ptr 是一个指向常量 double 的指针
+//// *ptr = 3.14;  // 错误，不能通过 ptr 修改所指向的值
+//
+//// 底层 const 函数参数
+//void printValue(const int* ptr) {
+//  // *ptr = 10;  // 错误，不能通过指针修改底层 const 参数所指向的值
+//  std::cout << *ptr << std::endl;
+//}
 
-const double pi = 3.14159;
-const double* ptr = &pi;  // ptr 是一个指向常量 double 的指针
-// *ptr = 3.14;  // 错误，不能通过 ptr 修改所指向的值
-
-// 底层 const 函数参数
-void printValue(const int* ptr) {
-  // *ptr = 10;  // 错误，不能通过指针修改底层 const 参数所指向的值
-  std::cout << *ptr << std::endl;
-}
-
-int main() {
+//int main() {
   //  using SI = Sales_item;
   //  wages hourly , weekly;
   //  int  val1,val2;
@@ -784,43 +787,122 @@ int main() {
 //  auto len = line.size();
 //  cout << size_t(len) << endl;
 
-  string str = "hello";
-  string phrase = "h2llo world";
-  string slang = "h1ya";
+//  string str = "hello";
+//  string phrase = "h2llo world";
+//  string slang = "h1ya";
+//
+//  if (str == phrase) {
+//    std::cout << "str1 is equal to phrase" << std::endl;
+//  } else if (str != phrase) {
+//    std::cout << "str1 is not equal to phrase" << std::endl;
+//  }
+//
+//  if (str == slang) {
+//    std::cout << "str1 is equal to slang" << std::endl;
+//  } else if (str != slang) {
+//    std::cout << "str1 is not equal to slang" << std::endl;
+//  }
+//
+//  if (str > phrase)
+//    cout << "1>2" << endl;
+//  else if (str < phrase){
+//    cout << "1<2" << endl;
+//  }
+//  if (str > slang)
+//    cout << "1>3" << endl;
+//  else if (str < slang){
+//    cout << "1<3" << endl;
+//  }
+//  if (phrase > slang)
+//    cout << "2>3" << endl;
+//  else if (phrase < slang){
+//    cout << "2<3" << endl;
+//  }
+//  string s1 = "hello";
+//  string s6 = ", " + "world"+s1;
+//  cout <<s6 << endl;
 
-  if (str == phrase) {
-    std::cout << "str1 is equal to phrase" << std::endl;
-  } else if (str != phrase) {
-    std::cout << "str1 is not equal to phrase" << std::endl;
-  }
+//  return 0;
+//
+//}
 
-  if (str == slang) {
-    std::cout << "str1 is equal to slang" << std::endl;
-  } else if (str != slang) {
-    std::cout << "str1 is not equal to slang" << std::endl;
-  }
-
-  if (str > phrase)
-    cout << "1>2" << endl;
-  else if (str < phrase){
-    cout << "1<2" << endl;
-  }
-  if (str > slang)
-    cout << "1>3" << endl;
-  else if (str < slang){
-    cout << "1<3" << endl;
-  }
-  if (phrase > slang)
-    cout << "2>3" << endl;
-  else if (phrase < slang){
-    cout << "2<3" << endl;
-  }
-
-  return 0;
-
+void sum_adjacent(const std::vector<int> &v) {
+  if (v.size() < 2)
+    return;
+  for (decltype(v.size()) i = 0; i < v.size() - 1; ++i)
+    std::cout << v[i] + v[i + 1] << '\t';
+  std::cout << std::endl;
 }
 
+void sum_symmetric(const std::vector<int> &v) {
+  // If the vector has odd size, element in the middle will add to itself.
+  auto mid = (v.size() + 1) / 2;
+  for (decltype(mid) i = 0; i != mid; ++i)
+    std::cout << v[i] + v[v.size() - 1 - i] << '\t';
+  std::cout << std::endl;
+}
+
+//int main(){
+//  std::vector<int> iv;
+//  int i;
+//  while (std::cin >> i)
+//    iv.push_back(i);
+//
+//  sum_adjacent(iv);
+//  sum_symmetric(iv);
+//
+//  return 0;
+//}
 
 
+//int main(){
+//  string word , line;
+//  cout << "请输入读取字符串的方式 ：1.按照此进行读取。2.按照整行进行读取" << endl;
+//  char ch;
+//  cin >> ch;
+//  if (ch == '1') {
+//    cout << "请输入字符串：    Welcome to C++ family!  " << endl;
+//    cin >> word;
+//    cout << "系统读取的有效字符串是：" << endl;
+//    cout << word << endl;
+//    return 0;
+//  }
+//
+//  cin.clear();
+//  cin.ignore();
+//  if (ch == '2') {
+//    cout << "请输入字符串：    Welcome to C++ family!  " << endl;
+//    getline(cin, line);
+//    cout << "系统读取的有效字符串是：" << endl;
+//    cout << line << endl;
+//    return 0;
+//  }
+//  cout << "您的输入有误！";
+//
+//  return -1;
+//
+//
+//}
 
+//test 3.5
+//int main(){
+//  string result,s;
+//  char ac = 'y';
+//  while (cin >> s){
+//    if (!result.size()){
+//      result += s;
+//    }
+//    else
+//      result = result + " " + s;
+//    cout << "是否继续（yes or no）" << endl;
+//    cin >>ac;
+//    if(ac == 'y' || ac == 'Y')
+//      cout << "请输入下一个字符串：" << endl;
+//    else
+//      break;
+//
+//  }
+//  cout << result  << endl;
+//  return 0;
+//}
 
