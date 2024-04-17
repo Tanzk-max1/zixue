@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Sales_item.h"
+#include "ex2_42.h"
 using namespace std;
+
 
 //int& test01(){
 //  int a = 10;
@@ -723,11 +725,99 @@ int main() {
 //  //g = 42;  // Error，因为只是引用关系，引用的话具有只读的特性，因此修改是错误的
 //  std::cout << "\tafter = " << g << std::endl;
 
+//  const int i = 42;
+//  auto j = i;//int
+//  const auto &k = i;//const int &
+//  auto *p = &i;
+//  const auto j2 = i,&k2 = i;//j2为什么不同是因为会自动忽略顶层const
+//  cout << *p <<endl;
 
+//  const int ci1 = 0, &cj = ci1;
+//  decltype(ci1) x = 0;     // x 类型 const int
+//  decltype(cj) y = x;     // y 类型 const int&   ---y绑定到变量 x
+////  decltype(cj) z;     // error ：z是一个引用，必须初始化
+//  cout << ci1 << "-----" << x << "-----" << y << endl;
+//  int i = 42, *p = &i , &r = i;
+//  decltype(r + 0) b;
+////  declval(*p) c;
+//cout <<  b << endl;
 
+//  int a = 3, b = 4;
+//  decltype(a) c = a;  // `c` is `int`
+//  std::cout << a << " " << b << " " << c << " " << std::endl;
+//  decltype(a = b) d = a;  // `d` is `int &` to a, the expression is not evaluated
+//  std::cout << a << " " << b << " " << c << " " << d << std::endl;  // 3 4 3 3
 
+//  Sales_data data1,data2;
+//  double price1,price2;
+//  std::cin >> data1.bookNo >> data1.units_sold >> price1;
+//  std::cin >> data2.bookNo >> data2.units_sold >> price2;
+//  data1.CalcRevenue(price1);
+//  data2.CalcRevenue(price2);
+//
+//  if (data1.bookNo == data2.bookNo)
+//  {
+//    data1.AddData(data2);
+//    data1.Print();
+//    return 0;
+//  }
+//  else
+//  {
+//    std::cerr << "Data must refer to same ISBN" << std::endl;
+//    return -1;  // indicate failure
+//  }
+
+//  int sum = 0;
+//  for (int val = 0; val <= 10; ++val) { sum += val;
+//
+//
+//  }
+//  cout << "sum " << sum <<endl;
+//  return 0;
+//  string s1,s2;
+//  cin >> s1 >> s2;
+//  cout << s1 << s2 << endl;
+//  return 0;
+//  string line;
+//  getline(cin,line);
+//  cout << line << endl;
+//  auto len = line.size();
+//  cout << size_t(len) << endl;
+
+  string str = "hello";
+  string phrase = "h2llo world";
+  string slang = "h1ya";
+
+  if (str == phrase) {
+    std::cout << "str1 is equal to phrase" << std::endl;
+  } else if (str != phrase) {
+    std::cout << "str1 is not equal to phrase" << std::endl;
+  }
+
+  if (str == slang) {
+    std::cout << "str1 is equal to slang" << std::endl;
+  } else if (str != slang) {
+    std::cout << "str1 is not equal to slang" << std::endl;
+  }
+
+  if (str > phrase)
+    cout << "1>2" << endl;
+  else if (str < phrase){
+    cout << "1<2" << endl;
+  }
+  if (str > slang)
+    cout << "1>3" << endl;
+  else if (str < slang){
+    cout << "1<3" << endl;
+  }
+  if (phrase > slang)
+    cout << "2>3" << endl;
+  else if (phrase < slang){
+    cout << "2<3" << endl;
+  }
 
   return 0;
+
 }
 
 

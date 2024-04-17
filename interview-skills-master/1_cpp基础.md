@@ -50,6 +50,8 @@ pointer to const
 ```c++
 const int* a;
 int const* a;
+
+const int* a 意味着 a 是一个指向 const int 类型的指针，即指针 a 所指向的地址中的内容不能被修改。
 ```
 
 ```c++
@@ -84,6 +86,8 @@ const pointer
 
 ```c++
 int* const a;
+
+int* const a 中的 const 是顶层 const，因为它修饰的是指针本身。这意味着 a 是一个常量指针，即指针所存储的值（指向的地址）不能改变，但可以通过 a 修改所指向的对象的值。
 ```
 
 ```c++
@@ -1220,6 +1224,10 @@ decltype则用于推导表达式类型，这里只用于编译器分析表达式
 1. exp是表达式，decltype(exp)和exp类型相同
 2. exp是函数调用，decltype(exp)和函数返回值类型相同
 3. 其它情况,若exp是左值，decltype(exp)是exp类型的左值引用
+4. `decltype` 根据表达式的类型来推导出相应的类型。
+5. 对于普通标识符和表达式，推导结果是其值的类型。
+6. 对于赋值表达式，推导结果是被赋值的左值引用类型。例如decltype（a = b) 意思是把推到结果int&，结果是被赋值的左值a。`decltype` 根据这个赋值操作推导出了表达式的类型。相当于是对a的引用，但是是实际上并不会改变a的值，decltype只关心表达式的类型推导，而不会执行表达式本身的操作
+7. `decltype` 并不会实际执行表达式，它只用于类型推导
 
 **auto和decltype的配合使用：**
 
