@@ -1,7 +1,7 @@
 #include <iostream>
 #include "vector"
 #include <string>
-
+//#include <cname>
 #include "Sales_item.h"
 #include "ex2_42.h"
 using namespace std;
@@ -906,3 +906,33 @@ void sum_symmetric(const std::vector<int> &v) {
 //  return 0;
 //}
 
+//int main() {
+//  string str("some string");
+//  for (auto c : str)
+//    cout << c << endl;
+//  return 0;
+//}
+int main()
+{
+//  string str("123456");
+//  for (auto c : str)
+//    cout << c << endl;
+//  std::vector<double> values = {1.5, 2.7, 3.2};
+//  for (auto val : values)
+//  {
+//    // val 的类型是 double
+//    cout << val << endl;
+//  }
+
+//  string s("hello world!!!");
+//  decltype(s.size()) punct_cnt = 0;
+//
+//  for(auto c : s)
+//    if (ispunct(c))
+//      ++punct_cnt;
+//  cout << punct_cnt
+//      << " punctuation character in " << s << endl;
+
+
+  return 0;
+}
