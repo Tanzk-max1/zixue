@@ -5,6 +5,7 @@
 #include "Sales_item.h"
 #include "ex2_42.h"
 using namespace std;
+using std::vector;
 
 
 //int& test01(){
@@ -912,8 +913,8 @@ void sum_symmetric(const std::vector<int> &v) {
 //    cout << c << endl;
 //  return 0;
 //}
-int main()
-{
+//int main()
+//{
 //  string str("123456");
 //  for (auto c : str)
 //    cout << c << endl;
@@ -932,7 +933,72 @@ int main()
 //      ++punct_cnt;
 //  cout << punct_cnt
 //      << " punctuation character in " << s << endl;
+//  string s = "hello world!!!";
+//  if (!s.empty())//ture->1,此处为false->0,然后取反为1
+//    cout << s[0] << endl;
+//  for(decltype(s.size()) index = 0;
+//     index!=s.size() && !isspace(s[index]); ++index)//判断体是字符串非空或者
+//  {
+//    s[index] = toupper(s[index]);
+//    cout << s[index] ;
+//
+//  }
+//  const string hexdigits = "0123456789ABCDEF";
+//  cout <<"Enter a series of numbers between 0 and 15"
+//       <<" separated by apaces. Hit ENTER when finished:"
+//       << endl;
+//  string result;
+//  string :: size_type  n;
+//  while (cin >> n)
+//    if (n < hexdigits.size())
+//      result += hexdigits[n];
+//  cout << "your hex number is: " << result << endl;
+//  return 0;
+//  string s;
+//  if (cin >> s){
+//    for(auto &c : s){
+//      c = 'X';
+//    }
+//  }
+//  cout << s << endl;
+//  return 0;
+//}
+//void change_with_while(){
+//  string s;
+//  if (cin >> s){
+//    string :: size_type pos = 0;
+//    while (pos!=s.size())
+//      s[pos++] = 'x';
+//  }
+//  cout << s << endl;
+//}
+//void change_with_for(){
+//  string s;
+//  if (cin >> s) {
+//    string ::size_type pos = 0;
+//    for (pos; pos != s.size(); ++pos) {
+//      s[pos] = 'x';
+//    }
+//    cout << s << endl;
+//  }
+//}
 
+//void cin_zifuchuan() {
+//  string s="hello,hehll!";
+//    string  pos;
+//    for (auto c : s) {
+//      if (!s.empty() && !ispunct(c))
+//        pos += c;
+//
+//    }
+//    cout << pos ;
+//}
 
+int main(){
+  vector<int> v2;
+  for (int i = 0; i != 100; ++i) {
+    v2.push_back(i);
+    cout << v2[i] << endl;
+  }
   return 0;
 }
