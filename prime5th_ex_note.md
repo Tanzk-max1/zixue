@@ -144,3 +144,177 @@ for (auto &c : s) {
 (g)vector<string> v7{10,"hi"};//10个hi
 ```
 
+3.16
+
+```c++
+void print_vector_int(const vector<int> &v) {
+  for (const auto & elem : v)
+    std::cout << elem << " ";
+  std::cout << std::endl;
+}
+
+void print_vector_string(const vector<string> &v) {
+  for (const auto & elem : v)
+    std::cout << elem << " ";
+  std::cout << std::endl;
+}
+int main() {
+  vector<int> v1;               // 0  element
+  vector<int> v2(10);           // 10 elements, values are all 0
+  vector<int> v3(10, 42);       // 10 elements, values are all 42
+  vector<int> v4{10};           // 1  element,  value  is  10
+  vector<int> v5{10, 42};       // 2  elements, values are 10 and 42
+  vector<string> v6{10};        // 10 elements, values are all empty string
+  vector<string> v7{10, "hi"};  // 10 elements, values are all "hi"
+
+  print_vector_int(v1);
+  print_vector_int(v2);
+  print_vector_int(v3);
+  print_vector_int(v4);
+  print_vector_int(v5);
+  print_vector_string(v6);
+  print_vector_string(v7);
+
+  return 0;
+}
+```
+
+3.17
+
+```c++
+int main() {
+  vector<string> vString;     // 元素类型为 string 的 vector 对象
+  string s;                   // 记录用户的输入值
+  char cont = 'y';            // 与用户交互，决定是否继续输入
+  cout << "请输入第一个词：" << endl;
+  while (cin >> s) {
+    vString.push_back(s);   // 向 vector 对象中添加元素
+    cout << "您要继续吗（y or n）？" << endl;
+    cin >> cont;
+    if (cont != 'y' && cont != 'Y')
+      break;
+    cout << "请输入下一个词：" << endl;
+  }
+  cout << "转换后的结果是：" << endl;
+  for (auto &mem : vString) { // 使用范围 for 循环语句遍历 vString 中的每个元素
+    for (auto &c : mem)     // 使用范围 for 循环语句遍历 mem 中的每个字符
+      c = toupper(c);     // 改写为大写字母形式
+    cout << mem << endl;
+  }
+
+  return 0;
+}
+
+```
+
+```c++
+int main() {
+  std::vector<std::string> sv;
+  std::string s;
+  while (std::cin >> s){
+    sv.push_back(s);
+    for (auto &elem : sv)
+      for (auto &c : elem)
+        c = toupper(c);
+    if (sv.size() == 8)
+      break;
+
+    continue;
+
+  }
+  for (decltype(sv.size()) i = 0; i != sv.size(); ++i) {
+    std::cout << sv[i] << '\t';
+    if ((i + 1) % 8 == 0)
+      std::cout << std::endl;
+  }
+  return 0;
+}
+
+```
+
+3.18
+
+```
+vector<int> ivec;
+ivec[0]= 42;//错误，因为ivec是一个空vector
+对于一个空的 vector<int>，不能直接通过索引进行元素赋值，因为该索引位置上的元素并不存在。
+
+要向空的 vector<int> 添加元素并进行更改，可以使用 push_back() 函数将元素添加到向量的末尾。
+```
+
+3.19
+
+```c++
+int main(){
+  vector<int> v1(10,42);
+  vector<int> v2 { 42, 42, 42, 42, 42, 42, 42, 42, 42, 42 };
+  vector<int> v3;
+  for (int i = 0; i < 10; ++i) {
+    v3.push_back(42);
+  }
+}
+```
+
+3.20
+
+```c++
+void sum_xianglin(vector<int> &v){
+  if (v.size()<2)
+    return;
+  for (decltype(v.size()) i = 0; i < v.size()-1; ++i) {
+    cout << v[i] + v[i + 1] << endl;
+  }
+}
+void  sum_shouwei(vector<int> &v){
+  if (v.size()<2)
+    return;
+  auto mid = (v.size() + 1)/2;
+  for (decltype(mid) i = 0; i < mid; ++i) {
+    cout << v[i] + v[v.size() - 1 - i] << '\t';
+  }
+}
+int main(){
+  vector<int> iv;
+  int i ;
+  while (cin >> i)
+    iv.push_back(i);
+  sum_adjacent(iv);
+  sum_shouwei(iv);
+  return 0;
+}
+
+```
+
+3.21
+
+```c++
+void print_vector_int(const vector<int> &v){
+  for (auto it = v.cbegin(); it != v.cend() ; ++it) {
+    cout << *it << " " << endl;
+  }
+}
+void print_vector_string(const vector<string> &v){
+  for (auto it = v.cbegin(); it != v.cend(); ++it)
+    std::cout << *it << " ";
+  std::cout << std::endl;
+}
+int main(){
+  vector<int> v1;               // 0  element
+  vector<int> v2(10);           // 10 elements, values are all 0
+  vector<int> v3(10, 42);       // 10 elements, values are all 42
+  vector<int> v4{10};           // 1  element,  value  is  10
+  vector<int> v5{10, 42};       // 2  elements, values are 10 and 42
+  vector<string> v6{10};        // 10 elements, values are all empty string
+  vector<string> v7{10, "hi"};  // 10 elements, values are all "hi"
+
+  print_vector_int(v1);
+  print_vector_int(v2);
+  print_vector_int(v3);
+  print_vector_int(v4);
+  print_vector_int(v5);
+  print_vector_string(v6);
+  print_vector_string(v7);
+  return 0;
+}
+```
+
