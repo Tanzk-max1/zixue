@@ -318,3 +318,176 @@ int main(){
 }
 ```
 
+3.22
+
+```c++
+int main(){
+  vector<string> text ;
+  string line;
+  while(getline(cin,line)&& !line.empty())
+    text.push_back(line);
+  for (auto it = text.begin(); it != text.end() && !it->empty(); ++it)
+    for (auto &c : *it) {
+      c = toupper(c);
+
+    }
+  for (auto &elem: text)
+    if (elem.empty())
+      cout << endl;
+    else
+      cout << elem << " ";
+//  vector<string> text;
+//  string s;
+//  // 利用 getline 读取一句话，直接回车产生一个空串，表示段落结束
+//  while (getline(cin, s))
+//    text.push_back(s);              // 逐个添加到 text 中
+//  // 利用迭代器遍历全部字符串，遇空串停止循环
+//  for (auto it = text.begin(); it != text.end() && !it -> empty(); it++) {
+//    // 利用迭代器遍历当前字符串
+//    for (auto it2 = it->begin(); it2 != it->end(); it2++)
+//      *it2 = toupper(*it2);       // 利用 toupper 改写成大写形式
+//    cout << *it << endl;
+//  }
+
+  return 0;
+}
+```
+
+3.24
+
+```c++
+void sum_adjacent(const vector<int> &v){
+  if (v.size() < 2)
+    return;
+  for (auto it = v.cbegin(); it!=v.cend() - 1 ;++it) {
+    std::cout << *it + *(it + 1) << '\t';
+    std::cout << std::endl;
+  }
+}
+void sum_symmetric(const std::vector<int> &v) {
+  // If the vector has odd size, element in the middle will add to itself.
+  auto mid = v.cbegin() + (v.cend() - v.cbegin() + 1) / 2;
+  for (auto it = v.cbegin(); it != mid; ++it)
+    std::cout << *it + *(v.cend() - 1 - (it - v.cbegin())) << '\t';
+  std::cout << std::endl;
+}
+//位置进行迁移
+
+
+
+int main(){
+  std::vector<int> iv;
+  int i;
+  while (std::cin >> i)
+    iv.push_back(i);
+
+  sum_adjacent(iv);
+  sum_symmetric(iv);
+
+  return 0;
+}
+```
+
+3.26
+
+```
+在二分搜索程序中，计算中间位置的索引时，通常使用 mid = beg + (end - beg) / 2 而不是简单的 (beg + end) / 2 的原因是为了避免整数溢出的问题。
+
+当 beg 和 end 都是很大的整数时，它们的和可能会超过整数类型的表示范围，导致溢出。这会导致计算的结果不正确，产生错误的中间位置。
+
+通过使用 beg + (end - beg) / 2 的方式，我们先计算 end - beg，得到两个索引之间的距离。然后再将这个距离除以 2，确保结果不会溢出。
+
+这种方式可以有效地避免整数溢出的问题，确保在计算中间位置时得到准确的结果。这在处理大范围的索引或数组时尤其重要，以保证二分搜索算法的正确性和稳定性。
+```
+
+
+
+3.27
+
+```c++
+
+int main(){
+  unsigned buf_size = 1024;
+  //int ia1[buf_size];            // //在声明数组时，数组的大小必须是编译时常量，而 constexpr 是用于定义编译时常量的关键字。如果 buf_size 不是一个 constexpr 值，那么在编译时无法确定数组的大小，因此会导致错误。
+  int ia2[4 * 7 - 14];          // OK
+  //int ia3[txt_size()];          // 这个语句错误的原因是 txt_size() 不是一个 constexpr 函数。与第一个错误类似，数组的大小必须在编译时确定，而 constexpr 函数是用于定义编译时常量的函数。如果 txt_size() 不是一个 constexpr 函数，那么在编译时无法确定数组的大小，因此会导致错误。
+//如果要声明一个大小为非常量的数组，可以使用动态内存分配，如使用 new 运算符分配堆上的内存，或者使用标准库提供的容器类（如 std::vector）来代替数组。
+  //char st[11] = "fundamental";  // Error: the size of string is 12 with a trailing '\0'
+//这个语句错误的原因是字符串字面量 "fundamental" 的长度为 12，包括表示字符串结束的空字符 '\0'。然而，数组 st 的大小被指定为 11，比字符串长度小 1。这会导致字符串无法完全存储在数组中，超出数组边界，因此会产生错误。
+  return 0;
+}
+
+```
+
+3.28
+
+```c++
+string sa[10];
+int ia[10];
+int main(){
+  string sa2[10];
+  int ia2[10];
+  cout << sa << endl;
+  cout << sa2 << endl;
+  cout << ia << endl;
+  cout << ia2 << endl;
+  return 0;
+}
+//0x7ff68fdd8040
+//0x5ffd10
+//0x7ff68fdd8180
+//0x5ffce0
+
+```
+
+3.30
+
+```c++
+int main(){
+  constexpr size_t array_size = 10;
+  int ia[array_size];
+  for (size_t ix = 0; ix != array_size ; ++ix) {
+    ia[ix] = ix +1;
+    cout << ia[ix] << endl;
+  }
+}//ix = array——size是错误的，下标只能是0-9，10个数字
+```
+
+3.31
+
+```c++
+int main(){
+  int ia[10];
+  for (size_t i = 0; i < 10; ++i) {
+    ia[i] = i;
+  }
+  return 0;
+}
+```
+
+3.32
+
+```c++
+int main(){
+  int ia[10];
+  for (size_t i = 0; i < 10; ++i) {
+    ia[i] = i;
+  }
+  int ia2[10];
+  for (size_t i = 0; i != 10; ++i)
+    ia2[i] = ia[i];
+
+  std::vector<int> iv;
+  for (int i = 0; i != 10; ++i)
+    iv.push_back(i);
+  return 0;
+}
+
+```
+
+3.33
+
+```
+如果scores数组在函数内部定义，则每个元素的值是未定义的。如果scores数组在任何函数外部定义，则每个元素的值为0。
+```
+

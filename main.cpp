@@ -827,21 +827,21 @@ using std::vector;
 //
 //}
 
-void sum_adjacent(const std::vector<int> &v) {
-  if (v.size() < 2)
-    return;
-  for (decltype(v.size()) i = 0; i < v.size() - 1; ++i)
-    std::cout << v[i] + v[i + 1] << '\t';
-  std::cout << std::endl;
-}
-
-void sum_symmetric(const std::vector<int> &v) {
-  // If the vector has odd size, element in the middle will add to itself.
-  auto mid = (v.size() + 1) / 2;
-  for (decltype(mid) i = 0; i != mid; ++i)
-    std::cout << v[i] + v[v.size() - 1 - i] << '\t';
-  std::cout << std::endl;
-}
+//void sum_adjacent(const std::vector<int> &v) {
+//  if (v.size() < 2)
+//    return;
+//  for (decltype(v.size()) i = 0; i < v.size() - 1; ++i)
+//    std::cout << v[i] + v[i + 1] << '\t';
+//  std::cout << std::endl;
+//}
+//
+//void sum_symmetric(const std::vector<int> &v) {
+//  // If the vector has odd size, element in the middle will add to itself.
+//  auto mid = (v.size() + 1) / 2;
+//  for (decltype(mid) i = 0; i != mid; ++i)
+//    std::cout << v[i] + v[v.size() - 1 - i] << '\t';
+//  std::cout << std::endl;
+//}
 
 //int main(){
 //  std::vector<int> iv;
@@ -1145,4 +1145,82 @@ void sum_symmetric(const std::vector<int> &v) {
 //  print_vector_string(v6);
 //  print_vector_string(v7);
 //  return 0;
+////}
+//int main(){
+//  vector<string> text ;
+//  string line;
+//  while(getline(cin,line)&& !line.empty())
+//    text.push_back(line);
+//  for (auto it = text.begin(); it != text.end() && !it->empty(); ++it)
+//    for (auto &c : *it) {
+//      c = toupper(c);
+//
+//    }
+//  for (auto &elem: text)
+//    if (elem.empty())
+//      cout << endl;
+//    else
+//      cout << elem << " ";
+////  vector<string> text;
+////  string s;
+////  // 利用 getline 读取一句话，直接回车产生一个空串，表示段落结束
+////  while (getline(cin, s))
+////    text.push_back(s);              // 逐个添加到 text 中
+////  // 利用迭代器遍历全部字符串，遇空串停止循环
+////  for (auto it = text.begin(); it != text.end() && !it -> empty(); it++) {
+////    // 利用迭代器遍历当前字符串
+////    for (auto it2 = it->begin(); it2 != it->end(); it2++)
+////      *it2 = toupper(*it2);       // 利用 toupper 改写成大写形式
+////    cout << *it << endl;
+////  }
+//
+//  return 0;
 //}
+
+//void sum_adjacent(const vector<int> &v){
+//  if (v.size() < 2)
+//    return;
+//  for (auto it = v.cbegin(); it!=v.cend() - 1 ;++it) {
+//    std::cout << *it + *(it + 1) << '\t';
+//    std::cout << std::endl;
+//  }
+//}
+//void sum_symmetric(const std::vector<int> &v) {
+//  // If the vector has odd size, element in the middle will add to itself.
+//  auto mid = v.cbegin() + (v.cend() - v.cbegin() + 1) / 2;
+//  for (auto it = v.cbegin(); it != mid; ++it)
+//    std::cout << *it + *(v.cend() - 1 - (it - v.cbegin())) << '\t';
+//  std::cout << std::endl;
+//}
+////位置进行迁移
+//
+//
+//
+//int main(){
+//  std::vector<int> iv;
+//  int i;
+//  while (std::cin >> i)
+//    iv.push_back(i);
+//
+//  sum_adjacent(iv);
+//  sum_symmetric(iv);
+//
+//  return 0;
+//}
+string sa[10];
+int ia[10];
+int main(){
+  int ia[10];
+  for (size_t i = 0; i < 10; ++i) {
+    ia[i] = i;
+  }
+  int ia2[10];
+  for (size_t i = 0; i != 10; ++i)
+    ia2[i] = ia[i];
+
+  std::vector<int> iv;
+  for (int i = 0; i != 10; ++i)
+    iv.push_back(i);
+  return 0;
+}
+
