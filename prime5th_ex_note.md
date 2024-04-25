@@ -491,3 +491,60 @@ int main(){
 如果scores数组在函数内部定义，则每个元素的值是未定义的。如果scores数组在任何函数外部定义，则每个元素的值为0。
 ```
 
+3.34
+
+```
+将代码中的p1移动到p2，与p1 = p2是相同的。
+
+只要p1和p2都指向同一个数组中的元素，任何值都是合法的。
+```
+
+3.35
+
+```c++
+int ia[10];
+int main(){
+  int ia[10];
+  for (const auto &e : ia) {
+    std::cout << e << ' ';
+
+  }
+  cout << endl;
+  for (auto *bg = begin(ia),*ed = end(ia);bg != ed;++bg) {
+    *bg = 0;
+  }
+  for (const auto &e : ia) {
+    cout<< e << ' ';
+    cout << endl;
+  }
+
+  return 0;
+}
+//因为初始没有对数组进行定义，意味着ia可以是任何元素，所以会导致打印出任何值，包垃圾值和之前存储在栈上面其他变量的值
+```
+
+3.41
+
+```c++
+int ia[10] = {1,2,3,4,5,6,7,8};
+  vector<int> iv(begin(ia),end(ia));
+  for (const auto &i: iv) {
+    cout << i <<" " << endl;
+
+  }
+```
+
+3.42
+
+```c++
+vector<int> iv = {1,2,3,4,5,6,7,8,9};
+  int ia[10];
+  int *bg = ia;
+  int *ed = ia + iv.size();
+  for(const auto &i:iv)
+    *bg++ = i;
+  for ( bg = ia; bg != ed ; ++bg) {
+    cout << *bg << " " << endl;
+  }
+```
+

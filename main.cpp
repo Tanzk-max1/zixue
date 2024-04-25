@@ -1207,20 +1207,55 @@ using std::vector;
 //
 //  return 0;
 //}
-string sa[10];
-int ia[10];
-int main(){
-  int ia[10];
-  for (size_t i = 0; i < 10; ++i) {
-    ia[i] = i;
-  }
-  int ia2[10];
-  for (size_t i = 0; i != 10; ++i)
-    ia2[i] = ia[i];
+//string sa[10];
 
-  std::vector<int> iv;
-  for (int i = 0; i != 10; ++i)
-    iv.push_back(i);
+int main(){
+//  int ia[10];
+//  for (const auto &e : ia) {
+//    std::cout << e << ' ';
+//
+//  }
+//  cout << endl;
+//  for (auto *bg = begin(ia),*ed = end(ia);bg != ed;++bg) {
+//    *bg = 0;
+//  }
+//  for (const auto &e : ia) {
+//    cout<< e << ' ';
+//    cout << endl;
+//  }
+//  int a1[5];
+//  int a2[5];
+//  for (int i = 0; i != 5; ++i) {
+//    cin >>a1[i];
+//  }
+//  for (int i = 0; i != 5; ++i) {
+//    cin >>a2[i];
+//  }
+//  int ia[10] = {1,2,3,4,5,6,7,8};
+//  vector<int> iv(begin(ia),end(ia));
+//  for (const auto &i: iv) {
+//    cout << i <<" " << endl;
+//
+//  }
+//  vector<int> iv = {1,2,3,4,5,6,7,8,9};
+//  int ia[10];
+//  int *bg = ia;
+//  int *ed = ia + iv.size();
+//  for(const auto &i:iv)
+//    *bg++ = i;
+//  for ( bg = ia; bg != ed ; ++bg) {
+//    cout << *bg << " " << endl;
+//  }
+  int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
+  size_t cnt = 0;
+  for (auto &row : ia) {
+    for (auto &col : row) {
+      col = cnt ;
+      ++cnt;
+      cout << col << endl;
+    }
+  }
+
   return 0;
 }
 
