@@ -6,6 +6,7 @@
 #include "ex2_42.h"
 using namespace std;
 using std::vector;
+#include <algorithm>
 
 
 //int& test01(){
@@ -1208,6 +1209,25 @@ using std::vector;
 //  return 0;
 //}
 //string sa[10];
+class Solution {
+public:
+  string baseNeg2(int n) {
+    if (n == 0 || n == 1) {
+      return to_string(n);
+    }
+    string res;
+    while (n != 0) {
+      int remainder = n & 1;
+      res.push_back('0' + remainder);
+      n -= remainder;
+      n /= -2;
+    }
+    reverse(res.begin(), res.end());
+    return res;
+
+
+  }
+};
 
 int main(){
 //  int ia[10];
@@ -1246,16 +1266,31 @@ int main(){
 //  for ( bg = ia; bg != ed ; ++bg) {
 //    cout << *bg << " " << endl;
 //  }
-  int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
-  size_t cnt = 0;
-  for (auto &row : ia) {
-    for (auto &col : row) {
-      col = cnt ;
-      ++cnt;
-      cout << col << endl;
-    }
-  }
+//  int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
+//  size_t cnt = 0;
+//  for (auto &row : ia) {
+//    for (auto &col : row) {
+//      col = cnt ;
+//      ++cnt;
+//      cout << col << endl;
+//    }
+//  }
+//  for(char a = '1';a <= '9';a++)
+//    cout<<  a << endl;
+//
+//  return 0;
+  Solution solution;
+  int input;
+  std::cout << "Enter an integer: ";
+  std::cin >> input;
+
+  solution.baseNeg2(input);
+  cout >> solution();
+
+
 
   return 0;
+
+
 }
 
