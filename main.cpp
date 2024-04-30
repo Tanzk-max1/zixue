@@ -1285,7 +1285,7 @@ int main(){
   std::cin >> input;
 
   solution.baseNeg2(input);
-  cout >> solution();
+
 
 
 

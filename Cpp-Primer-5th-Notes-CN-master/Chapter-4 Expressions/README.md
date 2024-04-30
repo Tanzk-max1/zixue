@@ -107,11 +107,17 @@ int ival, jval;
 ival = jval = 0;    // ok: each assigned 0
 ```
 
+对于多重赋值语句中的每一个对象，它的类型或者右边的对象的类型相同，或者可由右边对象的类型转换得到
+
+![image-20240430123025983](C:\Users\15525\AppData\Roaming\Typora\typora-user-images\image-20240430123025983.png)
+
 因为赋值运算符的优先级低于关系运算符的优先级，所以在条件语句中，赋值部分通常应该加上括号。
 
 不要混淆相等运算符`==`和赋值运算符`=`。
 
 复合赋值运算符包括`+=`、`-=`、`*=`、`/=`、`%=`、`<<=`、`>>=`、`&=`、`^=`和`|=`。任意一种复合运算都完全等价于*a = a op b*。
+
+![image-20240430123243301](C:\Users\15525\AppData\Roaming\Typora\typora-user-images\image-20240430123243301.png)
 
 ## 递增和递减运算符（Increment and Decrement Operators）
 
@@ -125,8 +131,8 @@ ival = jval = 0;    // ok: each assigned 0
 
 ```c++
 int i = 0, j;
-j = ++i;    // j = 1, i = 1: prefix yields the incremented value
-j = i++;    // j = 1, i = 2: postfix yields the unincremented value
+j = ++i;    // j = 1, i = 1: 前置版本得到递增后的值
+j = i++;    // j = 1, i = 2: 后置版本得到递增之前的值
 ```
 
 除非必须，否则不应该使用递增或递减运算符的后置版本。后置版本需要将原始值存储下来以便于返回修改前的内容，如果我们不需要这个值，那么后置版本的操作就是一种浪费。
