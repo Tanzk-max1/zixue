@@ -667,19 +667,28 @@ if (i == 1024)
 4.17
 
 ```c++
-
+前置是递增之后的值
+后置是递增之前的值
 ```
 
 4.18
 
 ```c++
-
+会得到从第二个元素开始到最后一个元素
 ```
 
 4.19
 
 ```c++
-
+ptr != 0 && *ptr++  // 检查指针 ptr 不是空指针（nullptr），并检查指针的值。
+ival++ && ival // 检查 ival 和 ival+1 是否都等于零。
+vec[ival++] <= vec[ival] // 首先，使用 ival 索引访问 vec 容器中的元素 vec[ival]。
+    
+//接着，ival 的值不会自增，因为后缀自增运算符 ++ 在此表达式中是后置的，所以 vec[ival++] 的结果仍然是 vec[ival]。
+    
+//最后，比较 vec[ival] 和 vec[ival+1] 的值是否满足小于或等于的关系。
+// correct:
+vec[ival] <= vec[ival+1]
 ```
 
 4.20
@@ -687,31 +696,60 @@ if (i == 1024)
  
 
 ```c++
+(a) *iter++;
+这个表达式是合法的。它的含义是先解引用 iter 指向的元素，然后将 iter 自增到下一个元素。这样做会返回当前元素的值，并将 iter 向后移动一个位置。
+(b) (*iter)++;
+这个表达式是不合法的。原因是 *iter 的结果是一个 std::string 对象，而后缀自增运算符 ++ 不能应用于 std::string 类型。
+    
+(c) *iter. empty();
+这个表达式是合法的。它的含义是先解引用 iter 指向的元素，并返回该元素的值。然后，逗号运算符 , 用于分隔表达式，继续执行 empty() 函数调用。这假设被迭代的元素是 std::string 类型或具有 empty() 成员函数的类型。
+    
+(d) iter->empty();
+这个表达式是合法的。它的含义是通过迭代器 iter 访问其指向的元素，并调用该元素的 empty() 成员函数。这假设被迭代的元素是 std::string 类型或具有 empty() 成员函数的类型。
 
+
+
+(e) ++*iter;
+这个表达式是不合法的。原因是 *iter 的结果是一个 std::string 对象，而前缀自增运算符 ++ 不能应用于 std::string 类型。
+
+
+(f) iter++->empty();
+这个表达式是合法的。它的含义是先使用迭代器 iter 访问其指向的元素，并调用该元素的 empty() 成员函数。然后，迭代器 iter 执行后缀自增运算符 ++，将迭代器移动到下一个位置。
 ```
 
 4.21
 
 ```c++
-
+std::vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  for (auto& i : ivec) i = (i % 2) ? (i * 2) : i;
+  std::cout << std::endl;
+  // Check
+  for (auto i : ivec) std::cout << i << " ";
+  std::cout << std::endl;
 ```
 
 4.22
 
 ```c++
-
+第二段，因为这种结构太常见，并且直观很多，不影响易读性
 ```
 
 4.23
 
 ```c++
-
+string s = "word";
+string pl = s + s[s.size() - 1] == 's' ? "" : "s" ;//错误的
+string pl = s + (s[s.size() - 1] == 's' ? "" : "s") ;//修改后
 ```
 
 4.24
 
 ```c++
+finalgrade = (grade > 90) ? "high pass" : (grade < 60) ? "fail" : "pass";
+//这条代码使用了左结合律。根据左结合律，条件运算符 ?: 从左到右进行计算。首先，它判断 grade > 90 的结果，如果为真，则将 "high pass" 赋值给 finalgrade。如果为假，则进一步判断 grade < 60 的结果，如果为真，则将 "fail" 赋值给 finalgrade。如果两个条件都不满足，则将 "pass" 赋值给 finalgrade。
 
+finalgrade = ((grade > 90) ? "high pass" : (grade < 60)) ? "fail" : "pass";
+//这条代码使用了右结合律。根据右结合律，条件运算符 ?: 从右到左进行计算。首先，它判断 (grade > 90) ? "high pass" : (grade < 60) 的结果，如果为真，则将 "fail" 赋值给 finalgrade。如果为假，则将 "pass" 赋值给 finalgrade。
 ```
 
 4.25

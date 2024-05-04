@@ -149,10 +149,14 @@ cout << *iter++ << endl;
 
 ```c++
 string s1 = "a string", *p = &s1;
-auto n = s1.size();  // run the size member of the string s1
-n = (*p).size();    // run size on the object to which p points
-n = p->size();      // equivalent to (*p).size()
+auto n = s1.size();  // 运行string对象s1的size成员
+n = (*p).size();    // 运行p所指对象的size成员
+n = p->size();      // 等价于(*p).size()
 ```
+
+因为解引用运算符（*）的优先级远低于点运算符，所以执行解引用运算符的子表达式必须两端都加上括号，如果没加上括号就大不相同了
+
+![image-20240504101104299](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240504101104299-1714788683023-1.png)
 
 ## 条件运算符（The Conditional Operator）
 
@@ -169,6 +173,14 @@ cond ? expr1 : expr2;
 条件运算符可以嵌套，但是考虑到代码的可读性，运算的嵌套层数最好不要超过两到三层。
 
 条件运算符的优先级非常低，因此当一个长表达式中嵌套了条件运算子表达式时，通常需要在它两端加上括号。
+
+```c++
+finalgrade=(grade>90)?"high pass"
+:(grade<60)?"fail":"pass";
+//第一个条件检查成绩是否在 90 分以上，如果是，执行符号?后面的表达式，得到"high pass”:如果否，执行符号：后面的分支。这个分支本身又是一个条件表达式，它检查成绩是否在60分以下，如果是，得到“fail”;否则得到"pass"。
+```
+
+
 
 ## 位运算符（The Bitwise Operators）
 

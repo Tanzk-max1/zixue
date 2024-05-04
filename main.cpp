@@ -1279,16 +1279,25 @@ int main(){
 //    cout<<  a << endl;
 //
 //  return 0;
-  Solution solution;
-  int input;
-  std::cout << "Enter an integer: ";
-  std::cin >> input;
-
-  solution.baseNeg2(input);
-
-
-
-
+//  Solution solution;
+//  int input;
+//  std::cout << "Enter an integer: ";
+//  std::cin >> input;
+//
+//  solution.baseNeg2(input);
+//  int grade = 90;
+//  cout <<((grade<60) ? "fail":"pass");//输出pass或者fail
+//  cout << endl;
+//  cout <<(grade< 60) ? "fail":"pass";//输出1或者0! "
+//  cout << grade< 60 ? "fall":"pass"; //错误：试图比较 cout 和 60
+//  std::vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+//  for (auto& i : ivec) i = (i % 2) ? (i * 2) : i;
+  string s = "wordas";
+  std::cout << std::endl;
+  // Check
+//  for (auto i : ivec) std::cout << i << " ";
+  string pl = s + (s[s.size() - 1] == 's' ? "" : "s") ;//修改后
+  std::cout <<pl << std::endl;
   return 0;
 
 
