@@ -755,6 +755,243 @@ finalgrade = ((grade > 90) ? "high pass" : (grade < 60)) ? "fail" : "pass";
 4.25
 
 ```c++
+'q' == 01110001
+
+~ 'q' == ~ 00000000000000000000000001110001
+
+~ 'q' == 11111111111111111111111110001110
+
+//看到 的值为~ 'q'负数。左移负值具有未定义的行为 
+```
+
+4.26
+
+```c++
+本节示例中有 30 名学生。unsigned long任何机器上至少有 32 位。因此，可以确保这些位以明确定义的值开始。unsigned int保证保存 16 位的标准定义。如果unsigned int采用，结果是不确定的。
+```
+
+4.27
+
+```c++
+unsigned long ul1 = 3, ul2 = 7;//3是0011，7是0111
+ul1 & ul2 // == 3，0011 & 0110，或的话是同位置同1才是1
+ul1 | ul2 // == 7，0011 | 0110，0111，至少有一个是1才是1
+ul1 && ul2 // == true ，两个都是真值
+ul1 || ul2 // == ture，两个都是真值
+```
+
+4.28
+
+```c++
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+int main()
+{
+    cout << "bool\t\tis " << sizeof(bool) << "bytes." << endl;
+    cout << "char\t\tis " << sizeof(char) << "bytes." << endl;
+    cout << "wchar_t\t\tis " << sizeof(wchar_t) << "bytes." << endl;
+    cout << "char16_t\tis " << sizeof(char16_t) << "bytes." << endl;
+    cout << "char32_t\tis " << sizeof(char32_t) << "bytes." << endl;
+    cout << "short\t\tis " << sizeof(short) << "bytes." << endl;
+    cout << "int\t\tis " << sizeof(int) << "bytes." << endl;
+    cout << "long\t\tis " << sizeof(long) << "bytes." << endl;
+    cout << "long long\tis " << sizeof(long long) << "bytes." << endl;
+    cout << "float\t\tis " << sizeof(float) << "bytes." << endl;
+    cout << "double\t\tis " << sizeof(double) << "bytes." << endl;
+    cout << "long double\tis " << sizeof(long double) << "bytes." << endl;
+    cout << endl;
+
+    return 0;
+}
+
+// Print
+/**************************/
+// bool            is 1bytes.
+// char            is 1bytes.
+// wchar_t         is 2bytes.
+// char16_t        is 2bytes.
+// char32_t        is 4bytes.
+// short           is 2bytes.
+// int             is 4bytes.
+// long            is 4bytes.
+// long long       is 8bytes.
+// float           is 4bytes.
+// double          is 8bytes.
+// long double     is 16bytes.
+```
+
+4.29
+
+```c++
+int x[10];   int *p = x;
+  cout << sizeof(x)/sizeof(*x) << endl;
+  cout << sizeof(p)/sizeof(*p) << endl;
+  return 0;
+//第一个结果是 10。它返回 x 中的元素数量。但第二个结果取决于你的机器。在 64 位计算机上为 2，在 32 位计算机上为 1。因为不同机器上指针的大小是不同的。
+```
+
+```markdown
+指针的大小不必是 32 位 - 实现会将指针的大小设置为平台体系结构规定的任何值。在具有 64 位寻址的系统上，指针的大小通常为 64 位。
+
+但是，您还应该注意，即使在单个实现上，不同类型的指针也可能具有不同的大小。特别是，指向成员类型的指针（我承认它们是奇怪的指针）可能与指向对象的普通旧指针具有不同的大小。
+
+指向普通旧函数的指针也是如此 - 它们的大小可能与指向对象的指针不同（这适用于 C 和 C++）。然而，在现代桌面系统上，您通常会发现指向函数的指针与指向对象的指针大小相同。
+```
+
+4.30
+
+```c++
+sizeof x + y      // (sizeof x)+y . "sizeof" has higher precedence than binary`\+`.
+sizeof p->mem[i]  // sizeof(p->mem[i])
+sizeof a < b      // sizeof(a) < b
+sizeof f()        // if`f()`returns`void`, this statement is undefined, otherwise it returns the size of return type.
 
 ```
 
+4.31
+
+```c++
+我们使用前缀而不是后缀，只是因为Advice: Use Postfix Operators only When Necessaryon 4.5. Increment and Decrement Operators。
+
+建议：仅在必要时使用 Postfix 运算符
+
+原因很简单：前缀版本避免了不必要的工作。它递增值并返回递增的版本。后缀运算符必须存储原始值，以便它可以返回未递增的值作为结果。如果我们不需要未递增的值，则不需要后缀运算符完成额外的工作。
+
+对于整数和指针，编译器可以优化掉这些额外的工作。对于更复杂的迭代器类型，这项额外的工作可能成本更高。通过习惯性地使用前缀版本，我们不必担心性能差异是否重要。此外——也许更重要的是——我们可以更直接地表达我们程序的意图。
+
+所以，这只是一个好习惯。如果我们必须使用后缀版本，则无需进行任何更改。改写：
+
+for(vector<int>::size_type ix = 0; ix != ivec.size(); ix++, cnt--)
+    ivec[ix] = cnt;
+这不是讨论前缀和后缀差异的合适示例。查看此页Built-in comma operator上的部分。
+```
+
+4.32
+
+```c++
+constexpr int size = 5;
+int ia[size] = {1,2,3,4,5};
+for (int *ptr = ia, ix = 0;
+    ix != size && ptr != ia+size;
+    ++ix, ++ptr) { /* ... */ }
+```
+
+`ptr`并`ix`具有相同的功能。前者使用指针，后者使用数组的索引。我们使用循环来遍历数组。（只需从`ptr`和中选择一个`ix`）
+
+4.33
+
+```c++
+someValue ? ++x, ++y : --x, --y
+    与
+    (someValue ? ++x, ++y : --x), --y
+    效果相同，因为逗号运算符的优先级最低，
+    如果 someValue 为 true，则++x，结果为y，如果 someValue 为 false，则--x，结果为--y。所以它也与：
+    someValue ? (++x, y) : (--x, --y);
+    
+```
+
+4.34
+
+```c++
+if (fval) // fval 转换为 bool
+dval = fval + ival; //ival 转换为 fval，然后 fval add ival 转换为 double 的结果。
+dval + ival * cval; // CVAL 转换为 Int，然后 int 和 ival 转换为 double。
+```
+
+4.35
+
+```c++
+char cval; int ival; unsigned int ui; float fval; double dval;
+```
+
+识别正在发生的隐式类型转换（如果有）：
+
+```c++
+cval = 'a' + 3; // ‘a’提升为 int，则 （'a' + 3）（int） 的结果转换为 char。
+fval = ui - ival * 1.0; // ival 转换为 double，ui 也转换为 double。然后，双倍转换（通过截断）为浮动。
+dval = ui * fval; // UI 提升为浮点数。然后，浮点数转换为双倍。
+cval = ival + fval + dval;  // ival 转换为 float，然后 float 和 fval 转换为 double。最后，该双精度转换为 char（通过截断）。
+```
+
+
+
+4.36
+
+```c++
+i *= static_cast<int>(d);
+```
+
+4.37
+
+```c++
+int i; double d; const string *ps; char *pc; void *pv;
+pv = (void*)ps; // pv = const_cast<string*>(ps); or pv = static_cast<void*>(const_cast<string*>(ps));
+i = int(*pc);   // i = static_cast<int>(*pc);
+pv = &d;        // pv = static_cast<void*>(&d);
+pc = (char*)pv; // pc = reinterpret_cast<char*>(pv);
+```
+
+4.38
+
+```c++
+double slope = static_cast<double>(j/i);
+//j/i是一个 int（通过截断），然后转换为 double 并分配给斜率。
+```
+
+5.01
+
+5.02
+
+5.03
+
+5.04
+
+5.05
+
+5.06
+
+5.07
+
+5.08
+
+5.09
+
+5.10
+
+5.11
+
+5.12
+
+5.13
+
+5.14
+
+5.15
+
+5.16
+
+5.17
+
+5.18
+
+5.19
+
+5.20
+
+5.21
+
+5.22
+
+5.23
+
+5.24
+
+5.25
+
+5.26
+
+5.27

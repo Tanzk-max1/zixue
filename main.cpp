@@ -1292,12 +1292,24 @@ int main(){
 //  cout << grade< 60 ? "fall":"pass"; //错误：试图比较 cout 和 60
 //  std::vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
 //  for (auto& i : ivec) i = (i % 2) ? (i * 2) : i;
-  string s = "wordas";
-  std::cout << std::endl;
-  // Check
-//  for (auto i : ivec) std::cout << i << " ";
-  string pl = s + (s[s.size() - 1] == 's' ? "" : "s") ;//修改后
-  std::cout <<pl << std::endl;
+//  string s = "wordas";
+//  std::cout << std::endl;
+//  // Check
+////  for (auto i : ivec) std::cout << i << " ";
+//  string pl = s + (s[s.size() - 1] == 's' ? "" : "s") ;//修改后
+//  std::cout <<pl << std::endl;
+//  int x[10];   int *p = x;
+//  cout << sizeof(x)/sizeof(*x) << endl;
+//  cout << sizeof(p)/sizeof(*p) << endl;
+  constexpr int size = 5;
+  int ia[size] = {1,2,3,4,5};
+  for (int *ptr = ia, ix = 0;
+       ix != size && ptr != ia+size;
+       ++ix, ++ptr) { int a = 0;
+    a++;
+    cout << a << endl;
+  }
+
   return 0;
 
 

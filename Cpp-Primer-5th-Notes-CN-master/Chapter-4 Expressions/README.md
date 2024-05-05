@@ -195,9 +195,25 @@ finalgrade=(grade>90)?"high pass"
 |  `^`   | 位异或 | `expr ^ expr`  |
 |  `\|`  |  位或  | `expr \| expr` |
 
+![image-20240505105738121](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240505105738121.png)
+
 在位运算中符号位如何处理并没有明确的规定，所以建议仅将位运算符用于无符号类型的处理。
 
 左移运算符`<<`在运算对象右侧插入值为0的二进制位。右移运算符`>>`的行为依赖于其左侧运算对象的类型：如果该运算对象是无符号类型，在其左侧插入值为0的二进制位；如果是带符号类型，在其左侧插入符号位的副本或者值为0的二进制位，如何选择视具体环境而定。
+
+```C++
+1UL << 27;//相当于把一个unsigned long类型的数字字面值第27位为1
+```
+
+![image-20240505110732899](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240505110732899.png)
+
+![image-20240505110807078](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240505110807078.png)
+
+![image-20240505003937023](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240505003937023.png)
+
+#### 位反运算符
+
+将运算单位按位取反后生成一个新值
 
 ## `sizeof`运算符（The `sizeof` Operator）
 
@@ -218,6 +234,12 @@ finalgrade=(grade>90)?"high pass"
 - 对数组执行`sizeof`运算得到整个数组所占空间的大小。
 
 - 对`string`或`vector`对象执行`sizeof`运算只返回该类型固定部分的大小，不会计算对象中元素所占空间的大小。
+
+- ```c++
+  sizeof(ia)/sizeof(*ia)//返回ia的元素数量
+  ```
+
+  sizeof 的返回值是一个常量表达式，所以我们可以用sizeof 的结果声明数组的维度。
 
 ## 逗号运算符（Comma Operator）
 
@@ -249,6 +271,10 @@ for(vector<int>::size_type ix = 0; ix != ivec.size(); ++ix, --cnt)
 任意一种算术类型或指针类型都能转换成布尔类型。如果指针或算术类型的值为0，转换结果是`false`，否则是`true`。
 
 指向非常量类型的指针能转换成指向相应的常量类型的指针。
+
+![image-20240505212355766](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240505212355766.png)
+
+![image-20240505212329600](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-4 Expressions\${photo}\image-20240505212329600.png)
 
 ### 显式转换（Explicit Conversions）
 
