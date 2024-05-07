@@ -70,6 +70,20 @@ else
 
 `if`语句可以嵌套，其中`else`与离它最近的尚未匹配的`if`相匹配。
 
+##### 垂悬else
+
+![image-20240508011302525](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-5 Statements\${photo}\image-20240508011302525.png)
+
+![image-20240508011325299](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-5 Statements\${photo}\image-20240508011325299.png)
+
+##### 使用花括号控制执行路径
+
+想要使else分支和外层的if语句匹配起来，可以在内层if语句的两端加上花括号，使其成为一个块：
+
+![image-20240508011552743](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-5 Statements\${photo}\image-20240508011552743.png)
+
+语句属于块，意味着语句一定在块的边界之内，因此内层if语句在关键字else 前面的那个花括号处已经结束了。else 不会再作为内层 if 的一部分。此时，最近的尚未匹配的if 是外层if,也就是我们希望else匹配的那个。
+
 ### `switch`语句（The `switch` Statement）
 
 `switch`语句的形式：

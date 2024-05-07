@@ -942,19 +942,145 @@ double slope = static_cast<double>(j/i);
 //j/i是一个 int（通过截断），然后转换为 double 并分配给斜率。
 ```
 
+
+
 5.01
+
+null 语句是空语句。像这样：
+
+```c++
+; // null statement
+```
+
+当语言需要语句但程序逻辑不需要时，我可能会使用空语句。例如：
+
+```c++
+// read until we hit end-of-file or find an input equal to sought
+while (cin >> s && s != sought)
+    ; // null statement.
+```
 
 5.02
 
+```c++
+while (val <= 10)
+{
+    sum += val;
+    ++val;
+}
+```
+
 5.03
+
+```c++
+#include <iostream>
+int main()
+{
+    int sum = 0, val = 1;
+    while (val <= 10)
+        sum += val, ++val;
+    std::cout << "Sum of 1 to 10 inclusive is "
+              << sum << std::endl;
+
+    return 0;
+}
+```
+
+这种重写降低了代码的可读性。逗号运算符始终保证顺序并丢弃前面的结果。但这个例子没有任何意义，也令人难以理解。
+
+
 
 5.04
 
+解释以下每个示例，并纠正您发现的任何问题
+
+```c++
+- (a) while (string::iterator iter != s.end()) { /* . . . */ }
+- (b) while (bool status = find(word)) { /* . . . */ }
+     if (!status) { /* . . . */ }
+```
+
+(a) iter 没有指向任何内容。无效的。
+
+```c++
+std::string::iterator iter = s.begin();
+    while (iter != s.end()) { /* . . . */ }
+
+```
+
+(b) if 语句不在 while 块中。所以`status`是无效的。如果 find(word) 返回 true，它将遍历 while 块。我们应该在一会儿之前声明状态。
+
+```c++
+bool status;
+while ((status = find(word))) {/* ... */}
+if (!status) {/* ... */}
+```
+
+`!status`是没有必要的。如果`status=false`，我们离开 while，且`!status`始终为真。
+
 5.05
+
+```c++
+int main(){
+      vector<string> scores = {"F", "D", "C", "B", "A", "A++"};
+
+  int grade{0};
+  while (cin >> grade) {
+    string lettergrade;
+    if (grade < 60)
+      lettergrade = scores[0];
+    else {
+      lettergrade = scores[(grade - 50) / 10];
+      if (grade != 100) {
+        if (grade % 10 > 7)
+          lettergrade += "+";
+        else if (grade % 10 < 3)
+          lettergrade += "-";
+      }
+    }
+
+    cout << lettergrade << endl;
+  }
+
+  return 0;
+
+
+}
+```
 
 5.06
 
+```c++
+vector<string> scores = {"F", "D", "C", "B", "A", "A++"};
+
+  int grade{0};
+  while (cin >> grade) {
+//    string lettergrade;
+//    if (grade < 60)
+//      lettergrade = scores[0];
+//    else {
+//      lettergrade = scores[(grade - 50) / 10];
+//      if (grade != 100) {
+//        if (grade % 10 > 7)
+//          lettergrade += "+";
+//        else if (grade % 10 < 3)
+//          lettergrade += "-";
+//      }
+//    }
+    string lettergrade = grade < 60 ? scores[0] : scores[(grade - 50) / 10];
+    lettergrade += (grade == 100 || grade < 60) ? "" : (grade % 10 > 7) ? "+" : (grade % 10 < 3) ? "-" : "";
+    
+    cout << lettergrade << endl;
+  }
+
+  return 0;
+```
+
 5.07
+
+```c++
+
+```
 
 5.08
 
@@ -992,6 +1118,3 @@ double slope = static_cast<double>(j/i);
 
 5.25
 
-5.26
-
-5.27

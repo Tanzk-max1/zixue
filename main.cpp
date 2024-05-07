@@ -1228,6 +1228,11 @@ public:
 
   }
 };
+using std::vector;
+using std::string;
+using std::cout;
+using std::endl;
+using std::cin;
 
 int main(){
 //  int ia[10];
@@ -1301,13 +1306,55 @@ int main(){
 //  int x[10];   int *p = x;
 //  cout << sizeof(x)/sizeof(*x) << endl;
 //  cout << sizeof(p)/sizeof(*p) << endl;
-  constexpr int size = 5;
-  int ia[size] = {1,2,3,4,5};
-  for (int *ptr = ia, ix = 0;
-       ix != size && ptr != ia+size;
-       ++ix, ++ptr) { int a = 0;
-    a++;
-    cout << a << endl;
+//  constexpr int size = 5;
+//  int ia[size] = {1,2,3,4,5};
+//  for (int *ptr = ia, ix = 0;
+//       ix != size && ptr != ia+size;
+//       ++ix, ++ptr) { int a = 0;
+//    a++;
+//    cout << a << endl;
+//  }
+//  int grade;
+//
+//  const vector<string> scores = {"F","E","D","C","B","A"};
+//  string lettergrade;
+//  cin >> grade;
+////  if (grade < 60)
+////    lettergrade = scores[0];
+////  else
+////    lettergrade = scores [(grade - 50) / 10];
+////  cout << lettergrade;
+//  if (grade < 60)
+//    lettergrade = scores[0];
+//  else {
+//    lettergrade = scores [(grade - 50) / 10];//获得字母形式的成绩
+//    if (grade != 100)
+//      if (grade % 10 > 7)
+//        lettergrade += '+';
+//      else if (grade % 10 < 3)
+//        lettergrade += '-';
+//  }
+//  cout << lettergrade;
+  vector<string> scores = {"F", "D", "C", "B", "A", "A++"};
+
+  int grade{0};
+  while (cin >> grade) {
+//    string lettergrade;
+//    if (grade < 60)
+//      lettergrade = scores[0];
+//    else {
+//      lettergrade = scores[(grade - 50) / 10];
+//      if (grade != 100) {
+//        if (grade % 10 > 7)
+//          lettergrade += "+";
+//        else if (grade % 10 < 3)
+//          lettergrade += "-";
+//      }
+//    }
+    string lettergrade = grade < 60 ? scores[0] : scores[(grade - 50) / 10];
+    lettergrade += (grade == 100 || grade < 60) ? "" : (grade % 10 > 7) ? "+" : (grade % 10 < 3) ? "-" : "";
+
+    cout << lettergrade << endl;
   }
 
   return 0;
