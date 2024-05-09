@@ -1690,3 +1690,40 @@ using std::cin;
 //  return 0;
 //}
 
+//int fact(int val){
+//  if (val == 0 || val == 1) return 1;
+//  else return val* fact(val-1);
+//
+//}
+
+//size_t count_calls()
+//{
+//    static size_t ctr = 0;
+//    return ++ctr;
+//}
+//int main(){
+//    //  int j = fact(5);
+//    //  cout << j << endl;
+//    for (size_t i = 0; i != 10; ++i) {
+//      cout << count_calls() << endl;
+//
+//    }
+//    return 0;
+//
+//}
+int fact(int val){
+  int ret = 1;
+  while (val > 1) ret *= val--;
+  return ret;
+}
+void factorial_with_interacts()
+{
+  for (int val = 0; cout << "Enter a number within [0, 13): ", cin >> val;) {
+    if (val < 0 || val > 12) continue;
+    cout << val << "! =" << fact(val) << endl;
+  }
+}
+int main()
+{
+  factorial_with_interacts();
+}

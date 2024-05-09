@@ -1731,6 +1731,125 @@ int main(void)
 
 1
 
+```c++
+形参：形参变量只有在被调用时才分配内存单元，在调用结束时， 即刻释放所分配的内存单元。因此，形参只有在函数内部有效。 函数调用结束返回主调函数后则不能再使用该形参变量。
+
+实参：实参可以是常量、变量、表达式、函数等， 无论实参是何种类型的量，在进行函数调用时，它们都必须具有确定的值， 以便把这些值传送给形参。 因此应预先用赋值，输入等办法使实参获得确定值。
+```
+
+2.
+
+```c++
+(a) string f() {
+          string s;
+          // ...
+          return s;
+    }
+(b) void f2(int i) { /* ... */ }//缺少返回类型
+(c) int calc(int v1, int v2) { /* ... */ }//参数名字重复了
+(d) double square (double x) { return x * x; }//ok
+```
+
+3.
+
+```c++
+int fact(int val)
+{
+    if (val == 0 || val == 1) return 1;
+    else return val * fact(val-1);
+}
+
+int main()
+{
+    int j = fact(5);  // j equals 120, i.e., the result of fact(5)
+    std::cout << "5! is " << j << std::endl;
+    return 0;
+}
+```
+
+4.
+
+```c++
+int fact(int val){
+  int ret = 1;
+  while (val > 1) ret *= val--;
+  return ret;
+}
+void factorial_with_interacts()
+{
+  for (int val = 0; cout << "Enter a number within [0, 13): ", cin >> val;) {
+    if (val < 0 || val > 12) continue;
+    cout << val << "! =" << fact(val) << endl;
+  }
+}
+int main()
+{
+  factorial_with_interacts();
+}
+```
+
+5.
+
+```c++
+template <typename T>
+T abs(T i)
+{
+    return i >= 0 ? i : -i;
+}
+```
+
+6.
+
+**局部变量：****块**内定义的变量；
+
+**参数**：在**函数参数列表**中声明的**局部变量**
+
+**局部静态变量**：**局部静态变量（对象）**在第一次执行通过对象的定义之前初始化。当函数结束时，**局部静态不会被破坏； 当程序终止时 ** 它们被销毁。
+
+```c++
+// example
+size_t count_add(int n)       // n is a parameter.
+{
+    static size_t ctr = 0;    // ctr is a static variable.
+    ctr += n;
+    return ctr;
+}
+
+int main()
+{
+    for (size_t i = 0; i != 10; ++i)  // i is a local variable.
+      cout << count_add(i) << endl;
+
+    return 0;
+}
+```
+
+7.
+
+```c++
+size_t generate()
+{
+    static size_t ctr = 0;
+    return ctr++;
+}
+```
+
+8.
+
+```c++
+template <typename T> T abs(T i)
+{
+    return i >= 0 ? i : -i;
+}
+```
+
+```c++
+template <typename T> T abs(T i)
+{
+    return i >= 0 ? i : -i;
+}
+```
+
 ```
 
 ```

@@ -4,4 +4,5 @@ project(zixuecpp)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(zixuecpp main.cpp
-        ex2_42.h)
+        ex2_42.h
+        Chapter6.h)
