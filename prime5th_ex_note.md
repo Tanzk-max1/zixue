@@ -1,4 +1,4 @@
-
+#### ch3
 
 默认已经
 
@@ -550,6 +550,8 @@ vector<int> iv = {1,2,3,4,5,6,7,8,9};
   }
 ```
 
+#### ch4
+
 4.1
 
 ```
@@ -942,7 +944,7 @@ double slope = static_cast<double>(j/i);
 //j/i是一个 int（通过截断），然后转换为 double 并分配给斜率。
 ```
 
-
+#### ch5
 
 5.01
 
@@ -1078,43 +1080,658 @@ vector<string> scores = {"F", "D", "C", "B", "A", "A++"};
 
 5.07
 
-```c++
+更正以下每个代码片段中的错误：
 
+```c++
+(a) if (ival1 != ival2) ival1 = ival2
+    else ival1 = ival2 = 0;
+(b) if (ival < minval) minval = ival;
+    occurs = 1;
+(c) if (int ival = get_value())
+    cout << "ival = " << ival << endl;
+    if (!ival)
+    cout << "ival = 0\n";
+(d) if (ival = 0)
+    ival = get_value();
+```
+
+```c++
+(a) if (ival1 != ival2) ival1 = ival2; // lost semicolon.
+    else ival1 = ival2 = 0;
+(b) if (ival < minval)
+    {
+        minval = ival;
+        occurs = 1;
+    }
+(c) int val;
+    if (ival = get_value())
+        cout << "ival = " << ival << endl;
+    if (!ival)
+        cout << "ival = 0\n";
+(d) if (ival == 0)
+    ival = get_value();
 ```
 
 5.08
 
+```c++
+//什么是“悬空其他”？ C++ 中的 else 子句是如何解析的？
+//口语术语，用于指如何处理 if 多于 else 的嵌套 if 语句的问题。在 C++ 中，else 总是与最前面的不匹配的 if 配对。
+```
+
 5.09
+
+```c++
+int main(){
+  unsigned acnt = 0,ecnt = 0,icnt = 0,ocnt = 0,ucnt = 0;
+  char ch;
+  while (cin >> ch){
+    if (ch == 'a')
+      ++acnt;
+    else if (ch == 'e')
+      ++ecnt;
+    else if (ch == 'i')
+      ++icnt;
+    else if (ch == 'o')
+      ++ocnt;
+    else if (ch == 'u')
+      ++ucnt;
+    else if (ch == 'q')
+      break;
+  }
+  cout << "Number of vowel a: \t" << acnt << '\n' << "Number of vowel e: \t"
+       << ecnt << '\n' << "Number of vowel i: \t" << icnt << '\n'
+       << "Number of vowel o: \t" << ocnt << '\n' << "Number of vowel u: \t"
+       << ucnt << endl;
+
+
+  return 0;
+}
+
+
+```
 
 5.10
 
+```C++
+//P1
+int main(){
+  unsigned acnt = 0,ecnt = 0,icnt = 0,ocnt = 0,ucnt = 0;
+  char ch;
+  while (cin >> ch){
+    if (ch == 'a'|| ch == 'A')
+      ++acnt;
+    else if (ch == 'e' || ch == 'E')
+      ++ecnt;
+    else if (ch == 'i' || ch == 'I')
+      ++icnt;
+    else if (ch == 'o' || ch == 'O')
+      ++ocnt;
+    else if (ch == 'u' || ch == 'U')
+      ++ucnt;
+    else if (ch == 'q' || ch == 'Q')
+      break;
+  }
+  cout << "Number of vowel a: \t" << acnt << '\n' << "Number of vowel e: \t"
+       << ecnt << '\n' << "Number of vowel i: \t" << icnt << '\n'
+       << "Number of vowel o: \t" << ocnt << '\n' << "Number of vowel u: \t"
+       << ucnt << endl;
+
+
+  return 0;
+}
+```
+
+```C++
+//P2
+int main()
+{
+  unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0;
+  char ch;
+//  bool quit = false;
+//  while (cin >> ch && !quit)
+  while (cin >> ch)
+    switch (ch) {
+    case 'a':
+    case 'A':
+      ++aCnt;
+      break;
+    case 'e':
+    case 'E':
+      ++eCnt;
+      break;
+    case 'i':
+    case 'I':
+      ++iCnt;
+      break;
+    case 'o':
+    case 'O':
+      ++oCnt;
+      break;
+    case 'u':
+    case 'U':
+      ++uCnt;
+      break;
+    case 'q':
+    case 'Q':
+
+      cout << "Number of vowel a(A): \t" << aCnt << '\n'
+           << "Number of vowel e(E): \t" << eCnt << '\n'
+           << "Number of vowel i(I): \t" << iCnt << '\n'
+           << "Number of vowel o(O): \t" << oCnt << '\n'
+           << "Number of vowel u(U): \t" << uCnt << endl;
+      quit = true; // 设置标志变量为 true，以退出循环
+
+      return 0;
+
+    }
+
+
+
+
+//  cout << "Number of vowel a(A): \t" << aCnt << '\n'
+//       << "Number of vowel e(E): \t" << eCnt << '\n'
+//       << "Number of vowel i(I): \t" << iCnt << '\n'
+//       << "Number of vowel o(O): \t" << oCnt << '\n'
+//       << "Number of vowel u(U): \t" << uCnt << endl;
+
+
+}
+
+```
+
 5.11
+
+```c++
+int main()
+{
+  unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0, spaceCnt = 0,
+           tabCnt = 0, newLineCnt = 0;
+  char ch;
+  while (cin >> std::noskipws >> ch) switch (ch) {
+    case 'a':
+    case 'A':
+      ++aCnt;
+      break;
+    case 'e':
+    case 'E':
+      ++eCnt;
+      break;
+    case 'i':
+    case 'I':
+      ++iCnt;
+      break;
+    case 'o':
+    case 'O':
+      ++oCnt;
+      break;
+    case 'u':
+    case 'U':
+      ++uCnt;
+      break;
+    case ' ':
+      ++spaceCnt;
+      break;
+    case '\t':
+      ++tabCnt;
+      break;
+    case '\n':
+      ++newLineCnt;
+      break;
+    case 'q':
+          case 'Q':
+
+//            cout << "Number of vowel a(A): \t" << aCnt << '\n'
+//                 << "Number of vowel e(E): \t" << eCnt << '\n'
+//                 << "Number of vowel i(I): \t" << iCnt << '\n'
+//                 << "Number of vowel o(O): \t" << oCnt << '\n'
+//                 << "Number of vowel u(U): \t" << uCnt << endl;
+cout << "Number of vowel a(A): \t" << aCnt << '\n'
+     << "Number of vowel e(E): \t" << eCnt << '\n'
+     << "Number of vowel i(I): \t" << iCnt << '\n'
+     << "Number of vowel o(O): \t" << oCnt << '\n'
+     << "Number of vowel u(U): \t" << uCnt << '\n' << "Number of space: \t"
+     << spaceCnt << '\n' << "Number of tab char: \t" << tabCnt << '\n'
+     << "Number of new line: \t" << newLineCnt << endl;
+//            quit = true; // 设置标志变量为 true，以退出循环
+
+            return 0;
+    }
+
+
+
+  return 0;
+}
+```
 
 5.12
 
+```c++
+int main()
+{
+  unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0, spaceCnt = 0,
+           tabCnt = 0, newLineCnt = 0, ffCnt = 0, flCnt = 0, fiCnt = 0;
+  char ch, prech = '\0';
+  while (cin >> std::noskipws >> ch) {
+    switch (ch) {
+    case 'a':
+    case 'A':
+      ++aCnt;
+      break;
+    case 'e':
+    case 'E':
+      ++eCnt;
+      break;
+    case 'i':
+      if (prech == 'f') ++fiCnt;
+    case 'I':
+      ++iCnt;
+      break;
+    case 'o':
+    case 'O':
+      ++oCnt;
+      break;
+    case 'u':
+    case 'U':
+      ++uCnt;
+      break;
+    case ' ':
+      ++spaceCnt;
+      break;
+    case '\t':
+      ++tabCnt;
+      break;
+    case '\n':
+      ++newLineCnt;
+      break;
+    case 'f':
+      if (prech == 'f') ++ffCnt;
+      break;
+    case 'l':
+      if (prech == 'f') ++flCnt;
+      break;
+    case 'q':
+    case 'Q':
+      cout << "Number of vowel a(A): \t" << aCnt << '\n'
+           << "Number of vowel e(E): \t" << eCnt << '\n'
+           << "Number of vowel i(I): \t" << iCnt << '\n'
+           << "Number of vowel o(O): \t" << oCnt << '\n'
+           << "Number of vowel u(U): \t" << uCnt << '\n' << "Number of space: \t"
+           << spaceCnt << '\n' << "Number of tab char: \t" << tabCnt << '\n'
+           << "Number of new line: \t" << newLineCnt << '\n' << "Number of ff: \t"
+           << ffCnt << '\n' << "Number of fl: \t" << flCnt << '\n'
+           << "Number of fi: \t" << fiCnt << endl;
+      return 0;
+    }
+    prech = ch;
+  }
+
+
+
+  return 0;
+}
+```
+
 5.13
+
+```c++
+//下面显示的每个程序都含有一个常见的编程错误，指出错误在哪里，然后修改它们。
+(a) unsigned aCnt = 0, eCnt = 0, iouCnt = 0;
+    char ch = next_text();
+    switch (ch) {
+        case 'a': aCnt++;
+        case 'e': eCnt++;
+        default: iouCnt++;
+    }
+(b) unsigned index = some_value();
+    switch (index) {
+        case 1:
+            int ix = get_value();
+            ivec[ ix ] = index;
+            break;
+        default:
+            ix = ivec.size()-1;
+            ivec[ ix ] = index;
+    }
+(c) unsigned evenCnt = 0, oddCnt = 0;
+    int digit = get_num() % 10;
+    switch (digit) {
+        case 1, 3, 5, 7, 9:
+            oddcnt++;
+            break;
+        case 2, 4, 6, 8, 10:
+            evencnt++;
+            break;
+    }
+(d) unsigned ival=512, jval=1024, kval=4096;
+    unsigned bufsize;
+    unsigned swt = get_bufCnt();
+    switch(swt) {
+        case ival:
+            bufsize = ival * sizeof(int);
+            break;
+        case jval:
+            bufsize = jval * sizeof(int);
+            break;
+        case kval:
+            bufsize = kval * sizeof(int);
+            break;
+    }
+```
+
+```c++
+//answer
+(a) // Error: should have a break statement
+    unsigned aCnt = 0, eCnt = 0, iouCnt = 0;
+    char ch = next_text();
+    switch (ch) {
+        case 'a': aCnt++; break;
+        case 'e': eCnt++; break;
+        default : iouCnt++; break;
+    }
+(b) // Error: ix 不在范围内。
+    unsigned index = some_value();
+    int ix;
+    switch (index) {
+        case 1:
+            ix = get_value();
+            ivec[ ix ] = index;
+            break;
+        default:
+            ix = static_cast<int>(ivec.size())-1;
+            ivec[ ix ] = index;
+    }
+(c) // Error: 案例标签语法错误
+    unsigned evenCnt = 0, oddCnt = 0;
+    int digit = get_num() % 10;
+    switch (digit) {
+        case 1: case 3: case 5: case 7: case 9:
+            oddcnt++;
+            break;
+        case 2: case 4: case 6: case 8: case 0:
+            evencnt++;
+            break;
+    }
+(d) // Error: case 标签必须是常量表达式
+    const unsigned ival=512, jval=1024, kval=4096;
+    unsigned bufsize;
+    unsigned swt = get_bufCnt();
+    switch(swt) {
+        case ival:
+            bufsize = ival * sizeof(int);
+            break;
+        case jval:
+            bufsize = jval * sizeof(int);
+            break;
+        case kval:
+            bufsize = kval * sizeof(int);
+            break;
+    }
+```
 
 5.14
 
+```c++
+int main()
+{
+  string pre_word, word, max_repeat_word;
+  int repeat_times = 0, max_repeat_times = 0;
+
+  while (cin >> word) {
+    if (word == pre_word) {
+      ++repeat_times;
+    } else {
+      repeat_times = 1;
+      pre_word = word;
+    }
+
+    if (max_repeat_times < repeat_times) {
+      max_repeat_times = repeat_times;
+      max_repeat_word = pre_word;
+    }
+//    if (word == 'q')
+    if (max_repeat_times > 3)
+      break;
+  }
+
+  if (max_repeat_times <= 1){
+    cout << "no word was repeated" << endl;
+  } else {
+    cout << "the word '" << max_repeat_word << "' occurred " << max_repeat_times << " times" << endl;
+  }
+}
+```
+
 5.15
+
+```c++
+//p1
+(a) for (int ix = 0; ix != sz; ++ix) { /* ... */ }
+    if (ix != sz)
+    // . . .
+(b) int ix;
+    for (ix != sz; ++ix) { /* ... */ }
+(c) for (int ix = 0; ix != sz; ++ix, ++sz) { /*...*/ }
+```
+
+```c++
+//p2
+(a)int ix; // 将 ix 声明在 for 循环之前
+
+for (ix = 0; ix != sz; ++ix) {
+  // 循环体代码
+}
+
+if (ix != sz) {
+  // if 语句中可以使用 ix 变量
+  // ...
+}
+//存在一个错误，即作用域问题导致变量 ix 在 if 语句中无法访问。变量 ix 定义在 for 循环的初始化部分，并且其作用域仅限于 for 循环的花括号内部。
+
+(b) int ix;
+    for (; ix != sz; ++ix) { /* ... */ }
+//少了一个，for是三个部分传入参数
+(c) for (int ix = 0; ix != sz; ++ix) { /*...*/ }
+//三个参数不是四个参数
+```
 
 5.16
 
+```c++
+// while idiomatic
+int i;
+while ( cin >> i )
+    // ...
+
+// same as for
+for (int i = 0; cin >> i;)
+    // ...
+
+// for idiomatic
+for (int i = 0; i != size; ++i)
+    // ...
+
+// same as while
+int i = 0;
+while (i != size)
+{
+    // ...
+    ++i;
+}
+//while 更好，不会陷入参数命名的问题
+
+```
+
 5.17
+
+```c++
+int main()
+{
+  vector<int> vec1{0, 1, 1, 2};
+  vector<int> vec2{0, 1, 1, 2, 3, 5, 8};
+
+  auto size = vec1.size() < vec2.size() ? vec1.size() : vec2.size();
+  for (decltype(vec1.size()) i = 0; i != size; ++i) {
+    if (vec1[i] != vec2[i]) {
+      cout << "false" << endl;
+      return 0;
+    }
+  }
+  cout << "true" << endl;
+  return 0;
+}
+```
 
 5.18
 
+```c++
+(a) do { // 添加了括号.{}
+        int v1, v2;
+        cout << "Please enter two numbers to sum:" ;
+        if (cin >> v1 >> v2)
+            cout << "Sum is: " << v1 + v2 << endl;
+    }while (cin);
+(b) int ival;
+    do {
+        // . . .
+    } while (ival = get_response()); // 不应在此范围内声明。，原来是有个int ival=
+(c) int ival = get_response();
+    do {
+        ival = get_response();
+    } while (ival); // IVAL 未在此范围内声明。
+```
+
 5.19
+
+```c++
+int main(){
+  string rsp;
+  do{
+    cout << "Input two strings: ";
+    string str1,str2;
+    cin >> str1 >> str2;
+    cout << (str1 <= str2 ? str1 : str2) << " is less than the other. "
+         << "\n\n"
+         << "More? Enter yes or no: ";
+    cin >> rsp;
+  } while (!rsp.empty() && rsp[0] == 'y');
+  return 0;
+}
+```
 
 5.20
 
+```c++
+int main()
+{
+    string read, tmp;
+    while (cin >> read)
+        if (read == tmp)
+            break;
+        else
+            tmp = read;
+
+    if (cin.eof())//是否到达文件末尾
+        cout << "no word was repeated." << endl;
+    else
+        cout << read << " occurs twice in succession." << endl;
+    return 0;
+}
+```
+
 5.21
+
+```c++
+int main() {
+  string curr, prev;
+  bool no_twice = false;
+
+  while (cin >> curr) {
+    if (!isupper(curr[0])) {
+      prev = "";
+      continue;
+    }
+    if (prev == curr) {
+      cout << curr << " occurs twice in succession." << endl;
+      no_twice = true;
+      break;
+    }
+    prev = curr;
+  }
+
+  if (!no_twice) cout << "no word was repeated." << endl;
+}
+```
 
 5.22
 
+```c++
+begin:
+    int sz = get_size();
+    if (sz <= 0) {
+        goto begin;
+    }
+//for代替goto
+for（int sz = get_size() ;sz <= 0 ;sz = get_size())
+```
+
 5.23
+
+```c++
+int main(){
+  int a,b;
+  cin >> a >> b;
+  cout << static_cast<double>(a) / b  <<endl;
+  return 0;
+}
+```
 
 5.24
 
+```c++
+int main(){
+  int a,b;
+  cin >> a >> b;
+  if (b == 0) throw std::runtime_error("divisor is 0");
+  cout << static_cast<double>(a) / b  <<endl;
+  return 0;
+}
+```
+
 5.25
+
+```c++
+int main(void)
+{
+    int a, b;
+    cout << "Input two integers: ";
+    while (cin >> a >> b) {
+        try {
+            if (b == 0) throw runtime_error("divisor is 0");
+            cout << static_cast<double>(a) / b << endl;
+            cout << "Input two integers: ";
+        }
+        catch (runtime_error err) {
+            cout << err.what() ;
+            cout << "\nTry Again? Enter y or n:" << endl;
+            char c;
+            cin >> c;
+            if (!cin || c == 'n')
+                break;
+            else
+                cout << "Input two integers: ";
+        }
+    }
+
+    return 0;
+}
+```
+
+#### ch6
+
+1
+
+```
+
+```
 

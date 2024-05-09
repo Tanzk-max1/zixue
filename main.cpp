@@ -1234,131 +1234,459 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-int main(){
-//  int ia[10];
-//  for (const auto &e : ia) {
-//    std::cout << e << ' ';
-//
-//  }
-//  cout << endl;
-//  for (auto *bg = begin(ia),*ed = end(ia);bg != ed;++bg) {
-//    *bg = 0;
-//  }
-//  for (const auto &e : ia) {
-//    cout<< e << ' ';
-//    cout << endl;
-//  }
-//  int a1[5];
-//  int a2[5];
-//  for (int i = 0; i != 5; ++i) {
-//    cin >>a1[i];
-//  }
-//  for (int i = 0; i != 5; ++i) {
-//    cin >>a2[i];
-//  }
-//  int ia[10] = {1,2,3,4,5,6,7,8};
-//  vector<int> iv(begin(ia),end(ia));
-//  for (const auto &i: iv) {
-//    cout << i <<" " << endl;
-//
-//  }
-//  vector<int> iv = {1,2,3,4,5,6,7,8,9};
-//  int ia[10];
-//  int *bg = ia;
-//  int *ed = ia + iv.size();
-//  for(const auto &i:iv)
-//    *bg++ = i;
-//  for ( bg = ia; bg != ed ; ++bg) {
-//    cout << *bg << " " << endl;
-//  }
-//  int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
-//  size_t cnt = 0;
-//  for (auto &row : ia) {
-//    for (auto &col : row) {
-//      col = cnt ;
-//      ++cnt;
-//      cout << col << endl;
-//    }
-//  }
-//  for(char a = '1';a <= '9';a++)
-//    cout<<  a << endl;
-//
-//  return 0;
-//  Solution solution;
-//  int input;
-//  std::cout << "Enter an integer: ";
-//  std::cin >> input;
-//
-//  solution.baseNeg2(input);
-//  int grade = 90;
-//  cout <<((grade<60) ? "fail":"pass");//输出pass或者fail
-//  cout << endl;
-//  cout <<(grade< 60) ? "fail":"pass";//输出1或者0! "
-//  cout << grade< 60 ? "fall":"pass"; //错误：试图比较 cout 和 60
-//  std::vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
-//  for (auto& i : ivec) i = (i % 2) ? (i * 2) : i;
-//  string s = "wordas";
-//  std::cout << std::endl;
-//  // Check
-////  for (auto i : ivec) std::cout << i << " ";
-//  string pl = s + (s[s.size() - 1] == 's' ? "" : "s") ;//修改后
-//  std::cout <<pl << std::endl;
-//  int x[10];   int *p = x;
-//  cout << sizeof(x)/sizeof(*x) << endl;
-//  cout << sizeof(p)/sizeof(*p) << endl;
-//  constexpr int size = 5;
-//  int ia[size] = {1,2,3,4,5};
-//  for (int *ptr = ia, ix = 0;
-//       ix != size && ptr != ia+size;
-//       ++ix, ++ptr) { int a = 0;
-//    a++;
-//    cout << a << endl;
-//  }
-//  int grade;
-//
-//  const vector<string> scores = {"F","E","D","C","B","A"};
-//  string lettergrade;
-//  cin >> grade;
+//int main(){
+////  int ia[10];
+////  for (const auto &e : ia) {
+////    std::cout << e << ' ';
+////
+////  }
+////  cout << endl;
+////  for (auto *bg = begin(ia),*ed = end(ia);bg != ed;++bg) {
+////    *bg = 0;
+////  }
+////  for (const auto &e : ia) {
+////    cout<< e << ' ';
+////    cout << endl;
+////  }
+////  int a1[5];
+////  int a2[5];
+////  for (int i = 0; i != 5; ++i) {
+////    cin >>a1[i];
+////  }
+////  for (int i = 0; i != 5; ++i) {
+////    cin >>a2[i];
+////  }
+////  int ia[10] = {1,2,3,4,5,6,7,8};
+////  vector<int> iv(begin(ia),end(ia));
+////  for (const auto &i: iv) {
+////    cout << i <<" " << endl;
+////
+////  }
+////  vector<int> iv = {1,2,3,4,5,6,7,8,9};
+////  int ia[10];
+////  int *bg = ia;
+////  int *ed = ia + iv.size();
+////  for(const auto &i:iv)
+////    *bg++ = i;
+////  for ( bg = ia; bg != ed ; ++bg) {
+////    cout << *bg << " " << endl;
+////  }
+////  int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
+////  size_t cnt = 0;
+////  for (auto &row : ia) {
+////    for (auto &col : row) {
+////      col = cnt ;
+////      ++cnt;
+////      cout << col << endl;
+////    }
+////  }
+////  for(char a = '1';a <= '9';a++)
+////    cout<<  a << endl;
+////
+////  return 0;
+////  Solution solution;
+////  int input;
+////  std::cout << "Enter an integer: ";
+////  std::cin >> input;
+////
+////  solution.baseNeg2(input);
+////  int grade = 90;
+////  cout <<((grade<60) ? "fail":"pass");//输出pass或者fail
+////  cout << endl;
+////  cout <<(grade< 60) ? "fail":"pass";//输出1或者0! "
+////  cout << grade< 60 ? "fall":"pass"; //错误：试图比较 cout 和 60
+////  std::vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+////  for (auto& i : ivec) i = (i % 2) ? (i * 2) : i;
+////  string s = "wordas";
+////  std::cout << std::endl;
+////  // Check
+//////  for (auto i : ivec) std::cout << i << " ";
+////  string pl = s + (s[s.size() - 1] == 's' ? "" : "s") ;//修改后
+////  std::cout <<pl << std::endl;
+////  int x[10];   int *p = x;
+////  cout << sizeof(x)/sizeof(*x) << endl;
+////  cout << sizeof(p)/sizeof(*p) << endl;
+////  constexpr int size = 5;
+////  int ia[size] = {1,2,3,4,5};
+////  for (int *ptr = ia, ix = 0;
+////       ix != size && ptr != ia+size;
+////       ++ix, ++ptr) { int a = 0;
+////    a++;
+////    cout << a << endl;
+////  }
+////  int grade;
+////
+////  const vector<string> scores = {"F","E","D","C","B","A"};
+////  string lettergrade;
+////  cin >> grade;
+//////  if (grade < 60)
+//////    lettergrade = scores[0];
+//////  else
+//////    lettergrade = scores [(grade - 50) / 10];
+//////  cout << lettergrade;
 ////  if (grade < 60)
 ////    lettergrade = scores[0];
-////  else
-////    lettergrade = scores [(grade - 50) / 10];
+////  else {
+////    lettergrade = scores [(grade - 50) / 10];//获得字母形式的成绩
+////    if (grade != 100)
+////      if (grade % 10 > 7)
+////        lettergrade += '+';
+////      else if (grade % 10 < 3)
+////        lettergrade += '-';
+////  }
 ////  cout << lettergrade;
-//  if (grade < 60)
-//    lettergrade = scores[0];
-//  else {
-//    lettergrade = scores [(grade - 50) / 10];//获得字母形式的成绩
-//    if (grade != 100)
-//      if (grade % 10 > 7)
-//        lettergrade += '+';
-//      else if (grade % 10 < 3)
-//        lettergrade += '-';
+////  vector<string> scores = {"F", "D", "C", "B", "A", "A++"};
+////
+////  int grade{0};
+////  while (cin >> grade) {
+//////    string lettergrade;
+//////    if (grade < 60)
+//////      lettergrade = scores[0];
+//////    else {
+//////      lettergrade = scores[(grade - 50) / 10];
+//////      if (grade != 100) {
+//////        if (grade % 10 > 7)
+//////          lettergrade += "+";
+//////        else if (grade % 10 < 3)
+//////          lettergrade += "-";
+//////      }
+//////    }
+////    string lettergrade = grade < 60 ? scores[0] : scores[(grade - 50) / 10];
+////    lettergrade += (grade == 100 || grade < 60) ? "" : (grade % 10 > 7) ? "+" : (grade % 10 < 3) ? "-" : "";
+////
+////    cout << lettergrade << endl;
+////  }
+//  switch (ch) { case 'a':case 'b':case 'c':case 'd':case 'e':
+//  ++vowelcnt;
+//  break;}
+//
+//
+//  return 0;
+//
+//
+//}
+
+//int main(){
+//  unsigned acnt = 0,ecnt = 0,icnt = 0,ocnt = 0,ucnt = 0;
+//  char ch;
+//  while (cin >> ch){
+//    if (ch == 'a'|| ch == 'A')
+//      ++acnt;
+//    else if (ch == 'e' || ch == 'E')
+//      ++ecnt;
+//    else if (ch == 'i' || ch == 'I')
+//      ++icnt;
+//    else if (ch == 'o' || ch == 'O')
+//      ++ocnt;
+//    else if (ch == 'u' || ch == 'U')
+//      ++ucnt;
+//    else if (ch == 'q' || ch == 'Q')
+//      break;
 //  }
-//  cout << lettergrade;
-  vector<string> scores = {"F", "D", "C", "B", "A", "A++"};
-
-  int grade{0};
-  while (cin >> grade) {
-//    string lettergrade;
-//    if (grade < 60)
-//      lettergrade = scores[0];
-//    else {
-//      lettergrade = scores[(grade - 50) / 10];
-//      if (grade != 100) {
-//        if (grade % 10 > 7)
-//          lettergrade += "+";
-//        else if (grade % 10 < 3)
-//          lettergrade += "-";
-//      }
+//  cout << "Number of vowel a: \t" << acnt << '\n' << "Number of vowel e: \t"
+//       << ecnt << '\n' << "Number of vowel i: \t" << icnt << '\n'
+//       << "Number of vowel o: \t" << ocnt << '\n' << "Number of vowel u: \t"
+//       << ucnt << endl;
+//
+//
+//  return 0;
+//}
+//int main()
+//{
+//  unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0;
+//  char ch;
+////  bool quit = false;
+////  while (cin >> ch && !quit)
+//  while (cin >> ch)
+//    switch (ch) {
+//    case 'a':
+//    case 'A':
+//      ++aCnt;
+//      break;
+//    case 'e':
+//    case 'E':
+//      ++eCnt;
+//      break;
+//    case 'i':
+//    case 'I':
+//      ++iCnt;
+//      break;
+//    case 'o':
+//    case 'O':
+//      ++oCnt;
+//      break;
+//    case 'u':
+//    case 'U':
+//      ++uCnt;
+//      break;
+//    case 'q':
+//    case 'Q':
+//
+//      cout << "Number of vowel a(A): \t" << aCnt << '\n'
+//           << "Number of vowel e(E): \t" << eCnt << '\n'
+//           << "Number of vowel i(I): \t" << iCnt << '\n'
+//           << "Number of vowel o(O): \t" << oCnt << '\n'
+//           << "Number of vowel u(U): \t" << uCnt << endl;
+//      quit = true; // 设置标志变量为 true，以退出循环
+//
+//      return 0;
+//
 //    }
-    string lettergrade = grade < 60 ? scores[0] : scores[(grade - 50) / 10];
-    lettergrade += (grade == 100 || grade < 60) ? "" : (grade % 10 > 7) ? "+" : (grade % 10 < 3) ? "-" : "";
+//
+//
+//
+//
+////  cout << "Number of vowel a(A): \t" << aCnt << '\n'
+////       << "Number of vowel e(E): \t" << eCnt << '\n'
+////       << "Number of vowel i(I): \t" << iCnt << '\n'
+////       << "Number of vowel o(O): \t" << oCnt << '\n'
+////       << "Number of vowel u(U): \t" << uCnt << endl;
+//
+//
+//}
 
-    cout << lettergrade << endl;
-  }
+//int main()
+//{
+//  unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0, spaceCnt = 0,
+//           tabCnt = 0, newLineCnt = 0;
+//  char ch;
+//  while (cin >> std::noskipws >> ch) switch (ch) {
+//    case 'a':
+//    case 'A':
+//      ++aCnt;
+//      break;
+//    case 'e':
+//    case 'E':
+//      ++eCnt;
+//      break;
+//    case 'i':
+//    case 'I':
+//      ++iCnt;
+//      break;
+//    case 'o':
+//    case 'O':
+//      ++oCnt;
+//      break;
+//    case 'u':
+//    case 'U':
+//      ++uCnt;
+//      break;
+//    case ' ':
+//      ++spaceCnt;
+//      break;
+//    case '\t':
+//      ++tabCnt;
+//      break;
+//    case '\n':
+//      ++newLineCnt;
+//      break;
+//    case 'q':
+//          case 'Q':
+//
+////            cout << "Number of vowel a(A): \t" << aCnt << '\n'
+////                 << "Number of vowel e(E): \t" << eCnt << '\n'
+////                 << "Number of vowel i(I): \t" << iCnt << '\n'
+////                 << "Number of vowel o(O): \t" << oCnt << '\n'
+////                 << "Number of vowel u(U): \t" << uCnt << endl;
+//cout << "Number of vowel a(A): \t" << aCnt << '\n'
+//     << "Number of vowel e(E): \t" << eCnt << '\n'
+//     << "Number of vowel i(I): \t" << iCnt << '\n'
+//     << "Number of vowel o(O): \t" << oCnt << '\n'
+//     << "Number of vowel u(U): \t" << uCnt << '\n' << "Number of space: \t"
+//     << spaceCnt << '\n' << "Number of tab char: \t" << tabCnt << '\n'
+//     << "Number of new line: \t" << newLineCnt << endl;
+////            quit = true; // 设置标志变量为 true，以退出循环
+//
+//            return 0;
+//    }
+//
+//
+//
+//  return 0;
+//}
+//int main()
+//{
+//  unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0, spaceCnt = 0,
+//           tabCnt = 0, newLineCnt = 0, ffCnt = 0, flCnt = 0, fiCnt = 0;
+//  char ch, prech = '\0';
+//  while (cin >> std::noskipws >> ch) {
+//    switch (ch) {
+//    case 'a':
+//    case 'A':
+//      ++aCnt;
+//      break;
+//    case 'e':
+//    case 'E':
+//      ++eCnt;
+//      break;
+//    case 'i':
+//      if (prech == 'f') ++fiCnt;
+//    case 'I':
+//      ++iCnt;
+//      break;
+//    case 'o':
+//    case 'O':
+//      ++oCnt;
+//      break;
+//    case 'u':
+//    case 'U':
+//      ++uCnt;
+//      break;
+//    case ' ':
+//      ++spaceCnt;
+//      break;
+//    case '\t':
+//      ++tabCnt;
+//      break;
+//    case '\n':
+//      ++newLineCnt;
+//      break;
+//    case 'f':
+//      if (prech == 'f') ++ffCnt;
+//      break;
+//    case 'l':
+//      if (prech == 'f') ++flCnt;
+//      break;
+//    case 'q':
+//    case 'Q':
+//      cout << "Number of vowel a(A): \t" << aCnt << '\n'
+//           << "Number of vowel e(E): \t" << eCnt << '\n'
+//           << "Number of vowel i(I): \t" << iCnt << '\n'
+//           << "Number of vowel o(O): \t" << oCnt << '\n'
+//           << "Number of vowel u(U): \t" << uCnt << '\n' << "Number of space: \t"
+//           << spaceCnt << '\n' << "Number of tab char: \t" << tabCnt << '\n'
+//           << "Number of new line: \t" << newLineCnt << '\n' << "Number of ff: \t"
+//           << ffCnt << '\n' << "Number of fl: \t" << flCnt << '\n'
+//           << "Number of fi: \t" << fiCnt << endl;
+//      return 0;
+//    }
+//    prech = ch;
+//  }
+//
+//
+//
+//  return 0;
+//}
+//int main()
+//{
+//  string pre_word, word, max_repeat_word;
+//  int repeat_times = 0, max_repeat_times = 0;
+//
+//  while (cin >> word) {
+//    if (word == pre_word) {
+//      ++repeat_times;
+//    } else {
+//      repeat_times = 1;
+//      pre_word = word;
+//    }
+//
+//    if (max_repeat_times < repeat_times) {
+//      max_repeat_times = repeat_times;
+//      max_repeat_word = pre_word;
+//    }
+////    if (word == 'q')
+//    if (max_repeat_times > 3)
+//      break;
+//  }
+//
+//  if (max_repeat_times <= 1){
+//    cout << "no word was repeated" << endl;
+//  } else {
+//    cout << "the word '" << max_repeat_word << "' occurred " << max_repeat_times << " times" << endl;
+//  }
+//}
 
-  return 0;
-
-
-}
+//int main()
+//{
+//  vector<int> vec1{0, 1, 1, 2};
+//  vector<int> vec2{0, 1, 1, 2, 3, 5, 8};
+//
+//  auto size = vec1.size() < vec2.size() ? vec1.size() : vec2.size();
+//  for (decltype(vec1.size()) i = 0; i != size; ++i) {
+//    if (vec1[i] != vec2[i]) {
+//      cout << "false" << endl;
+//      return 0;
+//    }
+//  }
+//  cout << "true" << endl;
+//  return 0;
+//}
+//int main(){
+//  string rsp;
+//  do{
+//    cout << "Input two strings: ";
+//    string str1,str2;
+//    cin >> str1 >> str2;
+//    cout << (str1 <= str2 ? str1 : str2) << " is less than the other. "
+//         << "\n\n"
+//         << "More? Enter yes or no: ";
+//    cin >> rsp;
+//  } while (!rsp.empty() && rsp[0] == 'y');
+//  return 0;
+//}
+//int main()
+//{
+//  string read, tmp;
+//  while (cin >> read)
+//    if (read == tmp)
+//      break;
+//    else
+//      tmp = read;
+//
+//  if (cin.eof())
+//    cout << "no word was repeated." << endl;
+//  else
+//    cout << read << " occurs twice in succession." << endl;
+//  return 0;
+//}
+//int main() {
+//  string curr, prev;
+//  bool no_twice = false;
+//
+//  while (cin >> curr) {
+//    if (!isupper(curr[0])) {
+//      prev = "";
+//      continue;
+//    }
+//    if (prev == curr) {
+//      cout << curr << " occurs twice in succession." << endl;
+//      no_twice = true;
+//      break;
+//    }
+//    prev = curr;
+//  }
+//
+//  if (!no_twice) cout << "no word was repeated." << endl;
+//}
+//int main(){
+//  int a,b;
+//  cin >> a >> b;
+//  if (b == 0) throw std::runtime_error("divisor is 0");
+//  cout << static_cast<double>(a) / b  <<endl;
+//  return 0;
+//}
+//int main(void)
+//{
+//  int a, b;
+//  cout << "Input two integers: ";
+//  while (cin >> a >> b) {
+//    try {
+//      if (b == 0) throw runtime_error("divisor is 0");
+//      cout << static_cast<double>(a) / b << endl;
+//      cout << "Input two integers: ";
+//    }
+//    catch (runtime_error err) {
+//      cout << err.what() ;
+//      cout << "\nTry Again? Enter y or n:" << endl;
+//      char c;
+//      cin >> c;
+//      if (!cin || c == 'n')
+//        break;
+//      else
+//        cout << "Input two integers: ";
+//    }
+//  }
+//
+//  return 0;
+//}
 

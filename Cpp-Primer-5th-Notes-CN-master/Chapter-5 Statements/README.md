@@ -117,6 +117,18 @@ switch (number)
 
 `switch`语句中可以添加一个`default`标签（default label），如果没有任何一个`case`标签能匹配上`switch`表达式的值，程序将执行`default`标签后的语句。
 
+```c++
+switch (ch) { case 'a':case 'b':case 'c':case 'd':case 'e': 
+  ++vowelcnt;
+  break;
+default:
+  ++otherCnt;
+  break;}
+  //在这个版本的程序中，如果 ch 不是元音字母，就从 default 标签开始执行并把otherCnt 加1。
+```
+
+
+
 即使不准备在`default`标签下做任何操作，程序中也应该定义一个`default`标签。其目的在于告诉他人我们已经考虑到了默认情况，只是目前不需要实际操作。
 
 不允许跨过变量的初始化语句直接跳转到该变量作用域内的另一个位置。如果需要为`switch`的某个`case`分支定义并初始化一个变量，则应该把变量定义在块内。
@@ -124,10 +136,19 @@ switch (number)
 ```c++
 case true:
 {
-    // ok: declaration statement within a statement block
+    // 因为程序的执行流程可能绕开下面的初始化语句，所以该switch语句不合法
     string file_name = get_file_name();
-    // ...
-}
+    // 错误：控制流绕过一个隐式初始化的变量
+    int ival = 0; //错误：控制流绕过一个显式初始化的变量
+	int jval; //正确：因为jval 没有初始化
+     }
+    break;
+   
+case false:
+// 正确：jval 虽然在作用域内，但是它没有被初始化
+jval =next_num(); // 正确：给 jval 赋一个值
+if(file_name.empty()) // file_name 在作用域内，但是没有被初始化
+
 ```
 
 ## 迭代语句（Iterative Statements）
@@ -149,7 +170,7 @@ while (condition)
 
 定义在`while`条件部分或者循环体内的变量每次迭代都经历从创建到销毁的过程。
 
-在不确定迭代次数，或者想在循环结束后访问循环控制变量时，使用`while`比较合适。
+在**不确定迭代次数**，或者**想在循环结束后访问循环控制变量**时，使用`while`比较合适。
 
 ### 传统的`for`语句（Traditional `for` Statement）
 
@@ -179,6 +200,10 @@ for (declaration : expression)
 
 其中`expression`表示一个序列，拥有能返回迭代器的`begin`和`end`成员。`declaration`定义一个变量，序列中的每个元素都应该能转换成该变量的类型（可以使用`auto`）。如果需要对序列中的元素执行写操作，循环变量必须声明成引用类型。每次迭代都会重新定义循环控制变量，并将其初始化为序列中的下一个值，之后才会执行`statement`。
 
+![image-20240509105534464](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-5 Statements\${photo}\image-20240509105534464.png)
+
+![image-20240509105546151](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-5 Statements\${photo}\image-20240509105546151.png)
+
 ### `do-while`语句（The `do-while` Statement）
 
 `do-while`语句的形式：
@@ -193,7 +218,7 @@ while (condition);
 
 计算`condition`的值之前会先执行一次`statement`，`condition`不能为空。如果`condition`的值为`false`，循环终止，否则重复执行`statement`。
 
-因为`do-while`语句先执行语句或块，再判断条件，所以不允许在条件部分定义变量。
+因为`do-while`语句先执行语句或块，再判断条件，所以不允许在条件部分定义变量，也就是不可以声明变量再条件部分。
 
 ## 跳转语句（Jump Statements）
 
@@ -294,9 +319,13 @@ catch (exception-declaration)
 }
 ```
 
-`try`语句块中的`program-statements`组成程序的正常逻辑，其内部声明的变量在块外无法访问，即使在`catch`子句中也不行。`catch`子句包含关键字`catch`、括号内一个对象的声明（异常声明，exception declaration）和一个块。当选中了某个`catch`子句处理异常后，执行与之对应的块。`catch`一旦完成，程序会跳过剩余的所有`catch`子句，继续执行后面的语句。
+`try`语句块中的`program-statements`组成程序的正常逻辑，其内部声明的变量在块外无法访问，即使在`catch`子句中也不行。跟在 try 块之后的是一个或多个 catch 子句。`catch`子句包含关键字`catch`、括号内一个对象的声明（异常声明，exception declaration）和一个块。当选中了某个`catch`子句处理异常后，执行与之对应的块。`catch`一旦完成，程序会跳过剩余的所有`catch`子句，继续执行后面的语句。
 
 如果最终没能找到与异常相匹配的`catch`子句，程序会执行名为`terminate`的标准库函数。该函数的行为与系统有关，一般情况下，执行该函数将导致程序非正常退出。类似的，如果一段程序没有`try`语句块且发生了异常，系统也会调用`terminate`函数并终止当前程序的执行。
+
+
+
+try 语句块中的 program-statements 组成程序的正常逻辑，像其他任何块一样，program-statements 可以有包括声明在内的任意 C++语句。一如往常，try 语句块内声明的变量在块外部无法访问，特别是在 catch 子句内也无法访问。
 
 ### 标准异常（Standard Exceptions）
 
@@ -340,4 +369,4 @@ classDiagram
     logic_error <|-- length_error
 ```
 
-只能以默认初始化的方式初始化`exception`、`bad_alloc`和`bad_cast`对象，不允许为这些对象提供初始值。其他异常类的对象在初始化时必须提供一个`string`或一个C风格字符串，通常表示异常信息。`what`成员函数可以返回该字符串的`string`副本。
+只能以默认初始化的方式初始化`exception`、`bad_alloc`和`bad_cast`对象，不允许为这些对象提供初始值。其他异常类的对象在初始化时必须提供一个`string`或一个C风格字符串，通常表示异常信息。`what`成员函数可以返回该字符串的`string`副本。对于其他无初始值的异常类型来说，what返回的内容由编译器决定。
