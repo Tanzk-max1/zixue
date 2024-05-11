@@ -4,7 +4,8 @@
 
 #ifndef ZIXUECPP_CHAPTER6_H
 #define ZIXUECPP_CHAPTER6_H
-
+#include <iostream>
+#include <string>
 int fact(int val);
 int func();
 

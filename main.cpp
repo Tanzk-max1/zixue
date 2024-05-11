@@ -4,6 +4,9 @@
 //#include <cname>
 #include "Sales_item.h"
 #include "ex2_42.h"
+//#include "Chapter6.h"
+#include "fact.h"
+
 using namespace std;
 using std::vector;
 #include <algorithm>
@@ -1711,19 +1714,42 @@ using std::cin;
 //    return 0;
 //
 //}
-int fact(int val){
-  int ret = 1;
-  while (val > 1) ret *= val--;
-  return ret;
-}
-void factorial_with_interacts()
+//int fact(int val){
+//  int ret = 1;
+//  while (val > 1) ret *= val--;
+//  return ret;
+//}
+//void factorial_with_interacts()
+//{
+//  for (int val = 0; cout << "Enter a number within [0, 13): ", cin >> val;) {
+//    if (val < 0 || val > 12) continue;
+//    cout << val << "! =" << fact(val) << endl;
+//  }
+//}
+void  reset(int  &ip)
 {
-  for (int val = 0; cout << "Enter a number within [0, 13): ", cin >> val;) {
-    if (val < 0 || val > 12) continue;
-    cout << val << "! =" << fact(val) << endl;
-  }
+//  *ip = 0;//改变指针ip所指对象的值
+//  ip = 0;//只改变了ip的局部拷贝，实参未被改变
+  ip = 0;
 }
 int main()
 {
-  factorial_with_interacts();
+//  std::cout << "5! is " << fact(5) << std::endl;
+//  std::cout << func() << std::endl;
+//  std::cout << abs(-9.78) << std::endl;
+  int j = 42;
+  reset(j);
+  cout  << j << endl;
+//  int *p = &n,*q = &i;
+//  *p = 42;
+//  p = q;
+//  int &r = n;
+//  r = 42;
+//  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+
+//  r = i;
+//  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+//  i = r;
+//  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+
 }

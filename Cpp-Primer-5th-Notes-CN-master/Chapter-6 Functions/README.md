@@ -109,6 +109,19 @@ void reset(int *ip)
 
 通过使用引用形参，函数可以改变实参的值。
 
+其实就是用引用形参来绑定实参，给实参换个名字
+
+```c++
+int n = 0,i = 45;
+int &r = n;
+  r = 42;
+cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+i = r;
+cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+```
+
+你修改引用形参的值r，n的值也会被改变
+
 ```c++
 // function that takes a reference to an int and sets the given object to zero
 void reset(int &i)  // i is just another name for the object passed to reset
@@ -117,7 +130,11 @@ void reset(int &i)  // i is just another name for the object passed to reset
 }
 ```
 
-使用引用形参可以避免拷贝操作，拷贝大的类类型对象或容器对象比较低效。另外有的类类型（如IO类型）根本就不支持拷贝操作，这时只能通过引用形参访问该类型的对象。
+**使用引用形参可以避免拷贝操作**，拷贝大的类类型对象或容器对象比较低效。另外有的类类型（如IO类型）根本就不支持拷贝操作，这时只能通过引用形参访问该类型的对象。
+
+![image-20240511142116405](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-6 Functions\${photo}\image-20240511142116405.png)
+
+* 如果函数无须改变引用形参的值，最好将其声明为常量引用
 
 除了内置类型、函数对象和标准库迭代器外，其他类型的参数建议以引用方式传递。
 
