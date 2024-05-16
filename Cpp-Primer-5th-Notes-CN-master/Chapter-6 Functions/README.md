@@ -134,11 +134,9 @@ void reset(int &i)  // i is just another name for the object passed to reset
 
 ![image-20240511142116405](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-6 Functions\${photo}\image-20240511142116405.png)
 
-* 如果函数无须改变引用形参的值，最好将其声明为常量引用
-
 除了内置类型、函数对象和标准库迭代器外，其他类型的参数建议以引用方式传递。
 
-如果函数无须改变引用形参的值，最好将其声明为常量引用。
+* 如果函数无须改变引用形参的值，最好将其声明为常量引用。
 
 一个函数只能返回一个值，但利用引用形参可以使函数返回额外信息。
 
@@ -150,18 +148,65 @@ void reset(int &i)  // i is just another name for the object passed to reset
 
 把函数不会改变的形参定义成普通引用会极大地限制函数所能接受的实参类型，同时也会给别人一种误导，即函数可以修改实参的值。
 
+![image-20240516102102322](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-6 Functions\${photo}\image-20240516102102322.png)
+
+```c++
+const int ci = 42;
+  cout << ci <<endl;
+
+  int i = ci;
+  cout << i <<endl;
+  int *const p = &i;//p 是一个被声明为 const 的指针变量，它指向 int 类型的变量 i。
+  cout << p <<endl;//p取得那个的指针地址
+  cout << *p <<endl;
+  *p = 0;//初始值是&i，就是i的地址，当打印p会看到i的地址
+//*p = 0就是把p所指向的值修改为0，就是i修改为0；
+cout << *p <<endl;
+//42
+//42
+//0x5ffe4c
+//42
+
+//但是不可以用const int &r1 = 42；这种写法，写出来不报错，可是很危险，是一种临时变量，并不安全，出了作用域就会被销毁
+
+
+```
+
+
+
 ### 数组形参（Array Parameters）
 
 因为不能拷贝数组，所以无法以值传递的方式使用数组参数，但是可以把形参写成类似数组的形式。
 
 ```c++
-// each function has a single parameter of type const int*
+// 每个函数都有一个const int*类型的形参
 void print(const int*);
-void print(const int[]);    // shows the intent that the function takes an array
-void print(const int[10]);  // dimension for documentation purposes (at best)
+void print(const int[]);    // 看出来，函数的意图是作用于一个数组
+void print(const int[10]);  // 这里的维度表示我们期望数组含有多少元素，实际不一定
 ```
 
-因为数组会被转换成指针，所以当我们传递给函数一个数组时，实际上传递的是指向数组首元素的指针。
+```c++
+#include <iostream>
+
+void print(const int arr[10]) {
+    for (int i = 0; i < 10; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    int i = 0;//正确：&i的类型是int*
+    int j[2] = {0, 1};//正确，j转换成int* 并指向j[0]
+  
+    print(&i);  // 输出: 0 0 0 0 0 0 0 0 0 0
+    print(j);   // 输出: 0 1 0 0 0 0 0 0 0 0
+
+    return 0;
+}
+```
+
+因为数组会被转换成指针，所以当我们传递给函数一个数组时，实际上传递的是指向数组首元素的指针。如果我们传给print函数的一个数组，则实参自动转换成指向数组首元素的指针，数组的大小对函数的调用没有调用。
 
 因为数组是以指针的形式传递给函数的，所以一开始函数并不知道数组的确切尺寸，调用者应该为此提供一些额外信息。
 
@@ -171,12 +216,18 @@ void print(const int[10]);  // dimension for documentation purposes (at best)
 
 形参可以是数组的引用，但此时维度是形参类型的一部分，函数只能作用于指定大小的数组。
 
+![image-20240516185831535](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-6 Functions\${photo}\image-20240516185831535.png)
+
+
+
 将多维数组传递给函数时，数组第二维（以及后面所有维度）的大小是数组类型的一部分，不能省略。
 
 ```c++
 f(int &arr[10])     // error: declares arr as an array of references
 f(int (&arr)[10])   // ok: arr is a reference to an array of ten ints
 ```
+
+![image-20240516190444117](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-6 Functions\${photo}\image-20240516190444117.png)
 
 ### `main`：处理命令行选项（`main`：Handling Command-Line Options）
 

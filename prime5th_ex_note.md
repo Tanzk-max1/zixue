@@ -1843,3 +1843,182 @@ template <typename T> T abs(T i)
 }
 ```
 
+11
+
+```c++
+void reset(int& i)
+{
+    i = 0;
+}
+
+int main()
+{
+    int i = 42;
+    reset(i);
+    std::cout << i << std::endl;
+}
+```
+
+12
+
+```c++
+#include <iostream>
+#include <string>
+
+using std::cin;
+using std::cout;
+using std::endl;
+
+void swap(int& lhs, int& rhs)
+{
+    auto tmp = lhs;
+    lhs = rhs;
+    rhs = tmp;
+}
+
+int main()
+{
+    for (int left, right; cout << "Please Enter:\n", cin >> left >> right;) {
+        swap(left, right);
+        cout << left << " " << right << endl;
+    }
+}
+//这个版本更简单
+```
+
+
+
+13
+
+```c++
+//前者是按照值进行传递参数，函数对形参所作的任何事都不会影响实参，
+//后者是做一个引用，绑定我们传递的任何T对象
+```
+
+14
+
+```c++
+//参数应该是引用类型：
+void reset(int &i)
+{
+    i = 0;
+}
+//参数不能是引用类型的
+void print(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+    for (std::vector<int>::iterator iter = begin; iter != end; ++iter)
+    std::cout << *iter << std::endl;
+}
+//迭代器作为非引用类型是更为合适的选择，他保证了函数的独立性，并且不会产生意外的副作用
+```
+
+15
+
+```c++
+//为什么是s对 const 的引用却occurs是普通引用？
+//因为s此函数是不做更改的，但是occurs是由函数计算得到更改的
+//为什么这些参数是引用，而char参数c不是？
+//在这里使用 const 引用是可以的，但是char直接复制 a 会更节省内存。
+//s如果我们简单地引用会发生什么？如果我们引用occurs是常量引用 会怎样？
+//s可以在函数中改变，也occurs可以不改变。occurs = 0;错误也是如此。
+```
+
+16
+
+```c++
+//为什么是s对 const 的引用却occurs是普通引用？
+//由于该函数不会改变参数，因此应在 string&s 之前添加“const”，否则该函数会产生误导，不能与 const string 或 const 函数一起使用。
+bool is_empty(const string& s) { return s.empty(); }
+```
+
+17
+
+```c++
+不一样。对于第一个，使用了“const”，因为不需要对参数进行任何更改。对于第二个函数，不能使用“const”，因为要更改参数的内容。
+```
+
+18
+
+```c++
+bool compare(const matrix &m1,const matrix &m2);
+vector<int> :: iterator change_val(int value,vector<int > ::iterator it)
+ 
+    //迭代器两个里欸行，一个iterator 一个const_iterator
+//前者可读可写，后者可读
+```
+
+19
+
+```c++
+a非法，只有一个参数
+    b合法
+    c合法
+    d合法，但是不推荐，因为会有浮点数丢失
+```
+
+20
+
+```c++
+//使用const的时候是常量引用
+  //  当你不确定是否需要修改对象时，建议使用常量引用作为函数形参。
+#include <iostream>
+
+void printNumber(const int& num) {
+    std::cout << num << std::endl;
+}
+
+void modifyNumber(int& num) {
+    num = 10;  // 修改传递的对象
+}
+
+int main() {
+    int number = 5;
+
+    printNumber(number);  // 使用常量引用，不修改对象
+    modifyNumber(number); // 使用普通引用，修改对象
+    printNumber(number);  // 对象已被修改
+
+    return 0;
+}
+```
+
+21
+
+```c++
+#include <iostream>
+
+int LargerOne(int i, const int* const ip)
+{
+    return (i > *ip) ? i : *ip;
+}
+
+int main()
+{
+    int c = 6;
+    std::cout << LargerOne(7, &c) << std::endl;
+}
+
+//可以防止指针指向的值被修改：const int* const ip 中的第一个 const 表示指针指向的值是一个常量，即不能通过 ip 修改所指向的整数值。这样可以提供额外的安全性，防止无意中修改了指针所指向的值。
+//可以防止指针指向其他对象：第二个 const 表示指针本身是一个常量，即指针 ip 不能指向其他对象。这意味着一旦 ip 被初始化为某个地址，就不能再指向其他地址。这样可以避免在后续代码中无意中修改指针指向的对象。
+```
+
+22
+
+```c++
+void swap(const int*& lhs, const int*& rhs)
+{
+    auto temp = lhs;
+    lhs = rhs;
+    rhs = temp;
+}
+
+int main()
+{
+    const int i = 42, j = 99;
+    auto lhs = &i;
+    auto rhs = &j;
+    swap(lhs, rhs);
+    std::cout << *lhs << " " << *rhs << std::endl;
+}
+```
+

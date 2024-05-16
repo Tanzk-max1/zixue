@@ -1486,11 +1486,11 @@ using std::cin;
 //    case 'q':
 //          case 'Q':
 //
-////            cout << "Number of vowel a(A): \t" << aCnt << '\n'
-////                 << "Number of vowel e(E): \t" << eCnt << '\n'
-////                 << "Number of vowel i(I): \t" << iCnt << '\n'
-////                 << "Number of vowel o(O): \t" << oCnt << '\n'
-////                 << "Number of vowel u(U): \t" << uCnt << endl;
+////            cout << "Number of vowel a(A): " << aCnt << ' '
+////                 << "Number of vowel e(E): " << eCnt << ' '
+////                 << "Number of vowel i(I): " << iCnt << ' '
+////                 << "Number of vowel o(O): " << oCnt << ' '
+////                 << "Number of vowel u(U): " << uCnt << endl;
 //cout << "Number of vowel a(A): \t" << aCnt << '\n'
 //     << "Number of vowel e(E): \t" << eCnt << '\n'
 //     << "Number of vowel i(I): \t" << iCnt << '\n'
@@ -1726,30 +1726,105 @@ using std::cin;
 //    cout << val << "! =" << fact(val) << endl;
 //  }
 //}
-void  reset(int  &ip)
-{
-//  *ip = 0;//改变指针ip所指对象的值
-//  ip = 0;//只改变了ip的局部拷贝，实参未被改变
-  ip = 0;
-}
-int main()
-{
-//  std::cout << "5! is " << fact(5) << std::endl;
-//  std::cout << func() << std::endl;
-//  std::cout << abs(-9.78) << std::endl;
-  int j = 42;
-  reset(j);
-  cout  << j << endl;
-//  int *p = &n,*q = &i;
-//  *p = 42;
-//  p = q;
-//  int &r = n;
-//  r = 42;
-//  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+//void  reset(int  &ip)
+//{
+////  *ip = 0;//改变指针ip所指对象的值
+////  ip = 0;//只改变了ip的局部拷贝，实参未被改变
+////  ip = 0;
+// ip = 0;
+//}
+//int main()
+//{
+////  std::cout << "5! is " << fact(5) << std::endl;
+////  std::cout << func() << std::endl;
+////  std::cout << abs(-9.78) << std::endl;
+//  int j = 42;
+//  reset(j);
+//  cout  << j << endl;
+////  int *p = &n,*q = &i;
+////  *p = 42;
+////  p = q;
+////  int &r = n;
+////  r = 42;
+////  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+//
+////  r = i;
+////  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+////  i = r;
+////  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+//
+//}
+//void print(const int *beg,const int *end) {
+////  for (int i = 0; i < 10; i++) {
+////    std::cout << arr[i] << " ";
+////  }
+////  std::cout << std::endl;
+////if (arr)
+////  while (*arr)
+////    cout << *arr++;
+//
+//while (beg != end)
+//  cout << *beg++ << endl;
+//
+//}
 
-//  r = i;
-//  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
-//  i = r;
-//  cout <<" n= "<< n <<" r= "<<  r <<" i= "<< i << endl;
+//void print(int (&ia)[10])
+//{
+////  for (size_t i = 0; i != size ; ++i) {
+////    cout << ia[i] << endl;
+////  }
+//for (auto elem : ia) {
+//  cout << elem << endl;
+//}
+//}
+
+
+int largerone(int i,const int* const ip)
+{
+  return (i > *ip) ? i : *ip;
+}
+
+
+int main(){
+//  const int ci = 42;
+//  //ci是一个 const int 类型的常量，它的值为 42。当你打印 &ci 时，你会看到 ci 的地址。
+//  cout << ci <<endl;
+//  cout << &ci <<endl;
+//
+//  int i = ci;
+//  cout << i <<endl;
+//  int *const p = &i;
+//  cout << p <<endl;
+//  cout << *p <<endl;
+//  *p = 0;
+//  cout << *p <<endl;
+//  cout << ci <<endl;
+//
+//  cout <<"i= "<< i <<endl;
+//  cout << &i <<endl;
+//int i=42;
+//const int *cp=&i;//正确：但是cp不能改变i(参见2.4.2节，第56页)
+//const int &r=i;//正确：但是r不能改变i(参见2.4.1节，第55页)
+//cout << "r = " << r << " &r= " << &r << endl;
+//const int &r2=45;// 正确：(参见2.4.1节，第55页)
+//cout << "r2 = " << r2 << " &r2= " << &r2 << endl;
+
+//错误：p的类型和cp的类型不匹配(参见2.4.2节，第56页)
+//int *p=cp;
+//int &r3=r; //错误：r3的类型和r的类型不匹配(参见2.4.1节，第55页)
+//int &r4 = 42;
+//bool compare(const matrix &m1, const matrix &m2);
+//  void print(const int*);
+//  void print(const int[]);
+//  int i = 0;
+//  int j[] = {0,1};
+//  int k[10] = {0,1,2,3,4,5,6,7,8,9};
+//  cout<<end(j)<<endl;
+//  cout<<begin(j)<<endl;
+//  print(k);
+int c = 6;
+std::cout << largerone(7, &c) << std::endl;
+
+  return 0;
 
 }
