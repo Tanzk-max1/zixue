@@ -2022,3 +2022,499 @@ int main()
 }
 ```
 
+23
+
+```c++
+#include <iostream>
+
+using std::begin;
+using std::cout;
+using std::end;
+using std::endl;
+
+void print(int* const pi)
+{
+    if (pi) cout << *pi << endl;
+}
+
+void print(const char* p)
+{
+    if (p)
+        while (*p) cout << *p++;
+    cout << endl;
+}
+
+void print(const int* beg, const int* end)
+{
+    while (beg != end) cout << *beg++ << " ";
+    cout << endl;
+}
+
+void print(const int ia[], size_t size)
+{
+    for (size_t i = 0; i != size; ++i) cout << ia[i] << " ";
+    cout << endl;
+}
+//size_t size这种就是给
+ 
+void print(const int (&arr)[2])
+{
+    for (auto i : arr) cout << i << " ";
+    cout << endl;
+}
+
+int main()
+{
+    int i = 0, j[2] = {0, 1};
+    char ch[5] = "pezy";
+
+    print(ch);
+    print(begin(j), end(j));
+    print(&i);
+    print(j, end(j) - begin(j));
+    print(const_cast<const int(&)[2]>(j));
+}
+```
+
+24
+
+```c++
+//数组有两个特殊属性，它们影响我们如何定义和使用对数组进行操作的函数：我们无法复制数组，并且当我们使用数组时，它（通常）会转换为指针。
+所以我们不能按值传递数组，当我们将数组传递给函数时，我们实际上传递了一个指向数组第一个元素的指针。
+    
+    在这个问题中，const int ia[10]实际上与 相同const int*，并且数组的大小无关紧要。我们可以通过const int ia[3]或者const int ia[255]，没有区别。如果我们想传递一个大小为 10 的数组，我们应该像这样使用引用：
+void print10(const int (&ia)[10]) { /*...*/ }
+```
+
+25-26
+
+```c++
+int main(int argc,char** argv)
+{
+  string str;
+  for (int i = 1; i != argc; ++i) {
+    str += argv[i];
+    str += " ";
+  }
+  cout << str << endl;
+}
+```
+
+
+
+27
+
+```c++
+int sum(const std::initializer_list<int>& il)
+{
+  int sum = 0;
+  for (auto i : il) sum += i;
+  return sum;
+}
+
+int main(void)
+{
+  std::cout << sum({1, 2, 3, 4, 5}) << std::endl;
+}
+```
+
+28
+
+```c++
+elem循环中的类型for是const std::string&。
+```
+
+29
+
+```c++
+取决于 的元素类型initializer_list。当类型为PODType时，不需要引用。因为复制成本低廉POD（例如）。否则，使用reference( )是更好的选择。int const
+```
+
+30
+
+```c++
+非空函数“str_subrange”应该返回一个值。 // 错误 #1
+
+控制可能到达非 void 函数的末尾。 // 错误 #2
+```
+
+31
+
+```c++
+//什么情况下返回的引用无效?什么情况下返回常量的引用无效?
+//返回局部变量的引用：当函数返回一个指向局部变量的引用时，该局部变量的生命周期在函数结束后结束，引用将指向无效的内存位置。这会导致未定义行为。
+  int& getLocalRef() {
+  int x = 5;
+  return x;  // 返回局部变量的引用
+}
+
+int main() {
+  int& ref = getLocalRef();  // 引用指向无效的内存位置
+  // ...
+}  
+    
+//返回临时对象的引用：当函数返回一个指向临时对象的引用时，临时对象的生命周期仅限于表达式的求值过程。在表达式求值完成后，临时对象将被销毁，引用将指向无效的内存位置。
+
+const std::string& getTempRef() {
+  return "temporary string";  // 返回临时字符串的引用
+}
+
+int main() {
+  const std::string& ref = getTempRef();  // 引用指向无效的内存位置
+  // ...
+}
+
+//返回常量的引用无效的情况包括：
+//返回指向非常量的引用，但将其绑定到常量引用：如果函数返回一个指向非常量的引用，但将其绑定到常量引用变量上，那么通过该常量引用修改变量的值将导致编译错误。
+int x = 5;
+
+const int& getRefToNonConst() {
+  return x;  // 返回非常量的引用
+}
+
+int main() {
+  const int& ref = getRefToNonConst();  // 将非常量引用绑定到常量引用变量
+  // ref = 10;  // 编译错误，无法通过常量引用修改变量的值
+}
+
+//返回常量的引用，并尝试修改其值：如果函数返回一个指向常量的引用，并尝试通过该引用修改其值，将导致编译错误。
+
+const int& getConstRef() {
+  static const int x = 5;
+  return x;  // 返回常量的引用
+}
+
+int main() {
+  const int& ref = getConstRef();
+  // ref = 10;  // 编译错误，无法通过常量引用修改常量的值
+}
+
+
+```
+
+33
+
+```c++
+using std::cout;
+using std::vector;
+using Iter = vector<int>::iterator;
+
+void print(Iter beg, Iter end)
+{
+    if (beg != end) {
+        cout << *beg << " ";
+        print(std::next(beg), end);
+    }
+}
+
+int main()
+{
+    vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    print(vec.begin(), vec.end());
+}
+```
+
+34
+
+```c++
+//当递归终止条件变为 时var != 0，可能会发生两种情况： 
+  //  第一种情况：如果参数为正，则递归在 0 处停止。这正是@shbling 所指出的。
+  //  情况 2：如果参数为负，则递归将永远不会停止。结果，就会发生堆栈溢出。
+
+```
+
+35
+
+```c++
+递归函数将始终用作val参数。会发生递归循环。
+```
+
+36
+
+```c++
+string (&func(string (&arrStr)[10]))[10]
+```
+
+37
+
+```c++
+using ArrT = string[10];
+ArrT& func1(ArrT& arr);
+
+auto func2(ArrT& arr) -> string(&)[10];
+
+string arrS[10];
+decltype(arrS)& func3(ArrT& arr);
+```
+
+38
+
+```c++
+decltype(arrStr)& arrPtr(int i)
+{
+          return (i % 2) ? odd : even;
+}
+```
+
+39
+
+```c++
+a.非法的（因为签名相同
+    b. 非法的（错误在，必须有不同给调用左区分，应该停工不同的函数铭或者参数类型，顺序，个数
+    c. 合法的（
+```
+
+40
+
+```c++
+char *init(int ht=24,int wd,char bckgrnd);//像这样的是错误的
+//如果前面给bckgrnd = "a"这样，下面是正确的
+char* init(int wd, int ht = 24, char bckgrnd);//正确的
+char* init(int ht = 24, int wd = 0, char bckgrnd);//正确的
+因为一个默认值后面的参数必须有默认参数值，这是因为在函数调用时，参数的传递是按照位置顺序进行的，没有默认参数值的参数必须在有默认参数值的参数之前。
+    否则就是全部有参数或者全部无参数
+```
+
+41
+
+```c++
+a，非法的，对于给定的函数声明 char* init(int ht, int wd = 80, char bckgrnd = ' ');，在调用函数 init() 时将会出错。
+
+调用 init() 时出错的原因是函数声明中的第一个参数 ht 没有默认参数值，而在函数调用中没有为其提供参数值。
+
+默认参数的作用是在函数调用时，如果没有提供对应的参数值，将使用默认参数值作为替代。但是，对于没有默认参数值的参数，必须显式地在函数调用中提供参数值，否则将会导致编译错误。
+    b,合法的
+c,按顺序提供，第一个时14，第二个时42，wd将设置为‘*’
+```
+
+42
+
+```c++
+string make_plural(size_t ctr,const string &word ,const string &ending = "s"){
+  return (ctr>1)?word+ending:word;
+}
+int main()
+{
+  cout << "singual: " << make_plural(1, "success", "es") << " "
+       << make_plural(1, "failure") << endl;
+  cout << "plural : " << make_plural(2, "success", "es") << " "
+       << make_plural(2, "failure") << endl;
+}
+```
+
+43
+
+```c++
+内联函数一般是塞在头文件，函数声明也是头文件
+```
+
+44
+
+```c++
+inline bool isShoter(const string & s1,const string& s2){
+  return s1.size() < s2.size();
+}
+
+int main()
+{
+  std::cout << isShoter("pezy", "mooophy") << std::endl;
+}
+```
+
+45
+
+```c++
+练习 6.38和练习 6.42中arrPtr的函数应定义为。但练习 6.4中的函数不应该这样。因为它只被调用一次并且函数中的代码太多。make_pluralinlinefunc
+```
+
+46
+
+```c++
+不能，因为constexpr函数是用来返回字面值类型，例如int，char这种的，string是标准库语言，不是字面值类型
+```
+
+47
+
+```c++
+void printVec(vector<int>& vec)
+{
+#ifndef NDEBUG
+  cout << "vector size: " << vec.size() << endl;
+#endif
+  if (!vec.empty()) {
+    auto tmp = vec.back();
+    vec.pop_back();
+    printVec(vec);
+    cout << tmp << " ";
+  }
+}
+int main()
+{
+  vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  printVec(vec);
+  cout << endl;
+}
+```
+
+48
+
+```c++
+这个循环让用户一直输入一个单词，直到找到该单词。
+
+这不是一个很好的用途assert。该assert宏通常用于检查“不可能发生”的情况。但当assert用户直接输入时总会发生这种情况EOF。这种行为很自然，所以检查没有意义。使用assert(!cin || s == sought)越多越好。
+```
+
+49
+
+候选函数：
+
+> 解析函数调用时考虑的函数集。 （具有调用中使用的名称的所有函数，其声明在调用时处于作用域内。）
+
+可行的功能：
+
+> 可以匹配给定调用的候选函数的子集。它具有与调用的参数相同数量的参数，并且每个参数类型都可以转换为相应的参数类型。
+
+50
+
+（a）非法。2.56 匹配`double`，但 42 匹配`int`。
+
+(b) 匹配`void f(int)`。
+
+（c）匹配`void f(int, int)`。
+
+（d）`void f(double, double = 3.14)`。
+
+52
+
+```c++
+(a) manip('a', 'z'):
+
+第一个参数：字符字面值 'a' 的类型是 char，与 int 参数不匹配。
+标准转换（Standard Conversion）：字符类型可以隐式地转换为整数类型。
+第二个参数：字符字面值 'z' 的类型是 char，与 int 参数不匹配。
+标准转换：字符类型可以隐式地转换为整数类型。
+因此，两个字符字面值都会经过标准转换，将它们从 char 类型转换为 int 类型。
+
+(b) manip(55.4, dobj):
+
+第一个参数：浮点字面值 55.4 的类型是 double，与 int 参数不匹配。
+标准转换：浮点类型可以隐式地转换为整数类型。
+第二个参数：全局变量 dobj 的类型是 double，与 int 参数不匹配。
+用户定义的转换（User-defined Conversion）：如果存在从 double 到 int 的用户定义的转换函数，可以进行转换。
+```
+
+53
+
+
+
+```c++
+(a) //没有影响，根据实参类型，可以是const型也可以是非const型
+	int calc(int &, int &);
+	int calc(const int &, const int &);
+(b) //没有影响，根据实参类型，可以是const型也可以是非const型
+	int calc(char*, char*);
+	int calc(const char*, const char*);
+(c) //不合法，实参是char*型时，不确定是哪个函数
+	int calc(char*, char*);
+	int calc(char* const, char* const);
+
+```
+
+54
+
+```c++
+int func(int a, int b);
+
+using pFunc1 = decltype(func) *;
+typedef decltype(func) *pFunc2;
+using pFunc3 = int (*)(int a, int b);
+using pFunc4 = int(int a, int b);
+typedef int(*pFunc5)(int a, int b);
+using pFunc6 = decltype(func);
+
+std::vector<pFunc1> vec1;
+std::vector<pFunc2> vec2;
+std::vector<pFunc3> vec3;
+std::vector<pFunc4*> vec4;
+std::vector<pFunc5> vec5;
+std::vector<pFunc6*> vec6;
+```
+
+然后，定义了以下类型别名：
+
+- `pFunc1`：使用 `decltype` 推导出函数 `func` 的指针类型，即 `int (*)(int, int)`。
+- `pFunc2`：使用 `typedef` 定义的函数指针类型，与 `pFunc1` 相同。
+- `pFunc3`：使用函数指针语法定义的函数指针类型，即 `int (*)(int, int)`。
+- `pFunc4`：使用函数类型语法定义的函数指针类型，即 `int(int, int)`。
+- `pFunc5`：使用 `typedef` 定义的函数指针类型，与 `pFunc4` 相同。
+- `pFunc6`：使用 `decltype` 推导出函数 `func` 的类型，即 `int(int, int)`。
+
+接下来，定义了多个向量，每个向量的元素类型是不同的函数指针类型：
+
+- `std::vector<pFunc1>`：元素类型是 `pFunc1`，即 `int (*)(int, int)`。
+- `std::vector<pFunc2>`：元素类型是 `pFunc2`，即 `int (*)(int, int)`。
+- `std::vector<pFunc3>`：元素类型是 `pFunc3`，即 `int (*)(int, int)`。
+- `std::vector<pFunc4*>`：元素类型是 `pFunc4*`，即 `int (*)(int, int)*`，函数指针的指针类型。
+- `std::vector<pFunc5>`：元素类型是 `pFunc5`，即 `int (*)(int, int)`。
+- `std::vector<pFunc6*>`：元素类型是 `pFunc6*`，即 `int (*)(int, int)*`，函数指针的指针类型。
+
+
+
+
+
+当我们看到这些代码中的不同指针类型时，可以根据以下几个要点来进行分辨：
+
+1. `pFunc1`、`pFunc2`、`pFunc6*`：这些类型使用了 `decltype(func) *` 或 `decltype(func)` 来定义指针类型。这表示它们是函数指针类型，可以用来指向具有相同函数签名的函数。例如，`pFunc1` 和 `pFunc2` 都是指向具有函数签名 `int(int, int)` 的函数指针类型，而 `pFunc6*` 是指向具有函数签名 `int(int, int)` 的函数指针的指针类型。
+2. `pFunc3`：这个类型使用了函数指针语法 `int (*)(int a, int b)` 来定义指针类型。它表示一个指向具有函数签名 `int(int, int)` 的函数指针。
+3. `pFunc4`：这个类型使用了函数类型语法 `int(int a, int b)` 来定义指针类型。请注意，这种语法在 C++ 中并不常见，但是在某些上下文中可以用于声明函数指针类型。它也表示一个指向具有函数签名 `int(int, int)` 的函数指针。
+4. `pFunc5`：这个类型使用了 `typedef` 来定义函数指针类型，它与 `pFunc4` 具有相同的函数签名 `int(int, int)`。
+5. `std::vector` 中的模板参数：这些模板参数指定了向量中元素的类型。根据不同的指针类型定义，我们可以得出以下规律：
+   - `std::vector<pFunc1>`：元素类型为 `pFunc1`，即 `int (*)(int, int)`，表示存储指向具有函数签名 `int(int, int)` 的函数指针的向量。
+   - `std::vector<pFunc2>`：元素类型为 `pFunc2`，即 `int (*)(int, int)`，与 `pFunc1` 相同。
+   - `std::vector<pFunc3>`：元素类型为 `pFunc3`，即 `int (*)(int, int)`，表示存储指向具有函数签名 `int(int, int)` 的函数指针的向量。
+   - `std::vector<pFunc4*>`：元素类型为 `pFunc4*`，即 `int (*)(int, int)*`，表示存储指向具有函数签名 `int(int, int)` 的函数指针的指针的向量。
+   - `std::vector<pFunc5>`：元素类型为 `pFunc5`，即 `int (*)(int, int)`，表示存储指向具有函数签名 `int(int, int)` 的函数指针的向量。
+   - `std::vector<pFunc6*>`：元素类型为 `pFunc6*`，即 `int (*)(int, int)*`，表示存储指向具有函数签名 `int(int, int)` 的函数指针的指针的向量。
+
+
+
+
+
+
+
+66
+
+```c++
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+int divide(int a, int b) { return b != 0 ? a / b : 0; }
+
+int main(){
+  int func(int a, int b);
+
+  using pFunc1 = decltype(func) *;
+  typedef decltype(func) *pFunc2;
+  using pFunc3 = int (*)(int a, int b);
+  using pFunc4 = int(int a, int b);
+  typedef int(*pFunc5)(int a, int b);
+  using pFunc6 = decltype(func);
+
+
+
+  std::vector<pFunc1> vec1;
+  std::vector<pFunc2> vec2;
+  std::vector<pFunc3> vec3;
+  std::vector<pFunc4*> vec4;
+  std::vector<pFunc5> vec5;
+  std::vector<pFunc6*> vec6;
+  
+  std::vector<decltype(func) *> vec{add, subtract, multiply, divide};
+  for (auto f : vec)
+    std::cout << f(2, 2) << std::endl;
+
+}
+
+
+```
+

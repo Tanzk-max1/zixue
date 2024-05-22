@@ -6,7 +6,7 @@
 #include "ex2_42.h"
 //#include "Chapter6.h"
 #include "fact.h"
-
+#include <initializer_list>
 using namespace std;
 using std::vector;
 #include <algorithm>
@@ -1779,52 +1779,224 @@ using std::cin;
 //}
 
 
-int largerone(int i,const int* const ip)
-{
-  return (i > *ip) ? i : *ip;
-}
+//int largerone(int i,const int* const ip)
+//{
+//  return (i > *ip) ? i : *ip;
+//}
 
+//int main(){
+////  const int ci = 42;
+////  //ci是一个 const int 类型的常量，它的值为 42。当你打印 &ci 时，你会看到 ci 的地址。
+////  cout << ci <<endl;
+////  cout << &ci <<endl;
+////
+////  int i = ci;
+////  cout << i <<endl;
+////  int *const p = &i;
+////  cout << p <<endl;
+////  cout << *p <<endl;
+////  *p = 0;
+////  cout << *p <<endl;
+////  cout << ci <<endl;
+////
+////  cout <<"i= "<< i <<endl;
+////  cout << &i <<endl;
+////int i=42;
+////const int *cp=&i;//正确：但是cp不能改变i(参见2.4.2节，第56页)
+////const int &r=i;//正确：但是r不能改变i(参见2.4.1节，第55页)
+////cout << "r = " << r << " &r= " << &r << endl;
+////const int &r2=45;// 正确：(参见2.4.1节，第55页)
+////cout << "r2 = " << r2 << " &r2= " << &r2 << endl;
+//
+////错误：p的类型和cp的类型不匹配(参见2.4.2节，第56页)
+////int *p=cp;
+////int &r3=r; //错误：r3的类型和r的类型不匹配(参见2.4.1节，第55页)
+////int &r4 = 42;
+////bool compare(const matrix &m1, const matrix &m2);
+////  void print(const int*);
+////  void print(const int[]);
+////  int i = 0;
+////  int j[] = {0,1};
+////  int k[10] = {0,1,2,3,4,5,6,7,8,9};
+////  cout<<end(j)<<endl;
+////  cout<<begin(j)<<endl;
+////  print(k);
+//int c = 6;
+//std::cout << largerone(7, &c) << std::endl;
+//
+//  return 0;
+//
+//}
+
+//void swap(const int *& lhs , const int *& rhs)
+//{
+//  auto temp = lhs;
+//  lhs = rhs;
+//  rhs = temp;
+//}
+//
+//int main(){
+//  const int i = 45,j = 99;
+//  auto lhs = &i;
+//  auto rhs = &j;
+//  swap(lhs,rhs);
+//  cout << *lhs << " " << *rhs;
+//}
+
+//#include <iostream>
+//
+//using std::begin;
+//using std::cout;
+//using std::end;
+//using std::endl;
+//
+//void print(int* const pi)
+//{
+//  if (pi) cout << *pi << endl;
+//}
+//
+//void print(const char* p)
+//{
+//  if (p)
+//    while (*p)
+//      cout << *p++;
+//  cout << endl;
+//}
+//
+//void print(const int* beg, const int* end)
+//{
+//  while (beg != end) cout << *beg++ << " ";
+//  cout << endl;
+//}
+//
+//void print(const int ia[], size_t size)
+//{
+//  for (size_t i = 0; i != size; ++i) cout << ia[i] << " ";
+//  cout << endl;
+//}
+//
+//void print(const int (&arr)[2])
+//{
+//  for (auto i : arr) cout << i << " ";
+//  cout << endl;
+//}
+//
+//int main()
+//{
+//  int i = 0, j[2] = {0, 1};
+//  char ch[5] = "pezy";
+//
+//  print(ch);
+//  print(begin(j), end(j));
+//  print(&i);
+//  print(j, end(j) - begin(j));
+//  print(const_cast<const int(&)[2]>(j));
+//}
+//int main(int argc,char** argv)
+//{
+//  string str;
+//  for (int i = 1; i != argc; ++i) {
+//    str += argv[i];
+//    str += " ";
+//  }
+//  cout << str << endl;
+//}
+
+//int sum(const std::initializer_list<int>& il)
+//{
+//  int sum = 0;
+//  for (auto i : il) sum += i;
+//  return sum;
+//}
+//
+//int main(void)
+//{
+//  std::cout << sum({1, 2, 3, 4, 5}) << std::endl;
+//}
+
+//using std::cout;
+//using std::vector;
+//using Iter = vector<int>::iterator;
+//using std::cout;
+//using std::endl;
+//using std::string;
+
+//void print(Iter beg, Iter end)
+//{
+//  if (beg != end) {
+//    cout << *beg << " ";
+//    print(std::next(beg), end);
+//  }
+//}
+
+//int main()
+//{
+//  vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+//  print(vec.begin(), vec.end());
+//}
+
+//string make_plural(size_t ctr,const string &word ,const string &ending = "s"){
+//  return (ctr>1)?word+ending:word;
+//}
+//int main()
+//{
+//  cout << "singual: " << make_plural(1, "success", "es") << " "
+//       << make_plural(1, "failure") << endl;
+//  cout << "plural : " << make_plural(2, "success", "es") << " "
+//       << make_plural(2, "failure") << endl;
+//}
+
+//inline bool isShoter(const string & s1,const string& s2){
+//  return s1.size() < s2.size();
+//}
+
+
+//void printVec(vector<int>& vec)
+//{
+//#ifndef NDEBUG
+//  cout << "vector size: " << vec.size() << endl;
+//#endif
+//  if (!vec.empty()) {
+//    auto tmp = vec.back();
+//    vec.pop_back();
+//    printVec(vec);
+//    cout << tmp << " ";
+//  }
+//}
+//int main()
+//{
+//  vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+//  printVec(vec);
+//  cout << endl;
+//}
+
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+int divide(int a, int b) { return b != 0 ? a / b : 0; }
 
 int main(){
-//  const int ci = 42;
-//  //ci是一个 const int 类型的常量，它的值为 42。当你打印 &ci 时，你会看到 ci 的地址。
-//  cout << ci <<endl;
-//  cout << &ci <<endl;
-//
-//  int i = ci;
-//  cout << i <<endl;
-//  int *const p = &i;
-//  cout << p <<endl;
-//  cout << *p <<endl;
-//  *p = 0;
-//  cout << *p <<endl;
-//  cout << ci <<endl;
-//
-//  cout <<"i= "<< i <<endl;
-//  cout << &i <<endl;
-//int i=42;
-//const int *cp=&i;//正确：但是cp不能改变i(参见2.4.2节，第56页)
-//const int &r=i;//正确：但是r不能改变i(参见2.4.1节，第55页)
-//cout << "r = " << r << " &r= " << &r << endl;
-//const int &r2=45;// 正确：(参见2.4.1节，第55页)
-//cout << "r2 = " << r2 << " &r2= " << &r2 << endl;
+  int func(int a, int b);
 
-//错误：p的类型和cp的类型不匹配(参见2.4.2节，第56页)
-//int *p=cp;
-//int &r3=r; //错误：r3的类型和r的类型不匹配(参见2.4.1节，第55页)
-//int &r4 = 42;
-//bool compare(const matrix &m1, const matrix &m2);
-//  void print(const int*);
-//  void print(const int[]);
-//  int i = 0;
-//  int j[] = {0,1};
-//  int k[10] = {0,1,2,3,4,5,6,7,8,9};
-//  cout<<end(j)<<endl;
-//  cout<<begin(j)<<endl;
-//  print(k);
-int c = 6;
-std::cout << largerone(7, &c) << std::endl;
+  using pFunc1 = decltype(func) *;
+  typedef decltype(func) *pFunc2;
+  using pFunc3 = int (*)(int a, int b);
+  using pFunc4 = int(int a, int b);
+  typedef int(*pFunc5)(int a, int b);
+  using pFunc6 = decltype(func);
 
-  return 0;
+
+
+  std::vector<pFunc1> vec1;
+  std::vector<pFunc2> vec2;
+  std::vector<pFunc3> vec3;
+  std::vector<pFunc4*> vec4;
+  std::vector<pFunc5> vec5;
+  std::vector<pFunc6*> vec6;
+
+  std::vector<decltype(func) *> vec{add, subtract, multiply, divide};
+  for (auto f : vec)
+    std::cout << f(2, 2) << std::endl;
 
 }
+
