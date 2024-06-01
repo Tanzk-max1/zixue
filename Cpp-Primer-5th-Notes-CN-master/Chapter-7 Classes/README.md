@@ -245,6 +245,20 @@ Sales_data(const std::string &s):
 
 编译器能合成拷贝、赋值和析构函数，但是对于某些类来说合成的版本无法正常工作。特别是当类需要分配类对象之外的资源时，合成的版本通常会失效。
 
+![image-20240601214813650](D:\project\zixuecpp\Cpp-Primer-5th-Notes-CN-master\Chapter-7 Classes\${photo}\image-20240601214813650.png)
+
+##### 某些类不能依赖合成的版本
+
+尽管编译器能替我们合成拷贝、赋值和销毁的操作，但是必须要清楚的一点是，对于某些类来说合成的版本无法正常工作。---》尽管编译器能够自动生成默认的拷贝构造函数、赋值运算符和析构函数，但对于某些类来说，这些合成的版本可能无法满足类的特定需求，无法正常工作
+
+```c++
+动态资源管理：假设有一个类 Resource，它在构造函数中动态分配内存，并在析构函数中释放内存。如果只依赖于编译器合成的析构函数，会导致内存泄漏，因为编译器合成的析构函数只会销毁对象本身，而不会释放动态分配的内存。在这种情况下，需要手动编写析构函数以释放内存。
+指针成员：考虑一个类 Container，它包含一个指向动态分配内存的指针成员 data。如果仅依赖于编译器合成的拷贝构造函数和赋值运算符，会导致浅拷贝问题。多个对象共享相同的指针，当其中一个对象销毁时，会导致其他对象的指针变为悬空指针。在这种情况下，需要手动编写拷贝构造函数和赋值运算符来执行深拷贝，即分配新的内存并复制数据。
+不可拷贝的成员：某些类可能包含不可拷贝的成员，如引用。编译器无法为包含不可拷贝成员的类合成适当的拷贝构造函数和赋值运算符。在这种情况下，需要手动编写这些函数来处理这些特殊成员。
+```
+
+
+
 ## 访问控制与封装（Access Control and Encapsulation）
 
 使用访问说明符（access specifier）可以加强类的封装性：
@@ -277,14 +291,41 @@ private: // access specifier added
 
 使用关键字`struct`定义类时，定义在第一个访问说明符之前的成员是`public`的；而使用关键字`class`时，这些成员是`private`的。二者唯一的区别就是默认访问权限不同。
 
+```c++
+struct MyStruct {
+    int publicMember;   // 默认为 public
+    void publicMethod() {
+        // ...
+    }
+};
+```
+
+```c++
+class MyClass {
+    int privateMember;   // 默认为 private
+    void privateMethod() {
+        // ...
+    }
+};
+```
+
+
+
 ### 友元（Friends）
+
+1. 友元函数可以访问类的私有成员和保护成员：通过将函数声明为类的友元，它可以绕过访问修饰符的限制，直接访问类中的私有成员和保护成员。这提供了一种在需要时让外部函数与类进行密切协作的方式。
+2. 友元函数不是类的成员函数：友元函数与类的成员函数不同，它没有隐式访问类对象的 this 指针。它在访问类的成员时需要显式传递对象作为参数或使用对象名称访问。
+3. 友元关系不可传递：友元关系没有传递性，即一个函数的友元并不自动成为它的友元函数的友元。友元关系是单向的。
+4. 友元函数的声明和定义：通常在类的声明中将友元函数声明为友元，然后在类外部定义它。这样做允许该函数在类外部访问类的私有成员。
+
+
 
 类可以允许其他类或函数访问它的非公有成员，方法是使用关键字`friend`将其他类或函数声明为它的友元。
 
 ```C++
 class Sales_data
 {
-    // friend declarations for nonmember Sales_data operations added
+    // 为Sales_data的非成员函数做的友元声明
     friend Sales_data add(const Sales_data&, const Sales_data&);
     friend std::istream &read(std::istream&, Sales_data&);
     friend std::ostream &print(std::ostream&, const Sales_data&);
@@ -311,7 +352,7 @@ std::istream &read(std::istream&, Sales_data&);
 std::ostream &print(std::ostream&, const Sales_data&);
 ```
 
-友元声明只能出现在类定义的内部，具体位置不限。友元不是类的成员，也不受它所在区域访问级别的约束。
+友元声明只能出现在类定义的内部，具体位置不限。友元不是类的成员，也不受它所在区域访问级别的约束。友元函数可以借助函数的参数进行访问，而不是直接访问类的成员。
 
 通常情况下，最好在类定义开始或结束前的位置集中声明友元。
 
@@ -321,7 +362,7 @@ std::ostream &print(std::ostream&, const Sales_data&);
 
 - 被封装的类的具体实现细节可以随时改变，而无须调整用户级别的代码。
 
-友元声明仅仅指定了访问权限，而并非一个通常意义上的函数声明。如果希望类的用户能调用某个友元函数，就必须在友元声明之外再专门对函数进行一次声明（部分编译器没有该限制）。
+友元声明仅仅指定了访问权限，而并非一个通常意义上的函数声明。如果希望类的用户能调用某个友元函数，就**必须在友元声明之外再专门对函数进行一次声明**（部分编译器没有该限制）。
 
 为了使友元对类的用户可见，通常会把友元的声明（类的外部）与类本身放在同一个头文件中。
 
@@ -372,11 +413,44 @@ void Screen::some_member() const
 
 ### 返回`*this`的成员函数（Functions That Return `*this`）
 
-`const`成员函数如果以引用形式返回`*this`，则返回类型是常量引用。
+`const`成员函数如果以引用形式返回`*this`，则返回类型是常量引用。用于在成员函数中**返回当前对象的引用**。
+
+```c++
+class MyClass {
+private:
+    int value;
+
+public:
+    MyClass(int val) : value(val) {}
+
+    MyClass& increment() {
+        value++;
+        return *this;
+    }
+
+    MyClass& multiply(int factor) {
+        value *= factor;
+        return *this;
+    }
+
+    int getValue() const {
+        return value;
+    }
+};
+
+int main() {
+    MyClass obj(5);
+    obj.increment().multiply(3);
+    int result = obj.getValue();  // 结果为 18
+
+    return 0;
+}
+```
 
 通过区分成员函数是否为`const`的，可以对其进行重载。在常量对象上只能调用`const`版本的函数；在非常量对象上，尽管两个版本都能调用，但会选择非常量版本。
 
 ```c++
+//例子
 class Screen
 {
 public:

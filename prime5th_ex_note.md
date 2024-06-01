@@ -2606,3 +2606,154 @@ if (secondStep)
     //该语句的条件是一次if读取两个对象。Sales_data
 ```
 
+11
+
+```c++
+int main()
+{
+    Sales_data item1;
+    print(std::cout, item1) << std::endl;
+
+    Sales_data item2("0-201-78345-X");
+    print(std::cout, item2) << std::endl;
+
+    Sales_data item3("0-201-78345-X", 3, 20.00);
+    print(std::cout, item3) << std::endl;
+
+    Sales_data item4(std::cin);
+    print(std::cout, item4) << std::endl;
+}
+```
+
+13
+
+```c++
+int main()
+{
+    Sales_data total(std::cin);
+    if (!total.isbn().empty()) {
+        std::istream& is = std::cin;
+        while (is) {
+            Sales_data trans(is);
+            if (total.isbn() == trans.isbn())
+                total.combine(trans);
+            else {
+                print(std::cout, total) << std::endl;
+                total = trans;
+            }
+        }
+    }
+    else {
+        std::cerr << "No data?!" << std::endl;
+        return -1;
+    }
+
+    return 0;
+}
+```
+
+14
+
+```c++
+Sales_data() : units_sold(0) , revenue(0){}
+```
+
+15
+
+```c++
+#include <string>
+#include <iostream>
+
+struct Person;
+istream read(istream ,Person &);
+struct Person{
+    Person() = default;
+    Person(const std::string sname, const std::string saddr)
+        : name(sname), address(saddr)
+    {
+    }
+    Person(std::istream& is) { read(is, *this); }
+
+    std::string getName() const { return name; }
+    std::string getAddress() const { return address; }
+
+    std::string name;
+    std::string address;
+}
+std::istream& read(std::istream& is, Person& person)
+{
+    is >> person.name >> person.address;
+    return is;
+}
+
+std::ostream& print(std::ostream& os, const Person& person)
+{
+    os << person.name << " " << person.address;
+    return os;
+}
+
+```
+
+16
+
+```c++
+question：在类的定义中对于访问说明符出现的位置和次数有限定吗?如果有，是什么?什么样的成员应该定义在 public 说明符之后?什么样的成员应该定义在
+private 说明符之后
+
+answer：
+对于访问说明符出现的频率没有限制。指定的访问级别一直有效，直到下一个访问说明符或类主体结束。
+
+程序所有部分都可以访问的成员应该在公共说明符之后定义。
+
+类的成员函数可以访问但使用该类的代码不能访问的成员应该在 private 说明符后定义。
+```
+
+17
+
+```c++
+class使用和使用struct定义类之间的唯一区别是默认访问级别。（ class：private，struct：public）
+```
+
+18
+
+**封装的含义**
+
+`class`使用和使用`struct`定义类之间的唯一区别是默认访问级别。（ `class`：private，`struct`：public）
+
+用处：
+
+重要优点：
+
+- 用户代码不能无意中破坏封装对象的状态。
+- 封装类的实现可以随着时间而改变，而不需要改变用户级代码。
+
+
+
+19
+
+
+
+- `public`包括：构造函数`getName()`，，`getAddress()`。
+- `private`包括：`name`，`address`。
+
+接口应该定义为公共的，数据不应该暴露给类的外部。
+
+
+
+20
+
+
+
+`friend`是类授予其非公共成员访问权限的一种机制。它们具有与成员相同的权利。
+
+**优点**：
+
+- 有用的函数可以在类范围内引用类成员，而无需在其前面明确加上类名。
+- 您可以方便地访问所有非公开成员。
+- 有时，对于班级用户来说更具可读性。
+
+**缺点**：
+
+- 减少了封装性，从而降低了可维护性。
+- 代码详细程度、类内部的声明、类外部的声明。
+
