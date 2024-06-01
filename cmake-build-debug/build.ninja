@@ -61,6 +61,12 @@ build CMakeFiles/zixuecpp.dir/fact.cpp.obj: CXX_COMPILER__zixuecpp_unscanned_Deb
   OBJECT_DIR = CMakeFiles\zixuecpp.dir
   OBJECT_FILE_DIR = CMakeFiles\zixuecpp.dir
 
+build CMakeFiles/zixuecpp.dir/avg_price.cpp.obj: CXX_COMPILER__zixuecpp_unscanned_Debug D$:/project/zixuecpp/avg_price.cpp || cmake_object_order_depends_target_zixuecpp
+  DEP_FILE = CMakeFiles\zixuecpp.dir\avg_price.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\zixuecpp.dir
+  OBJECT_FILE_DIR = CMakeFiles\zixuecpp.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target zixuecpp
@@ -69,7 +75,7 @@ build CMakeFiles/zixuecpp.dir/fact.cpp.obj: CXX_COMPILER__zixuecpp_unscanned_Deb
 #############################################
 # Link the executable zixuecpp.exe
 
-build zixuecpp.exe: CXX_EXECUTABLE_LINKER__zixuecpp_Debug CMakeFiles/zixuecpp.dir/main.cpp.obj CMakeFiles/zixuecpp.dir/fact.cpp.obj
+build zixuecpp.exe: CXX_EXECUTABLE_LINKER__zixuecpp_Debug CMakeFiles/zixuecpp.dir/main.cpp.obj CMakeFiles/zixuecpp.dir/fact.cpp.obj CMakeFiles/zixuecpp.dir/avg_price.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\zixuecpp.dir

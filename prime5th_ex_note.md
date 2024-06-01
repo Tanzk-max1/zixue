@@ -2518,3 +2518,91 @@ int main(){
 
 ```
 
+#### ch7
+
+2
+
+```c++
+#ifndef CP5_ex7_02_h
+#define CP5_ex7_02_h
+
+#include <string>
+
+// Add the combine and isbn members to the Sales_data
+struct Sales_data {
+    std::string isbn() const { return bookNo; };
+    Sales_data& combine(const Sales_data&);
+
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+
+Sales_data& Sales_data::combine(const Sales_data& rhs)
+{
+    units_sold += rhs.units_sold;
+    revenue += rhs.revenue;
+    return *this;
+}
+
+#endif
+```
+
+5
+
+```c++
+#include <string>
+
+class Person {
+    std::string name;
+    std::string address;
+
+public:
+    const std::string& getName() const { return name; }
+    const std::string& getAddress() const { return address; }
+};
+
+//是的，参数列表后面的 const 表示这是一个指向常量的指针。
+//这些函数可以读取但不能修改调用它的对象的数据成员。
+```
+
+09
+
+```c++
+#include <string>
+#include <iostream>
+
+struct Person {
+    const std::string& getName() const { return name; }
+    const std::string& getAddress() const { return address; }
+
+    std::string name;
+    std::string address;
+};
+
+std::istream& read(std::istream& is, Person& person)
+{
+    is >> person.name >> person.address;
+    if (!is) person = Person();
+    return is;
+}
+
+std::ostream& print(std::ostream& os, const Person& person)
+{
+    os << person.name << " " << person.address;
+    return os;
+}
+
+```
+
+10
+
+```c++
+//等价于
+std::istream &firstStep = read(cin, data1);
+std::istream &secondStep = read(firstStep, data2);
+if (secondStep)
+    
+    //该语句的条件是一次if读取两个对象。Sales_data
+```
+

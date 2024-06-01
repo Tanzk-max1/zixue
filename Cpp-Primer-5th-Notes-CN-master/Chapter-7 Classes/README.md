@@ -15,17 +15,19 @@
 ```c++
 struct Sales_data
 {
-    // new members: operations on Sales_data objects
+    // 新对象，关于salesdata对象的操作
     std::string isbn() const { return bookNo; }
     Sales_data& combine(const Sales_data&);
     double avg_price() const;
 
-    // data members
+    // 数据成员
     std::string bookNo;
     unsigned units_sold = 0;
     double revenue = 0.0;
 };
 ```
+
+定义在类里面的函数是隐式函数（inline函数
 
 成员函数通过一个名为`this`的隐式额外参数来访问调用它的对象。`this`参数是一个常量指针，被初始化为调用该函数的对象地址。在函数体内可以显式使用`this`指针。
 
@@ -132,11 +134,88 @@ struct Sales_data
 
 - 否则默认初始化该成员。
 
+  ```c++
+  //例子
+  class Person {
+  public:
+      // 成员变量
+      std::string name;
+      int age;
+  
+      // 默认构造函数（由编译器合成）
+      Person() {
+          // 默认初始化成员变量
+          // ...
+      }
+  };
+  
+  int main() {
+      // 使用默认构造函数创建 Person 对象
+      Person person;
+      // ...
+  }
+  //显式构造函数
+  class Person {
+  public:
+      // 成员变量
+      std::string name;
+      int age;
+  
+      // 显式定义的构造函数
+      Person(const std::string& n, int a) {
+          name = n;
+          age = a;
+          // 进行特定的初始化操作
+          // ...
+      }
+  };
+  
+  int main() {
+      // 创建 Person 对象时，需要传递参数进行初始化
+      Person person("Alice", 25);
+      // ...
+  }
+  ```
+
 某些类不能依赖于合成的默认构造函数。
 
 - 只有当类没有声明任何构造函数时，编译器才会自动生成默认构造函数。一旦类定义了其他构造函数，那么除非再显式地定义一个默认的构造函数，否则类将没有默认构造函数。
 
 - 如果类包含内置类型或者复合类型的成员，则只有当这些成员全部存在类内初始值时，这个类才适合使用合成的默认构造函数。否则用户在创建类的对象时就可能得到未定义的值。
+
+- ```c++
+  //上面的解释例子，其实就是多层构造函数，各种传递
+  class Person {
+  public:
+      // 内置类型成员
+      std::string name;
+      int age;
+  
+      // 类类型成员
+      Address address;
+  };
+  
+  class Address {
+  public:
+      std::string street;
+      std::string city;
+      std::string country;
+  };
+  
+  int main() {
+      // 创建 Person 对象并设置成员变量的值
+      Person person;
+      person.name = "Alice";
+      person.age = 25;
+      person.address.street = "123 Main St";
+      person.address.city = "New York";
+      person.address.country = "USA";
+  
+      // ...
+  }
+  ```
+
+  
 
 - 编译器不能为某些类合成默认构造函数。例如类中包含一个其他类类型的成员，且该类型没有默认构造函数，那么编译器将无法初始化该成员。
 
