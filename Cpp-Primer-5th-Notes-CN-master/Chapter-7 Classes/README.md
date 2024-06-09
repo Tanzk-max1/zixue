@@ -409,7 +409,7 @@ void Screen::some_member() const
 }
 ```
 
-提供类内初始值时，必须使用`=`或花括号形式。
+提供类内初始值时，必须使用`=`或花括号{}形式。
 
 ### 返回`*this`的成员函数（Functions That Return `*this`）
 

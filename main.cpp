@@ -2052,24 +2052,52 @@
 //}
 //
 #include <iostream>
-#include "Sales_data.h"
+#include <string>
+//#include "Sales_data.h"
 using std::cin;
 using std::cout;
 using std::endl;
-int main(){
-  Sales_data item1;
-  print(std::cout, item1) << std::endl;
+//int main(){
+////  Sales_data item1;
+////  print(std::cout, item1) << std::endl;
+////
+////  Sales_data item2("0-201-78345-X");
+////  print(std::cout, item2) << std::endl;
+////
+////  Sales_data item3("0-201-78345-X", 3, 20.00);
+////  print(std::cout, item3) << std::endl;
+////
+////  Sales_data item4(std::cin);
+////  print(std::cout, item4) << std::endl;
+//}
 
-  Sales_data item2("0-201-78345-X");
-  print(std::cout, item2) << std::endl;
+class Screen {
+public:
+  using pos = std::string::size_type;
 
-  Sales_data item3("0-201-78345-X", 3, 20.00);
-  print(std::cout, item3) << std::endl;
+  Screen() = default;
+  Screen(pos ht, pos wd) : height(ht), width(wd), contents(ht * wd, ' ') {}
 
-  Sales_data item4(std::cin);
-  print(std::cout, item4) << std::endl;
+  char get() const { return contents[cursor]; }
+  char get(pos r, pos c) const { return contents[r * width + c]; }
+
+  std::string getContents() const { return contents; }
+
+private:
+  pos cursor = 0;
+  pos height = 0;
+  pos width = 0;
+  std::string contents;
+};
+
+int main() {
+  Screen screen1(5, 10);
+
+  std::cout << "Contents Length: " << screen1.getContents().length() << std::endl;
+  std::cout << "Contents: " << screen1.getContents() << " " << "haha"<< std::endl;
+
+  return 0;
 }
-
 
 
 

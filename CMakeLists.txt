@@ -11,5 +11,9 @@ add_executable(zixuecpp main.cpp
         Sales_data.h
         avg_price.cpp
         avg_price.h
+        Screen.cpp
+        Screen.h
         #        data/maimai.cpp
 )
+
+add_executable(test test.cpp)

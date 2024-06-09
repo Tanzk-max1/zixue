@@ -67,6 +67,12 @@ build CMakeFiles/zixuecpp.dir/avg_price.cpp.obj: CXX_COMPILER__zixuecpp_unscanne
   OBJECT_DIR = CMakeFiles\zixuecpp.dir
   OBJECT_FILE_DIR = CMakeFiles\zixuecpp.dir
 
+build CMakeFiles/zixuecpp.dir/Screen.cpp.obj: CXX_COMPILER__zixuecpp_unscanned_Debug D$:/project/zixuecpp/Screen.cpp || cmake_object_order_depends_target_zixuecpp
+  DEP_FILE = CMakeFiles\zixuecpp.dir\Screen.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\zixuecpp.dir
+  OBJECT_FILE_DIR = CMakeFiles\zixuecpp.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target zixuecpp
@@ -75,7 +81,7 @@ build CMakeFiles/zixuecpp.dir/avg_price.cpp.obj: CXX_COMPILER__zixuecpp_unscanne
 #############################################
 # Link the executable zixuecpp.exe
 
-build zixuecpp.exe: CXX_EXECUTABLE_LINKER__zixuecpp_Debug CMakeFiles/zixuecpp.dir/main.cpp.obj CMakeFiles/zixuecpp.dir/fact.cpp.obj CMakeFiles/zixuecpp.dir/avg_price.cpp.obj
+build zixuecpp.exe: CXX_EXECUTABLE_LINKER__zixuecpp_Debug CMakeFiles/zixuecpp.dir/main.cpp.obj CMakeFiles/zixuecpp.dir/fact.cpp.obj CMakeFiles/zixuecpp.dir/avg_price.cpp.obj CMakeFiles/zixuecpp.dir/Screen.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\zixuecpp.dir
@@ -84,6 +90,39 @@ build zixuecpp.exe: CXX_EXECUTABLE_LINKER__zixuecpp_Debug CMakeFiles/zixuecpp.di
   TARGET_FILE = zixuecpp.exe
   TARGET_IMPLIB = libzixuecpp.dll.a
   TARGET_PDB = zixuecpp.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test
+
+
+#############################################
+# Order-only phony target for test
+
+build cmake_object_order_depends_target_test: phony || CMakeFiles/test.dir
+
+build CMakeFiles/test.dir/test.cpp.obj: CXX_COMPILER__test_unscanned_Debug D$:/project/zixuecpp/test.cpp || cmake_object_order_depends_target_test
+  DEP_FILE = CMakeFiles\test.dir\test.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\test.dir
+  OBJECT_FILE_DIR = CMakeFiles\test.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test
+
+
+#############################################
+# Link the executable test.exe
+
+build test.exe: CXX_EXECUTABLE_LINKER__test_Debug CMakeFiles/test.dir/test.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\test.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = test.exe
+  TARGET_IMPLIB = libtest.dll.a
+  TARGET_PDB = test.exe.dbg
 
 
 #############################################
@@ -111,6 +150,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
+build test: phony test.exe
+
 build zixuecpp: phony zixuecpp.exe
 
 # =============================================================================
@@ -121,7 +162,7 @@ build zixuecpp: phony zixuecpp.exe
 #############################################
 # Folder: D:/project/zixuecpp/cmake-build-debug
 
-build all: phony zixuecpp.exe
+build all: phony zixuecpp.exe test.exe
 
 # =============================================================================
 # Built-in targets

@@ -15,7 +15,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,7 +31,8 @@
 					"name" : "zixuecpp",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -38,8 +40,15 @@
 			[
 				{
 					"directoryIndex" : 0,
+					"id" : "test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test-Debug-09e2adc903d306e6ff24.json",
+					"name" : "test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "zixuecpp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-zixuecpp-Debug-20055c72ba81bdfddc5e.json",
+					"jsonFile" : "target-zixuecpp-Debug-925d6b40d6eb823860c1.json",
 					"name" : "zixuecpp",
 					"projectIndex" : 0
 				}

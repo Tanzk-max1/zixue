@@ -2750,10 +2750,39 @@ class使用和使用struct定义类之间的唯一区别是默认访问级别。
 
 - 有用的函数可以在类范围内引用类成员，而无需在其前面明确加上类名。
 - 您可以方便地访问所有非公开成员。
-- 有时，对于班级用户来说更具可读性。
+- 有时，对于class用户来说更具可读性。
 
 **缺点**：
 
 - 减少了封装性，从而降低了可维护性。
 - 代码详细程度、类内部的声明、类外部的声明。
+
+
+
+24
+
+```c++
+#include <string>
+
+class Screen {
+public:
+    using pos = std::string::size_type;
+
+    Screen() = default; // 1
+    Screen(pos ht, pos wd) : height(ht), width(wd), contents(ht * wd, ' ') {} // 2
+    Screen(pos ht, pos wd, char c) : height(ht), width(wd), contents(ht * wd, c)
+    {
+    } // 3
+
+    char get() const { return contents[cursor]; }
+    char get(pos r, pos c) const { return contents[r * width + c]; }
+
+private:
+    pos cursor = 0;
+    pos height = 0, width = 0;
+    std::string contents;
+};
+
+
+```
 

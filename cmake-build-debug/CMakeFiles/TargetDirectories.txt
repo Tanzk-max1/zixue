@@ -1,3 +1,4 @@
 D:/project/zixuecpp/cmake-build-debug/CMakeFiles/zixuecpp.dir
+D:/project/zixuecpp/cmake-build-debug/CMakeFiles/test.dir
 D:/project/zixuecpp/cmake-build-debug/CMakeFiles/edit_cache.dir
 D:/project/zixuecpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
