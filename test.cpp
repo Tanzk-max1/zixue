@@ -279,28 +279,153 @@ using namespace std;
 
 //类模板实现一个stl的vector向量容器
 
-template<typename T>
-class vector
+//template<typename T,typename Alloc = Allocatir<T>>
+//class vector
+//{
+//public:
+//  vector(int size = 10)
+//  {
+//
+////    _first = new T[size];
+//    _first = _allocator.allocate(size);
+//    _last = _first;
+//    _end = _first + size;
+//
+//  }
+//  ~vector(){
+//      //delete[]_first;
+//      for (T *p = _first; p != _last ; ++p) {
+//        _allocator.destroy(p); // 把_first指针指向的数组有效元素进行析构操作
+//      }
+//      _allocator.deallocate(_first);//先析构再释放掉
+//      _first = _last = _end = nullptr;
+//  };
+//
+//private:
+//  T *_first;//指向数组起始位置
+//  T *_last;//有效元素后继位置
+//  T *_end;//数组空间的后继位置
+//
+//};
+//template<typename T>
+//struct Allocator
+//{
+//  T* allocate(size_t size)
+//  {
+//    return (T*)malloc(sizeof (T) * size);
+//  }
+//  void deallocate(void *p)//负责内存释放
+//  {
+//    free(p);
+//  }
+//  void construct(T *p ,const T &val)//负责对象构造
+//  {
+//    new (p) T(val);//定位new
+//  }
+//  void destroy(T *P)
+//  {
+//    p->~T();
+//  }
+//};
+//int main(){
+//
+//}
+
+
+//c++的运算符重载
+
+class CComplex
 {
 public:
-  vector(int size = 10)
+  CComplex(int r = 0,int i = 0)
+      :mreal(r),mimage(i){}
+  //CComplex operator+(const CComplex &src)
+  //{
+//    CComplex comp;
+//    comp.mreal = this->mreal + src.mreal;
+//    comp.mimage = this->mimage + src.mimage;
+//    return comp;//不能返回一个局部对象或者局部变量的指针，或者引用等
+  //    return CComplex(this->mreal + src.mreal,
+   //             this->mimage + src.mimage);
+  //}
+  //因为已经由全局的了，可以屏蔽掉局部的函数
+  CComplex operator++(int)
   {
-    _first = new T[size];
-    _last = _first;
-    _end = _first + size;
+    CComplex comp = *this;
+    mreal += 1;
+    mimage += 1;
+    return comp;
+    //为什么这个不可以返回引用呢，因为这是一个局部对象，所以不能这样子
+  }
+  CComplex& operator++()//返回辅助对象的一个引用，可以不产生临时对象
+  {
+    mreal += 1;
+    mimage += 1;
+    return *this;
+  }
+  void operator+=(const CComplex &src)
+  {
+    mreal += src.mreal;
+    mimage += src.mimage;
 
   }
-  ~vector(){
-      delete[]_first;
-      _first = _last = _end = nullptr;
-  };
-  vector(const vector<T>)
+  void show(){cout << "real: " << mreal << " image: " << mimage << endl;}
 private:
-  T *_first;//指向数组起始位置
-  T *_last;//有效元素后继位置
-  T *_end;//数组空间的后继位置
-
+  int mreal;
+  int mimage;
+  friend CComplex operator+(const CComplex &lhs,const CComplex &rhs);
+  friend ostream& operator<< (ostream &out ,const CComplex &src);
+  friend istream& operator >> (istream &in ,CComplex &src);
 };
+CComplex operator+(const CComplex &lhs,const CComplex &rhs)
+{
+  cout << "nice" << endl;
+  return CComplex(lhs.mreal + rhs.mreal,lhs.mimage+rhs.mimage);
+}//全局的方法
+
+ostream& operator<< (ostream &out ,const CComplex &src)
+{
+  out << "mreal: " << src.mreal << "mimage: " << src.mimage <<endl;
+  return out;
+}
+istream& operator >> (istream &in ,CComplex &src)
+{
+  in >> src.mreal >> src.mimage;
+  return in;
+
+}//输入运算符的重载
 int main(){
+  CComplex complex(10,10);
+  CComplex complex1(20,20);
+  //加法运算符的重载函数
+  CComplex complex2 = complex + complex1;
+  complex2.show();
+  CComplex complex3 = complex + 20;//相当于comp.operator + (20) int ->CCom CComplex(int);
+  complex3.show();
+
+//  CComplex complex4 =  20+complex ;
+                                   // 这个就不行了，30在这里面没有生成形参对象，所以不存在生成临时对象
+  //编译器在做对象运算的时候，会调用对线的运算重载函数（优先调用成员方法）；如果没有成员方法，那就在全局做哟ing与找合适的运算符重载函数
+    CComplex complex4 =  20+complex ;
+    complex4.show();
+    complex4 = complex++;//++ 和-- 是单目运算符
+    complex.show();
+    complex4.show();
+    complex4 = ++complex;
+    complex.show();
+    complex4.show();
+    cout << "hh " << endl;
+
+    complex2 +=complex;
+    complex.show();
+    complex2.show();
+    cin >> complex >> complex1;
+    cout << complex << complex1 << endl;
+
+}
+template<typename T>
+void show(T a)
+{
+  cout << a << endl;
 
 }
