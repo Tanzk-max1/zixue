@@ -606,25 +606,35 @@ using namespace std;
 //  cout<< "hahah " << endl;
 //}
 
-class A
+class Base
 {
 public:
-  int ma;
+  Base(int data = 10):ma(data){cout << "base() " <<endl;}
+  ~Base(){cout << "~base() " << endl;}
 protected:
-  int mb;
-private:
-  int mc;
+  int ma;
+
 };
-class B
+class Derive : public Base // 继承A基类，b派生类
 {
 public:
-  int md;
+  Derive(int data)
+      :Base(data),mb(data)
+  {
+    cout << "Derive()" << endl;
+  }
+  ~Derive()
+  {
+    cout << "~Derive() " << endl;
+  }
+
 protected:
   int me;
 private:
-  int mf;
+  int mb;
 };
 int main(){
+  Derive d(20);
 
   return 0;
 }
