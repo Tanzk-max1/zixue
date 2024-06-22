@@ -1,10 +1,13 @@
 ////
 //// Created by 15525 on 2024/6/4.
 ////
-//#include <iostream>
-//#include <string>
-//#include <typeinfo>
-//using namespace std;
+#include <iostream>
+#include <string>
+#include <typeinfo>
+#include <cstring>
+#include <string>
+#include <vector>
+using namespace std;
 ////bool compare(int a , int b)
 ////{
 ////  cout << "compa" << endl;
@@ -66,8 +69,8 @@
 ////  return 0;
 ////}
 //
-#include <iostream>
-using namespace std;
+
+
 //class SeqStack
 //{
 //public:
@@ -193,8 +196,6 @@ using namespace std;
 //    return 0;
 //  }
 
-#include <cstring>
-#include <string>
 //class Date {
 //private:
 //  int _year;
@@ -333,99 +334,297 @@ using namespace std;
 
 
 //c++的运算符重载
+//
+//class CComplex
+//{
+//public:
+//  CComplex(int r = 0,int i = 0)
+//      :mreal(r),mimage(i){}
+//  //CComplex operator+(const CComplex &src)
+//  //{
+////    CComplex comp;
+////    comp.mreal = this->mreal + src.mreal;
+////    comp.mimage = this->mimage + src.mimage;
+////    return comp;//不能返回一个局部对象或者局部变量的指针，或者引用等
+//  //    return CComplex(this->mreal + src.mreal,
+//   //             this->mimage + src.mimage);
+//  //}
+//  //因为已经由全局的了，可以屏蔽掉局部的函数
+//  CComplex operator++(int)
+//  {
+//    CComplex comp = *this;
+//    mreal += 1;
+//    mimage += 1;
+//    return comp;
+//    //为什么这个不可以返回引用呢，因为这是一个局部对象，所以不能这样子
+//  }
+//  CComplex& operator++()//返回辅助对象的一个引用，可以不产生临时对象
+//  {
+//    mreal += 1;
+//    mimage += 1;
+//    return *this;
+//  }
+//  void operator+=(const CComplex &src)
+//  {
+//    mreal += src.mreal;
+//    mimage += src.mimage;
+//
+//  }
+//  void show(){cout << "real: " << mreal << " image: " << mimage << endl;}
+//private:
+//  int mreal;
+//  int mimage;
+//  friend CComplex operator+(const CComplex &lhs,const CComplex &rhs);
+//  friend ostream& operator<< (ostream &out ,const CComplex &src);
+//  friend istream& operator >> (istream &in ,CComplex &src);
+//};
+//CComplex operator+(const CComplex &lhs,const CComplex &rhs)
+//{
+//  cout << "nice" << endl;
+//  return CComplex(lhs.mreal + rhs.mreal,lhs.mimage+rhs.mimage);
+//}//全局的方法
+//
+//ostream& operator<< (ostream &out ,const CComplex &src)
+//{
+//  out << "mreal: " << src.mreal << "mimage: " << src.mimage <<endl;
+//  return out;
+//}
+//istream& operator >> (istream &in ,CComplex &src)
+//{
+//  in >> src.mreal >> src.mimage;
+//  return in;
+//
+//}//输入运算符的重载
+//int main(){
+//  CComplex complex(10,10);
+//  CComplex complex1(20,20);
+//  //加法运算符的重载函数
+//  CComplex complex2 = complex + complex1;
+//  complex2.show();
+//  CComplex complex3 = complex + 20;//相当于comp.operator + (20) int ->CCom CComplex(int);
+//  complex3.show();
+//
+////  CComplex complex4 =  20+complex ;
+//                                   // 这个就不行了，30在这里面没有生成形参对象，所以不存在生成临时对象
+//  //编译器在做对象运算的时候，会调用对线的运算重载函数（优先调用成员方法）；如果没有成员方法，那就在全局做哟ing与找合适的运算符重载函数
+//    CComplex complex4 =  20+complex ;
+//    complex4.show();
+//    complex4 = complex++;//++ 和-- 是单目运算符
+//    complex.show();
+//    complex4.show();
+//    complex4 = ++complex;
+//    complex.show();
+//    complex4.show();
+//    cout << "hh " << endl;
+//
+//    complex2 +=complex;
+//    complex.show();
+//    complex2.show();
+//    cin >> complex >> complex1;
+//    cout << complex << complex1 << endl;
+//
+//}
+//template<typename T>
+//void show(T a)
+//{
+//  cout << a << endl;
+//
+//}
 
-class CComplex
+//class String
+//{
+//public:
+//  String(const char *p = nullptr)
+//  {
+//    if (p != nullptr)
+//    {
+//      _pstr = new char[strlen(p) + 1];
+//      strcpy(_pstr,p);
+//    }
+//    else
+//    {
+//      _pstr = new char[1];
+//      *_pstr = '\0';
+//    }
+//  }
+//  ~String()
+//  {
+//    delete[]_pstr;
+//    _pstr = nullptr;
+//  }
+//  String(const String &str)
+//  {
+//    _pstr = new char[strlen(str._pstr) + 1];
+//    strcpy(_pstr,str._pstr);
+//  }
+//  String& operator=(const String &str)
+//  {
+//    if (this == &str)
+//      return *this;
+//    delete[]_pstr;
+//    _pstr = new char[strlen(str._pstr) + 1];
+//    strcpy(_pstr,str._pstr);
+//    return *this;
+//  }
+//
+//  bool operator>(const String &str)const
+//  {
+//    return strcmp(_pstr,str._pstr)>0;
+//  }
+//  bool operator<(const String &str)const
+//  {
+//    return strcmp(_pstr,str._pstr)<0;
+//  }
+//  bool operator==(const String &str)const
+//  {
+//    return strcmp(_pstr,str._pstr)==0;
+//  }
+//  int length()const{return strlen(_pstr);};
+//private:
+//  char *_pstr;
+//  friend ostream & operator<< (ostream &out ,const String &str);
+//  friend String operator+(const String &lhs,const String &rhs);
+//
+//};
+//String operator+(const String &lhs,const String &rhs)
+//{
+//  String tmp;
+//
+//  tmp._pstr = new char[strlen(lhs._pstr)+ strlen(rhs._pstr)+1];
+//  strcpy(tmp._pstr,lhs._pstr);
+//  strcat(tmp._pstr,rhs._pstr);
+////  String tmp(ptmp);
+////  delete[]ptmp;
+//  return tmp;
+//}
+//ostream& operator<<(ostream &out ,const String &str)
+//{
+//  out << str._pstr;
+//  return out;
+//}
+//int main(){
+//  String str1;
+//}
+
+//
+//int main(){
+//  vector<int> vec;
+//  for (int i = 0; i < 20; ++i) {
+//    vec.push_back(rand()%100 + 1);
+//
+//  }
+//  auto it = vec.begin();
+//  for (;  it!=vec.end() ; ++it) {
+//    if(*it %2 == 0)
+//    {
+//      vec.erase(it) ;
+//    }
+//  }
+//}
+
+
+////先调用operator new开辟内存空间，然后调用对线的构造函数（初始化）
+//void * operator new(size_t size)
+//{
+//  void *p = malloc(size);
+//  if(p == nullptr)
+//    throw bad_alloc();
+//  cout << "newnewnew : " << p << endl;
+//  return p;
+//}
+////delete p；调用p直线对象的析构函数，再调用operator delete释放内存空间
+//void operator delete (void *ptr)
+//{
+//  free(ptr);
+//  cout << "deletedeletedelete : " << ptr << endl;
+//}
+//template<typename T>
+//class Queue
+//{
+//public:
+//  Queue()
+//  {
+//    _front = _rear = new QueueItem();
+//  }
+//  ~Queue()
+//  {
+//    QueueItem *cur = _front;
+//    while (cur!= nullptr)
+//    {
+//      _front = _front->_next;
+//      delete cur;
+//      cur = _front;
+//    }
+//  }
+//  void push(const T &val) // 入队
+//  {
+//    QueueItem *item = new QueueItem(val);
+//    _rear -> _next = item;
+//    _rear = item;
+//  }
+//  void pop() // 出队
+//  {
+//    if(empty())
+//      return;
+//    QueueItem *first = _front->_next;
+//    _front -> _next = first->_next;
+//    if (_front->_next == nullptr)
+//    {
+//      _rear = _front;
+//
+//    }
+//    delete first;
+//  }
+//  T front() const
+//  {
+//    return _front->_next->_data;
+//  }
+//  bool empty()const {return _front == _rear;}
+//private:
+//  struct QueueItem
+//  {
+//    QueueItem(T data = T()):_data(data),_next(nullptr){}
+//    T _data;
+//    QueueItem *_next;
+//  };
+//  QueueItem *_front;
+//  QueueItem *_rear;
+//};
+//int main(){
+//    Queue<int> que;
+//    for (int i = 0; i < 1000000; ++i) {
+//      que.push(i);
+//      que.pop();
+//    }
+//    cout << que.empty() << endl;
+//    return 0;
+//
+//}
+//
+//void 哈啊哈哈()
+//{
+//  cout<< "hahah " << endl;
+//}
+
+class A
 {
 public:
-  CComplex(int r = 0,int i = 0)
-      :mreal(r),mimage(i){}
-  //CComplex operator+(const CComplex &src)
-  //{
-//    CComplex comp;
-//    comp.mreal = this->mreal + src.mreal;
-//    comp.mimage = this->mimage + src.mimage;
-//    return comp;//不能返回一个局部对象或者局部变量的指针，或者引用等
-  //    return CComplex(this->mreal + src.mreal,
-   //             this->mimage + src.mimage);
-  //}
-  //因为已经由全局的了，可以屏蔽掉局部的函数
-  CComplex operator++(int)
-  {
-    CComplex comp = *this;
-    mreal += 1;
-    mimage += 1;
-    return comp;
-    //为什么这个不可以返回引用呢，因为这是一个局部对象，所以不能这样子
-  }
-  CComplex& operator++()//返回辅助对象的一个引用，可以不产生临时对象
-  {
-    mreal += 1;
-    mimage += 1;
-    return *this;
-  }
-  void operator+=(const CComplex &src)
-  {
-    mreal += src.mreal;
-    mimage += src.mimage;
-
-  }
-  void show(){cout << "real: " << mreal << " image: " << mimage << endl;}
+  int ma;
+protected:
+  int mb;
 private:
-  int mreal;
-  int mimage;
-  friend CComplex operator+(const CComplex &lhs,const CComplex &rhs);
-  friend ostream& operator<< (ostream &out ,const CComplex &src);
-  friend istream& operator >> (istream &in ,CComplex &src);
+  int mc;
 };
-CComplex operator+(const CComplex &lhs,const CComplex &rhs)
+class B
 {
-  cout << "nice" << endl;
-  return CComplex(lhs.mreal + rhs.mreal,lhs.mimage+rhs.mimage);
-}//全局的方法
-
-ostream& operator<< (ostream &out ,const CComplex &src)
-{
-  out << "mreal: " << src.mreal << "mimage: " << src.mimage <<endl;
-  return out;
-}
-istream& operator >> (istream &in ,CComplex &src)
-{
-  in >> src.mreal >> src.mimage;
-  return in;
-
-}//输入运算符的重载
+public:
+  int md;
+protected:
+  int me;
+private:
+  int mf;
+};
 int main(){
-  CComplex complex(10,10);
-  CComplex complex1(20,20);
-  //加法运算符的重载函数
-  CComplex complex2 = complex + complex1;
-  complex2.show();
-  CComplex complex3 = complex + 20;//相当于comp.operator + (20) int ->CCom CComplex(int);
-  complex3.show();
 
-//  CComplex complex4 =  20+complex ;
-                                   // 这个就不行了，30在这里面没有生成形参对象，所以不存在生成临时对象
-  //编译器在做对象运算的时候，会调用对线的运算重载函数（优先调用成员方法）；如果没有成员方法，那就在全局做哟ing与找合适的运算符重载函数
-    CComplex complex4 =  20+complex ;
-    complex4.show();
-    complex4 = complex++;//++ 和-- 是单目运算符
-    complex.show();
-    complex4.show();
-    complex4 = ++complex;
-    complex.show();
-    complex4.show();
-    cout << "hh " << endl;
-
-    complex2 +=complex;
-    complex.show();
-    complex2.show();
-    cin >> complex >> complex1;
-    cout << complex << complex1 << endl;
-
-}
-template<typename T>
-void show(T a)
-{
-  cout << a << endl;
-
+  return 0;
 }
