@@ -606,35 +606,127 @@ using namespace std;
 //  cout<< "hahah " << endl;
 //}
 
-class Base
-{
+//class Base
+//{
+//public:
+//  Base(int data = 10):ma(data){cout << "base() " <<endl;}
+//  ~Base(){cout << "~base() " << endl;}
+//protected:
+//  int ma;
+//
+//};
+//class Derive : public Base // 继承A基类，b派生类
+//{
+//public:
+//  Derive(int data)
+//      :Base(data),mb(data)
+//  {
+//    cout << "Derive()" << endl;
+//  }
+//  ~Derive()
+//  {
+//    cout << "~Derive() " << endl;
+//  }
+//
+//protected:
+//  int me;
+//private:
+//  int mb;
+//};
+//int main(){
+//  Derive d(20);
+//
+//  return 0;
+//}
+
+//class Base {
+//public:
+//  Base() {
+//    show(); // 调用 Base::show
+//  }
+//  virtual void show() {
+//    cout << "Base::show" << endl;
+//  }
+//};
+//
+//class Derived : public Base {
+//public:
+//  Derived() : Base() {}
+//  void show() override {
+//    cout << "Derived::show" << endl;
+//  }
+//};
+//int main(){
+//  Derived d; // 构造函数期间调用 Base::show
+//  return 0;
+//}
+
+
+//#include <iostream>
+//using namespace std;
+//
+//class Base {
+//public:
+//  virtual void show() {
+//    cout << "Base::show" << endl;
+//  }
+//
+//  void display() {
+//    cout << "Base::display" << endl;
+//  }
+//};
+//
+//class Derived : public Base {
+//public:
+//  void show() override {
+//    cout << "Derived::show" << endl;
+//  }
+//
+//  void display() {
+//    cout << "Derived::display" << endl;
+//  }
+//};
+//
+//int main() {
+//  Base b;
+//  Derived d;
+//  Base* basePtr = &d;
+//
+//  b.show();          // 静态绑定，调用 Base::show
+//  d.show();          // 静态绑定，调用 Derived::show
+//  basePtr->show();   // 动态绑定，调用 Derived::show
+//
+//  b.display();       // 静态绑定，调用 Base::display
+//  d.display();       // 静态绑定，调用 Derived::display
+//  basePtr->display(); // 静态绑定，调用 Base::display (因为 display 不是虚函数)
+//
+//  return 0;
+//}
+
+
+class Base {
 public:
-  Base(int data = 10):ma(data){cout << "base() " <<endl;}
-  ~Base(){cout << "~base() " << endl;}
-protected:
-  int ma;
-
+  virtual void show() {
+    cout << "Base::show\n";
+  }
 };
-class Derive : public Base // 继承A基类，b派生类
-{
+
+class Derived : public Base {
 public:
-  Derive(int data)
-      :Base(data),mb(data)
-  {
-    cout << "Derive()" << endl;
+  void show() override {
+    cout << "Derived::show\n";
   }
-  ~Derive()
-  {
-    cout << "~Derive() " << endl;
-  }
-
-protected:
-  int me;
-private:
-  int mb;
 };
-int main(){
-  Derive d(20);
 
+int main() {
+  Base b;
+  Derived d;
+  b.show();
+  d.show();
+  Derived* basePtr1 = &d;
+  basePtr1->show();
+  Base* basePtr = &d;  // 使用基类指针指向派生类对象
+  basePtr->show();     // 动态绑定，调用 Derived::show
   return 0;
 }
+
