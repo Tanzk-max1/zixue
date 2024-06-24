@@ -3916,6 +3916,7 @@ int main() {
 - [ ] 4种智能指针，shared_ptr，weak_ptr，unique_ptr
 - [ ] 虚函数的实现及内存分布
 - [ ] c++面向对象三大特性，
+- [ ] 成员初始化部分
 
 
 
