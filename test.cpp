@@ -729,4 +729,37 @@ using namespace std;
 //  basePtr->show();     // 动态绑定，调用 Derived::show
 //  return 0;
 //}
-
+#include <unordered_map>
+int main(){
+  const int ARR_LEN = 10000;
+  int arr[ARR_LEN] = { 0 };
+  for (int i = 0; i < ARR_LEN; ++i) {
+    arr[i] = rand() % 20 +1 ;
+  }
+  unordered_map<int,int> map1;
+  for (int k : arr) {
+    auto it = map1.find(k);
+    if (it == map1.end()){
+      map1.insert({k,1});
+    }
+    else{
+      it->second++;
+    }
+  }
+  for (pair<int,int> p : map1)
+  {
+    if(p.second > 1)
+    {
+      cout << "key: " << p.first << " count : " << p.second << endl;
+    }
+  }
+  cout << endl;
+cout <<"--------------"<< endl;
+  auto it = map1.begin();
+  for (; it != map1.end() ; ++it) {
+    if(it->second > 1)
+    {
+      cout << "key: " << it->first << " count : " << it->second << endl;
+    }
+  }
+}
