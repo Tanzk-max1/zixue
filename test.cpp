@@ -704,29 +704,29 @@ using namespace std;
 //}
 
 
-class Base {
-public:
-  virtual void show() {
-    cout << "Base::show\n";
-  }
-};
-
-class Derived : public Base {
-public:
-  void show() override {
-    cout << "Derived::show\n";
-  }
-};
-
-int main() {
-  Base b;
-  Derived d;
-  b.show();
-  d.show();
-  Derived* basePtr1 = &d;
-  basePtr1->show();
-  Base* basePtr = &d;  // 使用基类指针指向派生类对象
-  basePtr->show();     // 动态绑定，调用 Derived::show
-  return 0;
-}
+//class Base {
+//public:
+//  virtual void show() {
+//    cout << "Base::show\n";
+//  }
+//};
+//
+//class Derived : public Base {
+//public:
+//  void show() override {
+//    cout << "Derived::show\n";
+//  }
+//};
+//
+//int main() {
+//  Base b;
+//  Derived d;
+//  b.show();
+//  d.show();
+//  Derived* basePtr1 = &d;
+//  basePtr1->show();
+//  Base* basePtr = &d;  // 使用基类指针指向派生类对象
+//  basePtr->show();     // 动态绑定，调用 Derived::show
+//  return 0;
+//}
 
