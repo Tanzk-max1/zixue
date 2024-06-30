@@ -763,34 +763,79 @@ using namespace std;
 //    }
 //  }
 //}
-template<typename T>
-class mygreater
-{
-public:
-  bool operator()(T a,T b)
-  {
-    return a>b;
-  }
-};
-template<typename T>
-class myless
-{
-public:
-  bool operator()(T a,T b)
-  {
-    return a<b;
-  }
-};
+//template<typename T>
+//class mygreater
+//{
+//public:
+//  bool operator()(T a,T b)
+//  {
+//    return a>b;
+//  }
+//};
+//template<typename T>
+//class myless
+//{
+//public:
+//  bool operator()(T a,T b)
+//  {
+//    return a<b;
+//  }
+//};
+//
+//class MyClass {
+//public:
+//  MyClass(int x) : value(x) {}
+//  int area() const { return  value*value; }
+//
+//
+//private:
+//  int value;
+//};
+//
+//
+//template<typename T,typename Compare>
+//bool compare(T a,T b,Compare comp)
+//{
+//  return comp(a,b);
+//}
+//int main(){
+//  cout << compare(10,20,mygreater<int>()) << endl;
+//  cout << compare(10,20,myless<int>()) << endl;
+//  cout << compare('a','b',myless<char>()) << endl;
+//  cout << endl;
+//  MyClass hai(10);
+//  cout << hai.area() << endl;
+//
+//  return 0;
+//}
 
 
-template<typename T,typename Compare>
-bool compare(T a,T b,Compare comp)
-{
-  return comp(a,b);
-}
-int main(){
-  cout << compare(10,20,mygreater<int>()) << endl;
-  cout << compare(10,20,myless<int>()) << endl;
-  cout << compare('a','b',myless<char>()) << endl;
+
+class MyClass {
+public:
+  MyClass(int size) : data(new int[size]), size(size) {
+    std::cout << "Constructed\n";
+  }
+  ~MyClass() {
+    delete[] data;
+    std::cout << "Destroyed\n";
+  }
+  // 移动构造函数
+  MyClass(MyClass&& other) noexcept : data(other.data), size(other.size) {
+    other.data = nullptr;
+    other.size = 0;
+    std::cout << "Moved\n";
+  }
+  // 禁用拷贝构造函数
+  MyClass(const MyClass& other) = delete;
+
+private:
+  int* data;
+  int size;
+};
+
+int main() {
+  MyClass a(100);
+  MyClass b(std::move(a));  // 使用移动语义
   return 0;
 }
