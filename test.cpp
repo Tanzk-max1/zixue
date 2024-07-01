@@ -811,31 +811,71 @@ using namespace std;
 
 
 
-class MyClass {
-public:
-  MyClass(int size) : data(new int[size]), size(size) {
-    std::cout << "Constructed\n";
-  }
-  ~MyClass() {
-    delete[] data;
-    std::cout << "Destroyed\n";
-  }
-  // 移动构造函数
-  MyClass(MyClass&& other) noexcept : data(other.data), size(other.size) {
-    other.data = nullptr;
-    other.size = 0;
-    std::cout << "Moved\n";
-  }
-  // 禁用拷贝构造函数
-  MyClass(const MyClass& other) = delete;
+//class MyClass {
+//public:
+//  MyClass(int size) : data(new int[size]), size(size) {
+//    std::cout << "Constructed\n";
+//  }
+//  ~MyClass() {
+//    delete[] data;
+//    std::cout << "Destroyed\n";
+//  }
+//  // 移动构造函数
+//  MyClass(MyClass&& other) noexcept : data(other.data), size(other.size) {
+//    other.data = nullptr;
+//    other.size = 0;
+//    std::cout << "Moved\n";
+//  }
+//  // 禁用拷贝构造函数
+//  MyClass(const MyClass& other) = delete;
+//
+//private:
+//  int* data;
+//  int size;
+//};
+//
+//int main() {
+//  MyClass a(100);
+//  MyClass b(std::move(a));  // 使用移动语义
+//  return 0;
+//}
 
+
+#include <memory>
+//#include <iostream>
+using namespace std;
+
+//对资源进行引用计数的类
+template<typename T>
+class RefCnt
+{
+public:
+  RefCnt(T *ptr = nullptr)
+  :mptr(ptr)
+  {
+    if (mptr!= nullptr)
+      mcount = 1;
+  }
 private:
-  int* data;
-  int size;
+  T *mptr;
+  int mcount;
 };
 
+class MyClass {
+public:
+  MyClass() { std::cout << "MyClass Constructor\n"; }
+  ~MyClass() { std::cout << "MyClass Destructor\n"; }
+  void display() { std::cout << "Display MyClass\n"; }
+};
+
+void process(std::shared_ptr<MyClass> ptr) {
+  ptr->display();
+  std::cout << "Reference Count: " << ptr.use_count() << "\n";
+}
+
 int main() {
-  MyClass a(100);
-  MyClass b(std::move(a));  // 使用移动语义
+  std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>();
+  process(ptr1); // 共享所有权
+  std::cout << "Reference Count: " << ptr1.use_count() << "\n";
   return 0;
 }
