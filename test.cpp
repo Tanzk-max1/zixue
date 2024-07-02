@@ -843,39 +843,52 @@ using namespace std;
 
 #include <memory>
 //#include <iostream>
-using namespace std;
+//using namespace std;
+//
+////对资源进行引用计数的类
+//template<typename T>
+//class RefCnt
+//{
+//public:
+//  RefCnt(T *ptr = nullptr)
+//  :mptr(ptr)
+//  {
+//    if (mptr!= nullptr)
+//      mcount = 1;
+//  }
+//private:
+//  T *mptr;
+//  int mcount;
+//};
+//
+//class MyClass {
+//public:
+//  MyClass() { std::cout << "MyClass Constructor\n"; }
+//  ~MyClass() { std::cout << "MyClass Destructor\n"; }
+//  void display() { std::cout << "Display MyClass\n"; }
+//};
+//
+//void process(std::shared_ptr<MyClass> ptr) {
+//  ptr->display();
+//  std::cout << "Reference Count: " << ptr.use_count() << "\n";
+//}
 
-//对资源进行引用计数的类
-template<typename T>
-class RefCnt
+void func(int &a)
 {
-public:
-  RefCnt(T *ptr = nullptr)
-  :mptr(ptr)
-  {
-    if (mptr!= nullptr)
-      mcount = 1;
-  }
-private:
-  T *mptr;
-  int mcount;
-};
+  cout << "int &a" << endl;
 
-class MyClass {
-public:
-  MyClass() { std::cout << "MyClass Constructor\n"; }
-  ~MyClass() { std::cout << "MyClass Destructor\n"; }
-  void display() { std::cout << "Display MyClass\n"; }
-};
+}
+void func(const int &a)
+{
+  cout << "cconst int &a" << endl;
 
-void process(std::shared_ptr<MyClass> ptr) {
-  ptr->display();
-  std::cout << "Reference Count: " << ptr.use_count() << "\n";
 }
 
+
 int main() {
-  std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>();
-  process(ptr1); // 共享所有权
-  std::cout << "Reference Count: " << ptr1.use_count() << "\n";
+
+  int a = 20;
+  func(a);
+  func(20);
   return 0;
 }
